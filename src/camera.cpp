@@ -113,7 +113,7 @@ void Camera::camerControl(float moveVel, float mouseVel, bool MInS, float WinWid
       {
         cameraMovement(moveVel,180.0);
       }
-      moveCameraUp(moveVel,180.0);
+      moveCameraUp(moveVel,180cd.0);
     }
     if (strafeLeft == true)
     {

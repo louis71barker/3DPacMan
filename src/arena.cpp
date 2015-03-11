@@ -28,36 +28,36 @@ void Arena::ground()
 
 
   glBegin(GL_QUADS);
-//    // front face
-//    glNormal3f(0,0,1);
-//    glVertex3f(-w,h,d);
-//    glVertex3f(w,h,d);
-//    glVertex3f(w,-h,d);
-//    glVertex3f(-w,-h,d);
-//    // back face
-//    glNormal3d(0,0,-1);
-//    glVertex3f(-w,h,-d);
-//    glVertex3f(w,h,-d);
-//    glVertex3f(w,-h,-d);
-//    glVertex3f(-w,-h,-d);
-//    // Left face
-//    glNormal3f(1,0,0);
-//    glVertex3f(-w,-h,d);
-//    glVertex3f(-w,-h,-d);
-//    glVertex3f(-w,h,-d);
-//    glVertex3f(-w,h,d);
-//    // Right face
-//    glNormal3f(-1,0,0);
-//    glVertex3f(w,-h,d);
-//    glVertex3f(w,-h,-d);
-//    glVertex3f(w,h,-d);
-//    glVertex3f(w,h,d);
-//    // Top face
-//    glNormal3f(0,1,0);
-//    glVertex3f(-w,h,d);
-//    glVertex3f(-w,h,-d);
-//    glVertex3f(w,h,-d);
-//    glVertex3f(w,h,d);
+    // front face
+    glNormal3f(0,0,1);
+    glVertex3f(-w,h,d);
+    glVertex3f(w,h,d);
+    glVertex3f(w,-h,d);
+    glVertex3f(-w,-h,d);
+    // back face
+    glNormal3d(0,0,-1);
+    glVertex3f(-w,h,-d);
+    glVertex3f(w,h,-d);
+    glVertex3f(w,-h,-d);
+    glVertex3f(-w,-h,-d);
+    // Left face
+    glNormal3f(1,0,0);
+    glVertex3f(-w,-h,d);
+    glVertex3f(-w,-h,-d);
+    glVertex3f(-w,h,-d);
+    glVertex3f(-w,h,d);
+    // Right face
+    glNormal3f(-1,0,0);
+    glVertex3f(w,-h,d);
+    glVertex3f(w,-h,-d);
+    glVertex3f(w,h,-d);
+    glVertex3f(w,h,d);
+    // Top face
+    glNormal3f(0,1,0);
+    glVertex3f(-w,h,d);
+    glVertex3f(-w,h,-d);
+    glVertex3f(w,h,-d);
+    glVertex3f(w,h,d);
     // Bottom face
     glNormal3f(0,-1,0);
     glVertex3f(-w,-h,d);

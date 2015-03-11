@@ -6,14 +6,16 @@ SOURCES+=src/main.cpp\
          src/ghost.cpp\
          src/arena.cpp\
          src/collectables.cpp\
-         src/window.cpp
+         src/window.cpp\
+         src/camera.cpp
 
 
 HEADERS+=header/arena.h\
          header/collectables.h\
          header/player.h\
          header/ghost.h\
-         header/window.h
+         header/window.h\
+         header/camera.h
 
 
 QT += core

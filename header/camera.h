@@ -32,7 +32,8 @@ public:
   Camera() :
     camEye(0, 0, 2),
     camCentre(0, 0, 0),
-    camUp(0, 1, 0)
+    camUp(0, 1, 0),
+    camCoor(0, 0, 0)
   {
     strafeLeft = false;
     strafeRight = false;

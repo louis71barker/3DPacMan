@@ -43,6 +43,7 @@ void Camera::cameraStrafe()
   {
     camCentre.m_z += 0.1;
     camEye.m_z += 0.1;
+
   }
 
 }
@@ -96,7 +97,7 @@ void Camera::camerControl(float moveVel, float mouseVel, bool MInS, float WinWid
     SDL_GetMouseState(&mouseX, &mouseY);
     camYaw += mouseVel*(midX-mouseX);
     camPitch += mouseVel*(midY-mouseY);
-    //SDL_WarpMouseInWindow(win, midX, midY);
+    SDL_WarpMouseInWindow(win, midX, midY);
     lockCamera();
 
     if (moveForward == true)
@@ -113,7 +114,7 @@ void Camera::camerControl(float moveVel, float mouseVel, bool MInS, float WinWid
       {
         cameraMovement(moveVel,180.0);
       }
-      moveCameraUp(moveVel,180cd.0);
+      moveCameraUp(moveVel,180.0);
     }
     if (strafeLeft == true)
     {
@@ -123,18 +124,16 @@ void Camera::camerControl(float moveVel, float mouseVel, bool MInS, float WinWid
     {
       cameraMovement(moveVel, 270.0);
     }
-
-
   }
 
-  glRotatef(-camPitch,1.0,0.0,0.0);
-  glRotatef(-camYaw,0.0,1.0,0.0);
+//  glRotatef(-camPitch/2,1.0,0.0,0.0);
+//  glRotatef(-camYaw/2,0.0,1.0,0.0);
 }
 
 void Camera::cameraRender(int WinWidth, int WinHeight, SDL_Window *win)
 {
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-  camerControl(0.01,0.01,mouseInScreen,WinWidth/2,WinHeight/2,win);
+  camerControl(0.01,0.001,mouseInScreen,WinWidth/2,WinHeight/2,win);
   cameraUpdate();
   float pos[]={-1.0,1.0,-2.0-1.0};
   glLightfv(GL_LIGHT0,GL_POSITION,pos);
@@ -149,6 +148,12 @@ void Camera::cameraUpdate()
 //  gluLookAt(camEye.m_x, camEye.m_y, camEye.m_z,
 //            camCentre.m_x, camCentre.m_y, camCentre.m_z,
 //            camUp.m_x, camUp.m_y, camUp.m_z);
-//  cameraStrafe();
+
+
+
+  std::cout<<"camCoor x:  " <<camCoor.m_x<<"  y:  "<<camCoor.m_y<<"  z:  "<<camCoor.m_z<<"\n";
+  std::cout<<"cam Up x:  " <<camUp.m_x<<"  y:  "<<camUp.m_y<<"  z:  "<<camUp.m_z<<"\n";
+
+  cameraStrafe();
 
 }

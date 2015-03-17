@@ -2,6 +2,10 @@
 #define WINDOW_H__
 
 #include <SDL.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+
 
 
 #ifdef LINUX
@@ -25,6 +29,7 @@ public:
   int quit;
   static void SDLInit();
   static void Input();
+  void ReshapeScreen();
 
 
 protected:

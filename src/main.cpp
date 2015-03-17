@@ -24,14 +24,13 @@
 #endif
 
 
-int main()
+int main(int argc, char **argv)
 {
   if(SDL_Init(SDL_INIT_VIDEO)<0)
   {
     SDLErrorExit("Unable to init SDL");
   }
 
-  static int mouseX,mouseY;
 
 
   //this grabs the screen size's
@@ -63,15 +62,28 @@ int main()
 
 
 
-  SDL_GL_MakeCurrent(win,gl);
-  SDL_GL_SetSwapInterval(1);
+//  SDL_GL_MakeCurrent(win,gl);
+//  SDL_GL_SetSwapInterval(1);
 
-  glMatrixMode(GL_PROJECTION);
-  gluPerspective(90.0f,float(_rect.w)/_rect.h,0.1,100.0);
-  glMatrixMode(GL_MODELVIEW);
+//  glMatrixMode(GL_PROJECTION);
+//  gluPerspective(90.0f,float(_rect.w)/_rect.h,0.1,100.0);
+//  glMatrixMode(GL_MODELVIEW);
 
-  glEnable(GL_DEPTH_TEST);
-  glEnable(GL_NORMALIZE);
+//  glEnable(GL_DEPTH_TEST);
+//  glEnable(GL_NORMALIZE);
+
+  glutInit (&argc, argv);
+  glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH);
+  glutInitWindowSize (_rect.w/2, _rect.h/2);
+  glutInitWindowPosition (_rect.w/2, _rect.h/2);
+  glutCreateWindow ("A basic OpenGL Window");
+  glutDisplayFunc (cam.displayCamera());
+  glutIdleFunc (cam.displayCamera());
+  glutReshapeFunc (w.ReshapeScreen());
+
+  glutPassiveMotionFunc(cam.mouseMovementCapture());
+
+  glutMainLoop ();
   // Enable lighting
 //  glEnable(GL_LIGHTING);
 //  glEnable(GL_LIGHT0);
@@ -82,7 +94,6 @@ int main()
 
 
   float angle;
-  float tmpX, tmpZ;
   int quit = 0;
   while(!quit)
   {
@@ -167,7 +178,8 @@ int main()
 //    cam.camCentre.m_z = 1+sqrt(cam.camEye.m_x*cam.camEye.m_x + cam.camEye.m_y*cam.camEye.m_y + cam.camEye.m_z*cam.camEye.m_z)*cosf(angle);
 //    cam.camCentre.m_x = 1+sqrt(cam.camEye.m_x*cam.camEye.m_x + cam.camEye.m_y*cam.camEye.m_y + cam.camEye.m_z*cam.camEye.m_z)*sinf(angle);
 
-    cam.cameraRender(_rect.w, _rect.h, win);
+    //cam.cameraRender(_rect.w, _rect.h, win);
+    cam.cameraUpdate();
 
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

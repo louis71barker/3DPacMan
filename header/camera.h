@@ -65,7 +65,7 @@ public:
     yRot = 0.0f;
 
   }
-  void cameraUpdate();
+  void cameraUpdate(int x, int y);
   void cameraStrafe();
   void enableScene();
   void displayCamera();

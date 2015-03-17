@@ -1,13 +1,7 @@
-#include "header/arena.h"
+#include "walls.h"
+#include <stdlib.h>
 #include <iostream>
-#include <cmath>
-#include <SDL.h>
-#include <string>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-
-
+#include <vector>
 
 
 
@@ -21,14 +15,21 @@
 
 
 
-void Arena::ground()
+void Walls::cubeInit()
 {
-  // assume the  cube centered at the origin
-  GLfloat w=150.0f;
-  GLfloat h=2.0f;
-  GLfloat d=150.0f;
+  cubeSetter();
+}
+
+
+
+void Walls::cubeSetter()
+{
+  GLfloat w=CUBEWIDTH;
+  GLfloat h=CUBEHEIGHT;
+  GLfloat d=CUBEDEPTH;
 
   glPushMatrix();
+  glColor3f(1.0,0.0,0.0);
   glBegin(GL_QUADS);
     // front face
     glNormal3f(0,0,-1);
@@ -55,11 +56,11 @@ void Arena::ground()
     glVertex3f(w,h,-d);
     glVertex3f(w,h,d);
     // Top face
-//    glNormal3f(0,1,0);
-//    glVertex3f(-w,h,d);
-//    glVertex3f(-w,h,-d);
-//    glVertex3f(w,h,-d);
-//    glVertex3f(w,h,d);
+    glNormal3f(0,1,0);
+    glVertex3f(-w,h,d);
+    glVertex3f(-w,h,-d);
+    glVertex3f(w,h,-d);
+    glVertex3f(w,h,d);
     // Bottom face
     glNormal3f(0,1,0);
     glVertex3f(-w,-h,d);
@@ -71,22 +72,15 @@ void Arena::ground()
   glPopMatrix();
 }
 
-void Arena::sky()
+void Walls::mapBuilder()
 {
-    // Draw ground
-    glColor3f(0.0f, 0.9f, 0.9f);
-    glBegin(GL_QUADS);
-      glVertex3f(-100.0f, 0.0f, -100.0f);
-      glVertex3f(-100.0f, 0.0f,  100.0f);
-      glVertex3f( 100.0f, 0.0f,  100.0f);
-      glVertex3f( 100.0f, 0.0f, -100.0f);
-    glEnd();
-}
+  int num_of_col = 15;
+  int num_of_row = 15;
+  double init_value = 3.14;
 
-void Arena::drawArena()
-{
-  ground();
+  std::vector< std::vector<double> > matrix;
+  //now we have an empty 2D-matrix of size (0,0). Resizing it with one single command:
+  matrix.resize( num_of_col , std::vector<double>( num_of_row , init_value ) );
+
 
 }
-
-

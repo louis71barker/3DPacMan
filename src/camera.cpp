@@ -22,9 +22,25 @@
 
 void Camera::enableScene()
 {
-  glEnable (GL_DEPTH_TEST);//enables depth testing
-  glEnable(GL_LIGHTING);//enables the lights
-  glEnable(GL_LIGHT0);//enables light 0
+
+  // Somewhere in the initialization part of your program…
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
+
+  // Create light components
+  GLfloat ambientLight[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+  GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
+  GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+  GLfloat position[] = { -1.5f, 15.0f, -4.0f, 1.0f };
+
+  // Assign created components to GL_LIGHT0
+  glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
+  glLightfv(GL_LIGHT0, GL_POSITION, position);
+//  glEnable (GL_DEPTH_TEST);//enables depth testing
+//  glEnable(GL_LIGHTING);//enables the lights
+//  glEnable(GL_LIGHT0);//enables light0
   glShadeModel(GL_SMOOTH);//sets the shader to smooth
 }
 
@@ -39,7 +55,7 @@ void Camera::displayCamera()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
   CameraSet();
-  glutSwapBuffers();
+  enableScene();
   angle++;
 }
 
@@ -49,31 +65,31 @@ void Camera::cameraStrafe()
   if (strafeLeft == true)
   {
     float yRotRad;
-    yRotRad = (playerYpos / 180 * M_PI);
+    yRotRad = (yRot / 180 * M_PI);
     playerXpos -= float(cos(yRotRad)) * 0.2;
-    playerXpos -= float(sin(yRotRad)) * 0.2;
+    playerZpos -= float(sin(yRotRad)) * 0.2;
 
   }
   if (strafeRight == true)
   {
     float yRotRad;
-    yRotRad = (playerYpos / 180 * M_PI);
+    yRotRad = (yRot / 180 * M_PI);
     playerXpos += float(cos(yRotRad)) * 0.2;
     playerZpos += float(sin(yRotRad)) * 0.2;
   }
   if (moveBackward == true)
   {
     float xRotRad,yRotRad;
-    yRotRad = (playerYpos / 180 * M_PI);
-    xRotRad = (playerXpos / 180 * M_PI);
+    yRotRad = (yRot / 180 * M_PI);
+    xRotRad = (xRot / 180 * M_PI);
     playerXpos -= float(sin(yRotRad));
     playerZpos += float(cos(yRotRad));
   }
   if (moveForward == true)
   {
     float xRotRad,yRotRad;
-    yRotRad = (playerYpos / 180 * M_PI);
-    xRotRad = (playerXpos / 180 * M_PI);
+    yRotRad = (yRot / 180 * M_PI);
+    xRotRad = (xRot / 180 * M_PI);
     playerXpos += float(sin(yRotRad));
     playerZpos -= float(cos(yRotRad));
 
@@ -94,9 +110,13 @@ void Camera::mouseMovementCapture(int x, int y)
 
 
 
-void Camera::cameraUpdate()
+void Camera::cameraUpdate(int x, int y)
 {
+  mouseMovementCapture(x,y);
+  cameraStrafe();
+  displayCamera();
 
+//  std::cout<<"x   "<<x<<"\n"<<"y    "<<y<<"\n";
 
 }
 

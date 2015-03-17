@@ -7,7 +7,8 @@ SOURCES+=src/main.cpp\
          src/arena.cpp\
          src/collectables.cpp\
          src/window.cpp\
-         src/camera.cpp
+         src/camera.cpp\
+         src/walls.cpp
 
 
 HEADERS+=header/arena.h\
@@ -15,7 +16,8 @@ HEADERS+=header/arena.h\
          header/player.h\
          header/ghost.h\
          header/window.h\
-         header/camera.h
+         header/camera.h\
+         header/walls.h
 
 
 QT += core

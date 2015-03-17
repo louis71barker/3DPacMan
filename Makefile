@@ -51,14 +51,16 @@ SOURCES       = src/main.cpp \
 		src/arena.cpp \
 		src/collectables.cpp \
 		src/window.cpp \
-		src/camera.cpp 
+		src/camera.cpp \
+		src/walls.cpp 
 OBJECTS       = obj/main.o \
 		obj/player.o \
 		obj/ghost.o \
 		obj/arena.o \
 		obj/collectables.o \
 		obj/window.o \
-		obj/camera.o
+		obj/camera.o \
+		obj/walls.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -281,7 +283,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d obj/PacMan3D1.0.0 || mkdir -p obj/PacMan3D1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp obj/PacMan3D1.0.0/ && (cd `dirname obj/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname obj/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r obj/PacMan3D1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp obj/PacMan3D1.0.0/ && (cd `dirname obj/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname obj/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r obj/PacMan3D1.0.0
 
 
 clean:compiler_clean 
@@ -343,6 +345,9 @@ obj/window.o: src/window.cpp header/window.h
 
 obj/camera.o: src/camera.cpp header/camera.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/camera.o src/camera.cpp
+
+obj/walls.o: src/walls.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/walls.o src/walls.cpp
 
 ####### Install
 

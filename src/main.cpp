@@ -14,6 +14,7 @@
 #include "header/arena.h"
 #include "header/window.h"
 #include "header/camera.h"
+#include "header/walls.h"
 
 
 #ifdef LINUX
@@ -24,7 +25,7 @@
 #endif
 
 
-int main(int argc, char **argv)
+int main()
 {
   if(SDL_Init(SDL_INIT_VIDEO)<0)
   {
@@ -43,7 +44,7 @@ int main(int argc, char **argv)
   Window w;
   w.screenH = _rect.w;
   w.screenH = _rect.h;
-  win=SDL_CreateWindow("3D Maze Man", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _rect.w/2, _rect.w/2, SDL_WINDOW_OPENGL);
+  win=SDL_CreateWindow("3D Maze Man", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _rect.w/2, _rect.h/2, SDL_WINDOW_OPENGL);
 
   if (!win)
   {
@@ -57,33 +58,33 @@ int main(int argc, char **argv)
   }
   Arena a;
   Camera cam;
+  Walls wa;
   //std::cout << cam.camEye.m_x << " " << cam.camEye.m_y << " " << cam.camEye.m_z << "\n";
 
 
 
+  SDL_GL_MakeCurrent(win,gl);
+  SDL_GL_SetSwapInterval(1);
 
-//  SDL_GL_MakeCurrent(win,gl);
-//  SDL_GL_SetSwapInterval(1);
+  glMatrixMode(GL_PROJECTION);
+  gluPerspective(45.0f,float(_rect.w)/_rect.h,0.1,1000.0);
+  glMatrixMode(GL_MODELVIEW);
 
-//  glMatrixMode(GL_PROJECTION);
-//  gluPerspective(90.0f,float(_rect.w)/_rect.h,0.1,100.0);
-//  glMatrixMode(GL_MODELVIEW);
+  glEnable(GL_DEPTH_TEST);
+  glEnable(GL_NORMALIZE);
 
-//  glEnable(GL_DEPTH_TEST);
-//  glEnable(GL_NORMALIZE);
+//  glutInit (&argc, argv);
+//  glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH);
+//  glutInitWindowSize (_rect.w/2, _rect.h/2);
+//  glutInitWindowPosition (_rect.w/2, _rect.h/2);
+//  glutCreateWindow ("A basic OpenGL Window");
+//  glutDisplayFunc (cam.displayCamera());
+//  glutIdleFunc (cam.displayCamera());
+//  glutReshapeFunc (w.ReshapeScreen());
 
-  glutInit (&argc, argv);
-  glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH);
-  glutInitWindowSize (_rect.w/2, _rect.h/2);
-  glutInitWindowPosition (_rect.w/2, _rect.h/2);
-  glutCreateWindow ("A basic OpenGL Window");
-  glutDisplayFunc (cam.displayCamera());
-  glutIdleFunc (cam.displayCamera());
-  glutReshapeFunc (w.ReshapeScreen());
+//  glutPassiveMotionFunc(cam.mouseMovementCapture());
 
-  glutPassiveMotionFunc(cam.mouseMovementCapture());
-
-  glutMainLoop ();
+//  glutMainLoop ();
   // Enable lighting
 //  glEnable(GL_LIGHTING);
 //  glEnable(GL_LIGHT0);
@@ -97,7 +98,9 @@ int main(int argc, char **argv)
   int quit = 0;
   while(!quit)
   {
-    //SDL_GetMouseState(&mouseX, &mouseY);
+
+    int mouseX,mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;
 
 
@@ -159,7 +162,6 @@ int main(int argc, char **argv)
        {
          if (e.button.button == SDL_BUTTON_LEFT)
          {
-//           zCam = 0.0f;
 
          }
        }
@@ -171,7 +173,6 @@ int main(int argc, char **argv)
 
       if(e.type == SDL_MOUSEMOTION)
       {
-        angle += e.motion.xrel*0.01f;
       }
     }
 
@@ -179,7 +180,9 @@ int main(int argc, char **argv)
 //    cam.camCentre.m_x = 1+sqrt(cam.camEye.m_x*cam.camEye.m_x + cam.camEye.m_y*cam.camEye.m_y + cam.camEye.m_z*cam.camEye.m_z)*sinf(angle);
 
     //cam.cameraRender(_rect.w, _rect.h, win);
-    cam.cameraUpdate();
+    cam.cameraUpdate(mouseX,mouseY);
+    wa.cubeInit();
+
 
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

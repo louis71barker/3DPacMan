@@ -36,7 +36,6 @@ int main()
 
   //this grabs the screen size's
   SDL_Rect _rect;
-
   SDL_GetDisplayBounds(0, &_rect);
 
 
@@ -58,8 +57,8 @@ int main()
   }
   Arena a;
   Camera cam;
-  Walls wa;
-  //std::cout << cam.camEye.m_x << " " << cam.camEye.m_y << " " << cam.camEye.m_z << "\n";
+  Walls wa("src/MapCoor.txt");
+  Player p;
 
 
 
@@ -73,28 +72,9 @@ int main()
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_NORMALIZE);
 
-//  glutInit (&argc, argv);
-//  glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH);
-//  glutInitWindowSize (_rect.w/2, _rect.h/2);
-//  glutInitWindowPosition (_rect.w/2, _rect.h/2);
-//  glutCreateWindow ("A basic OpenGL Window");
-//  glutDisplayFunc (cam.displayCamera());
-//  glutIdleFunc (cam.displayCamera());
-//  glutReshapeFunc (w.ReshapeScreen());
-
-//  glutPassiveMotionFunc(cam.mouseMovementCapture());
-
-//  glutMainLoop ();
-  // Enable lighting
-//  glEnable(GL_LIGHTING);
-//  glEnable(GL_LIGHT0);
   glClearColor(0,222,222,1);
 
 
-
-
-
-  float angle;
   int quit = 0;
   while(!quit)
   {
@@ -131,6 +111,8 @@ int main()
                             case SDLK_a : cam.strafeLeft=true; break;
                             case SDLK_d : cam.strafeRight=true; break;
                             case SDLK_p : cam.mouseInScreen=false; SDL_ShowCursor(SDL_ENABLE); break;
+                            case SDLK_1 : if (cam.thirdPersonCam == true) {cam.firstPersonCam = true; cam.thirdPersonCam = false;} break;
+                            case SDLK_2 : if (cam.firstPersonCam == true) {cam.firstPersonCam = false; cam.thirdPersonCam = true;} break;
 
                             }
                           }break;
@@ -169,44 +151,19 @@ int main()
 
        }
 
-
-
       if(e.type == SDL_MOUSEMOTION)
       {
       }
     }
 
-//    cam.camCentre.m_z = 1+sqrt(cam.camEye.m_x*cam.camEye.m_x + cam.camEye.m_y*cam.camEye.m_y + cam.camEye.m_z*cam.camEye.m_z)*cosf(angle);
-//    cam.camCentre.m_x = 1+sqrt(cam.camEye.m_x*cam.camEye.m_x + cam.camEye.m_y*cam.camEye.m_y + cam.camEye.m_z*cam.camEye.m_z)*sinf(angle);
-
-    //cam.cameraRender(_rect.w, _rect.h, win);
     cam.cameraUpdate(mouseX,mouseY);
-    wa.cubeInit();
-
-
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-
-
+    p.update(wa.matrix);
     a.drawArena();
-
-
-
+    wa.draw();
 
     SDL_GL_SwapWindow(win);
 
-
-
-
-
   }
-
-
-
-
-
 
   SDL_Quit();
   return 0;

@@ -1,4 +1,5 @@
 #include "header/arena.h"
+#include "header/walls.h"
 #include <iostream>
 #include <cmath>
 #include <SDL.h>
@@ -24,9 +25,9 @@
 void Arena::ground()
 {
   // assume the  cube centered at the origin
-  GLfloat w=150.0f;
+  GLfloat w=2.0f * MAPGRIDSIZE;
   GLfloat h=2.0f;
-  GLfloat d=150.0f;
+  GLfloat d=2.0f * MAPGRIDSIZE;
 
   glPushMatrix();
   glBegin(GL_QUADS);

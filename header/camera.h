@@ -1,10 +1,8 @@
 #ifndef CAMERA_H__
 #define CAMERA_H__
 #include <math.h>
-#include <SDL.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
+#include "header/scene.h"
+
 
 #ifndef M_PI
 #define M_PI 3.141592654
@@ -13,28 +11,7 @@
 
 
 
-typedef struct {
-  GLfloat x;
-  GLfloat y;
-  GLfloat z;
-}Vector3;
 
-Vector3 NormalizeVec3(Vector3 Vector);
-
-class Vec3
-{
-public:
-  Vec3(float _x=0.0f,float _y=0.0f, float _z=0.0f) :
-    m_x(_x), m_y(_y), m_z(_z){}
-
-  struct
-  {
-    float m_x;
-    float m_y;
-    float m_z;
-  };
-
-};
 
 
 
@@ -54,6 +31,8 @@ public:
     moveForward = false;
     moveBackward = false;
     mouseInScreen = false;
+    firstPersonCam = true;
+    thirdPersonCam = false;
 
     angle = 0.0f;
     playerXpos = 0.0f;
@@ -63,6 +42,7 @@ public:
     lastPlayerPosy = 0.0f;
     xRot = 0.0f;
     yRot = 0.0f;
+    rotationNum = 1.0f;
 
   }
   void cameraUpdate(int x, int y);
@@ -72,15 +52,17 @@ public:
   void CameraSet();
   void mouseMovementCapture(int x, int y);
   void WidowSetting();
+  void thirdPerson();
+  void spotLight();
 
 
-  bool strafeLeft,strafeRight,moveForward,moveBackward,mouseInScreen;
+  bool strafeLeft,strafeRight,moveForward,moveBackward,mouseInScreen,firstPersonCam,thirdPersonCam;
   Vec3 camEye;
   Vec3 camCentre;
   Vec3 camUp;
   Vec3 camCoor;
 
-  float angle,playerXpos,playerYpos,playerZpos,lastPlayerPosx,lastPlayerPosy,xRot,yRot;
+  float angle,playerXpos,playerYpos,playerZpos,lastPlayerPosx,lastPlayerPosy,xRot,yRot,rotationNum;
 
 
 

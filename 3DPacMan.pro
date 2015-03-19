@@ -8,7 +8,8 @@ SOURCES+=src/main.cpp\
          src/collectables.cpp\
          src/window.cpp\
          src/camera.cpp\
-         src/walls.cpp
+         src/walls.cpp\
+         src/torch.cpp
 
 
 HEADERS+=header/arena.h\
@@ -17,7 +18,11 @@ HEADERS+=header/arena.h\
          header/ghost.h\
          header/window.h\
          header/camera.h\
-         header/walls.h
+         header/walls.h\
+         header/torch.h\
+         header/scene.h
+
+OTHER_FILES+= src/MapCoor.txt
 
 
 QT += core

@@ -43,7 +43,7 @@ int main()
   Window w;
   w.screenH = _rect.w;
   w.screenH = _rect.h;
-  win=SDL_CreateWindow("3D Maze Man", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _rect.w/2, _rect.h/2, SDL_WINDOW_OPENGL);
+  win=SDL_CreateWindow("Pacnesia", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _rect.w/2, _rect.h/2, SDL_WINDOW_OPENGL);
 
   if (!win)
   {
@@ -66,19 +66,24 @@ int main()
   SDL_GL_SetSwapInterval(1);
 
   glMatrixMode(GL_PROJECTION);
-  gluPerspective(45.0f,float(_rect.w)/_rect.h,0.1,1000.0);
+  gluPerspective(45.0f,float(_rect.w)/_rect.h,1.0,100.0);
   glMatrixMode(GL_MODELVIEW);
 
-  glEnable(GL_DEPTH_TEST);
   glEnable(GL_NORMALIZE);
 
-  glClearColor(0,222,222,1);
+  glClearColor(0,0,0,1);
+
+
+
+
 
 
   int quit = 0;
   while(!quit)
   {
 
+      SDL_ShowCursor(SDL_DISABLE);
+      SDL_SetWindowGrab(win, SDL_TRUE);
     int mouseX,mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;

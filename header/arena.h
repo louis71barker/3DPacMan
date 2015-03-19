@@ -8,18 +8,17 @@
 class Arena
 {
 public:
-  Arena ()
+  Arena () : MAPGRIDSIZE(15.0f)
   {
   }
 
-  static void ground();
-  static void sky();
-
-  static void drawArena();
+  void ground();
+  void sky();
+  void drawArena();
 
 
 private:
-  const float MAPGRIDSIZE = 15.0;
+  const float MAPGRIDSIZE;
 
 
 };

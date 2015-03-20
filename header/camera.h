@@ -2,6 +2,8 @@
 #define CAMERA_H__
 #include <math.h>
 #include "header/scene.h"
+#include <vector>
+
 
 
 #ifndef M_PI
@@ -45,7 +47,7 @@ public:
     rotationNum = 1.0f;
 
   }
-  void cameraUpdate(int x, int y);
+  void cameraUpdate(std::vector<std::vector<int> > matrix,int x, int y);
   void cameraStrafe();
   void enableScene();
   void displayCamera();
@@ -54,6 +56,7 @@ public:
   void WidowSetting();
   void thirdPerson();
   void spotLight();
+  void playerCollisions(std::vector<std::vector<int> > matrix);
 
 
   bool strafeLeft,strafeRight,moveForward,moveBackward,mouseInScreen,firstPersonCam,thirdPersonCam;

@@ -161,8 +161,8 @@ int main()
       }
     }
 
-    cam.cameraUpdate(mouseX,mouseY);
-    p.update(wa.matrix);
+    cam.cameraUpdate(wa.matrix,mouseX,mouseY);
+    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     a.drawArena();
     wa.draw();
 

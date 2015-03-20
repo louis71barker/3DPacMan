@@ -21,7 +21,7 @@ Walls::Walls(const std::string &_fname) :  CUBEDEPTH(2.0f), CUBEWIDTH(2.0f), CUB
   gridZPos = 15;
   mapCoorSetter();
   initMaze();
-  std::cout << dList.size() << "\n";
+//  std::cout << dList.size() << "\n";
 }
 
 void Walls::draw()
@@ -123,13 +123,13 @@ void Walls::mapCoorSetter()
       for (int a=0;a<15;a++)
       {
 
-        GridCoor[j][a].m_gridPoint = PointCounter;
-        GridCoor[j][a].m_Gx = gridXPos;
-        GridCoor[j][a].m_Gz = gridZPos;
-        gridXPos += CUBEWIDTH;
-        gridZPos += CUBEDEPTH;
-        PointCounter++;
-        if (a == 14)
+//        GridCoor[j][a].m_gridPoint = PointCounter;
+//        GridCoor[j][a].m_Gx = gridXPos;
+//        GridCoor[j][a].m_Gz = gridZPos;
+//        gridXPos += CUBEWIDTH;
+//        gridZPos += CUBEDEPTH;
+//        PointCounter++;
+//        if (a == 14)
         {
           gridXPos = -15;
           gridZPos = (13 - j)-j;
@@ -153,10 +153,12 @@ void Walls::initMaze()
       {
         //std::cout<<i<<"         "<<j<<"\n";
         letsDraw(i, j);
+        //std::cout<<matrix[i][j]<<"  asdgakjd     "<<j<<"\n";
       }
       if(matrix[i][j] == 0)
       {
         //draw collectables here
+
       }
     }
   }
@@ -178,123 +180,155 @@ void Walls::drawCube()
   GLfloat w=CUBEWIDTH;
   GLfloat h=CUBEHEIGHT;
   GLfloat d=CUBEDEPTH;
+  GLfloat r = CUBEWIDTH;
 
   glColor3f(1,1,1);
 
-//  static const GLfloat g_vertex_buffer_data[] = {
-//      -w,-h,-d, // triangle 1 : begin
-//      -w,-h, d,
-//      -w, h, d, // triangle 1 : end
-//      w, h,-d, // triangle 2 : begin
-//      -w,-h,-d,
-//      -w, h,-d, // triangle 2 : end
-//      w,-h, d,
-//      -w,-h,-d,
-//      w,-h,-d,
-//      w, h,-d,
-//      w,-h,-d,
-//      -w,-h,-d,
-//      -w,-h,-d,
-//      -w, h, d,
-//      -w, h,-d,
-//      w,-h, d,
-//      -w,-h, d,
-//      -w,-h,-d,
-//      -w, h, d,
-//      -w,-h, d,
-//      w,-h, d,
-//      w, h, d,
-//      w,-h,-d,
-//      w, h,-d,
-//      w,-h,-d,
-//      w, h, d,
-//      w,-h, d,
-//      w, h, d,
-//      w, h,-d,
-//      -w, h,-d,
-//      w, h, d,
-//      -w, h,-d,
-//      -w, h, d,
-//      w, h, d,
-//      -w, h, d,
-//      w,-h, d
-
-//  };
 //  glDrawArrays(GL_TRIANGLES,0,1);
-  glBegin(GL_POLYGON);
+  glBegin(GL_TRIANGLES);
     // front face
 
 
 
-  glNormal3f(0,0,1);
-  glColor3f(0,0,0);
-  glVertex3f(-w,h,d);
-  glVertex3f(w,h,d);
-  glColor3f(1,1,1);
-  glVertex3f(w,-h,d);
-  glVertex3f(-w,-h,d);
+  // Side 1
+        glNormal3f(0, 0, 1);
+        glVertex3f(r, r, r);
+        glVertex3f(-r, r, r);
+        glVertex3f(r, -r, r);
 
+        glVertex3f(-r, r, r);
+        glVertex3f(-r, -r, r);
+        glVertex3f(r, -r, r);
+
+
+
+        // Side 2
+        glNormal3f(0, 0, -1);
+        glVertex3f(r, r, -r);
+        glVertex3f(r, -r, -r);
+        glVertex3f(-r, r, -r);
+
+
+        glVertex3f(-r, r, -r);
+        glVertex3f(r, -r, -r);
+        glVertex3f(-r, -r, -r);
+
+        // Side 3
+
+        glNormal3f(-1, 0, 0);
+        glVertex3f(-r, r, -r);
+        glVertex3f(-r, -r, -r);
+        glVertex3f(-r, r, r);
+
+
+        glVertex3f(-r, r, r);
+        glVertex3f(-r, -r, -r);
+        glVertex3f(-r, -r, r);
+
+        // Side 4
+
+        glNormal3f(1, 0, 0);
+        glVertex3f(r, r, -r);
+        glVertex3f(r, r, r);
+        glVertex3f(r, -r, -r);
+
+        glVertex3f(r, r, r);
+        glVertex3f(r, -r, r);
+        glVertex3f(r, -r, -r);
+
+
+        // Side 5
+
+        glNormal3f(0, 1, 0);
+        glVertex3f(-r, r, -r);
+        glVertex3f(-r, r, r);
+        glVertex3f(r, r, -r);
+
+        glVertex3f(-r, r, r);
+        glVertex3f(r, r, -r);
+        glVertex3f(r, r, r);
+
+        // Side 6
+        glNormal3f(0, -1, 0);
+        glVertex3f(-r, -r, -r);
+        glVertex3f(-r, -r, r);
+        glVertex3f(r, -r, -r);
+
+        glVertex3f(-r, -r, r);
+        glVertex3f(r, -r, -r);
+        glVertex3f(r, -r, r);
+
+//  glNormal3f(0,0,1);
+//  glColor3f(0,0,0);
+//  glVertex3f(-w,h,d);
+//  glVertex3f(w,h,d);
+//  glColor3f(1,1,1);
+//  glVertex3f(w,-h,d);
+//  glVertex3f(-w,-h,d);
+
+//  glEnd();
+
+//  glBegin(GL_POLYGON);
+//    // back face
+
+//  glNormal3d(0,0,-1);
+//  glColor3f(0,0,0);
+//  glVertex3f(-w,h,-d);
+//  glVertex3f(w,h,-d);
+//  glColor3f(1,1,1);
+//  glVertex3f(w,-h,-d);
+//  glVertex3f(-w,-h,-d);
+//  glEnd();
+
+//  glBegin(GL_POLYGON);
+//    // Left face
+//    glNormal3f(-1,0,0);
+//    glColor3f(1,1,1);
+//    glVertex3f(w,-h,d);
+//    glVertex3f(w,-h,-d);
+//    glColor3f(0,0,0);
+//    glVertex3f(w,h,-d);
+//    glVertex3f(w,h,d);
+//  glEnd();
+
+//  glBegin(GL_POLYGON);
+//    // Right face
+
+
+//    glNormal3f(1,0,0);
+
+//    glColor3f(1,1,1);
+//    glVertex3f(-w,-h,d);
+//    glVertex3f(-w,-h,-d);
+
+//    glColor3f(0,0,0);
+//    glVertex3f(-w,h,-d);
+//    glVertex3f(-w,h,d);
+//  glEnd();
+
+//  glBegin(GL_POLYGON);
+//    // Top face
+//    glNormal3f(0,1,0);
+//    glVertex3f(-w,h,d);
+//    glVertex3f(-w,h,-d);
+//    glVertex3f(w,h,-d);
+//    glVertex3f(w,h,d);
+//  glEnd();
+
+//  glBegin(GL_POLYGON);
+//    // Bottom face
+//    glNormal3f(0,-1,0);
+//    glVertex3f(-w,-h,d);
+//    glVertex3f(-w,-h,-d);
+//    glVertex3f(w,-h,-d);
+//    glVertex3f(w,-h,d);
   glEnd();
-
-  glBegin(GL_POLYGON);
-    // back face
-
-  glNormal3d(0,0,-1);
-  glColor3f(0,0,0);
-  glVertex3f(-w,h,-d);
-  glVertex3f(w,h,-d);
-  glColor3f(1,1,1);
-  glVertex3f(w,-h,-d);
-  glVertex3f(-w,-h,-d);
-  glEnd();
-
-  glBegin(GL_POLYGON);
-    // Left face
-    glNormal3f(-1,0,0);
-    glColor3f(1,1,1);
-    glVertex3f(w,-h,d);
-    glVertex3f(w,-h,-d);
-    glColor3f(0,0,0);
-    glVertex3f(w,h,-d);
-    glVertex3f(w,h,d);
-  glEnd();
-
-  glBegin(GL_POLYGON);
-    // Right face
-
-
-    glNormal3f(1,0,0);
-
-    glColor3f(1,1,1);
-    glVertex3f(-w,-h,d);
-    glVertex3f(-w,-h,-d);
-
-    glColor3f(0,0,0);
-    glVertex3f(-w,h,-d);
-    glVertex3f(-w,h,d);
-  glEnd();
-
-  glBegin(GL_POLYGON);
-    // Top face
-    glNormal3f(0,1,0);
-    glVertex3f(-w,h,d);
-    glVertex3f(-w,h,-d);
-    glVertex3f(w,h,-d);
-    glVertex3f(w,h,d);
-  glEnd();
-
-  glBegin(GL_POLYGON);
-    // Bottom face
-    glNormal3f(0,-1,0);
-    glVertex3f(-w,-h,d);
-    glVertex3f(-w,-h,-d);
-    glVertex3f(w,-h,-d);
-    glVertex3f(w,-h,d);
+  glBegin(GL_LINE_STRIP);
+    glColor3f(0, 1, 0);
+    glVertex3f(0, 0, 0);
+    glVertex3f(0, (CUBEWIDTH+0.1), 0);
   glEnd();
 }
 
 
-void Walls::triangleCubCoor(GLfloat cube_buffer)
-{
 
-}

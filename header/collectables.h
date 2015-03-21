@@ -2,6 +2,9 @@
 #define COLLECTABLE_H__
 #include <vector>
 #include <GL/gl.h>
+#include <stdlib.h>
+#include <istream>
+
 
 
 class Collecable
@@ -13,9 +16,10 @@ public:
 
 private:
   void normalSetter(std::vector<std::vector<int> > matrix);
-  void specialSetter(std::vector<std::vector<int> > matrix);
+  void specialSetter(int _x, int _y);
   void placeObj(int _x, int _y);
   void drawBalls();
+  void drawSpecials();
 
 
 

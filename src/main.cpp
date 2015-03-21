@@ -59,6 +59,7 @@ int main()
   Camera cam;
   Walls wa("src/MapCoor.txt");
   Player p;
+  Collecable col;
 
 
 
@@ -162,6 +163,7 @@ int main()
     }
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
+    col.drawCollectable(wa.matrix);
     p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     a.drawArena();
     wa.draw();

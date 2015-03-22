@@ -75,6 +75,7 @@ void Arena::ground()
 void Arena::sky()
 {
     // Draw ground
+  glPushMatrix();
     glColor3f(0.0f, 0.9f, 0.9f);
     glBegin(GL_QUADS);
       glVertex3f(-100.0f, 0.0f, -100.0f);
@@ -82,6 +83,7 @@ void Arena::sky()
       glVertex3f( 100.0f, 0.0f,  100.0f);
       glVertex3f( 100.0f, 0.0f, -100.0f);
     glEnd();
+  glPopMatrix();
 }
 
 void Arena::drawArena()

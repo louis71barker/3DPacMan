@@ -57,7 +57,7 @@ void Camera::enableScene()
   GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
   GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
   GLfloat  ambientLight[] = { 0.5f, 0.5f, 0.5f, 1.0f};
-  GLfloat  spotDir[] = { -1, (xRot - 117), -1.0f };
+  GLfloat  spotDir[] = { 1, yRot, -1};
 
 //  std::cout<<xRot<<"      "<<yRot<<"\n";
   // This function does any needed initialization on the rendering
@@ -68,6 +68,10 @@ void Camera::enableScene()
     glEnable(GL_DEPTH_TEST);   // Hidden surface removal
     //glFrontFace(GL_CW);       // Counterclockwise polygons face out
     glEnable(GL_CULL_FACE);    // Do not try to display the back sides
+
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_COLOR_MATERIAL);
+
 
     // Enable lighting
     glEnable(GL_LIGHTING);
@@ -104,7 +108,7 @@ void Camera::enableScene()
 
     glPushMatrix();
 
-            glRotatef(-xRot, 1.0f, 0.0f, 0.0f);
+            glRotatef(-yRot, 0.0f, 1.0f, 0.0f);
             glRotatef(0, 0.0f, 1.0f, 0.0f);
             //spotDir[0] = asinf(xRot / 180 * M_PI);
             //spotDir[2] = acosf(xRot / 180 * M_PI);
@@ -118,7 +122,7 @@ void Camera::enableScene()
 
             // Translate origin to move the cone out to where the light
             // is positioned.
-            glTranslatef(lightPos[0],lightPos[1],lightPos[2]);
+            glTranslatef(lightPos[0],0,lightPos[2]);
 //            auxSolidCone(4.0f,6.0f);
 
             // Draw a smaller displaced sphere to denote the light bulb
@@ -140,6 +144,9 @@ void Camera::enableScene()
   glBegin(GL_POINTS);
     glColor3f(1,0,0);
     glVertex3f(playerXpos + 5, -1.0f, playerZpos );
+    glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+    std::cout<<yRot<<"\n";
+    glRotatef(0, 0.0f, 1.0f, 0.0f);
   glEnd();
   glPopMatrix();
 
@@ -193,6 +200,15 @@ void Camera::displayCamera()
   CameraSet();
   enableScene();
   angle++;
+  if (yRot > 360)
+  {
+    yRot=0;
+  }
+  if (yRot < 0)
+  {
+    yRot = 360;
+  }
+
 
 }
 
@@ -243,6 +259,8 @@ void Camera::mouseMovementCapture(int x, int y)
   lastPlayerPosy = y;
   xRot += (float) diffy;
   yRot += (float) diffx;
+
+
 }
 
 
@@ -253,6 +271,7 @@ void Camera::cameraUpdate(std::vector<std::vector<int> > matrix,int x, int y)
   cameraStrafe();
   displayCamera();
   playerCollisions(matrix);
+
 
 
 }
@@ -286,11 +305,11 @@ void Camera::playerCollisions(std::vector<std::vector<int> > matrix)
           {
             playerXpos += 0.1 ;
           }
-          if (cubeCentreZ - (fabs((30 - (j+0.5)*4) - playerZpos) < 3) > 0)
+          if (cubeCentreZ - (fabs((30 - (j+0.6)*4) - playerZpos) < 3) > 0)
           {
             playerZpos -= 0.1;
           }
-          else if (cubeCentreZ - (fabs((30 + (j+0.5)*4) - playerZpos) < 3) < 0)
+          else if (cubeCentreZ - (fabs((30 + (j+0.6)*4) - playerZpos) < 3) < 0)
           {
             playerZpos += 0.1;
           }

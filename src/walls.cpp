@@ -1,4 +1,5 @@
 #include "walls.h"
+#include <GL/glut.h>
 
 
 
@@ -183,80 +184,82 @@ void Walls::drawCube()
   GLfloat r = CUBEWIDTH;
 
   glColor3f(1,1,1);
+  glutSolidCube(4);
+
 
 //  glDrawArrays(GL_TRIANGLES,0,1);
-  glBegin(GL_TRIANGLES);
-    // front face
+//  glBegin(GL_TRIANGLES);
+//    // front face
 
 
 
-  // Side 1
-        glNormal3f(0, 0, 1);
-        glVertex3f(r, r, r);
-        glVertex3f(-r, r, r);
-        glVertex3f(r, -r, r);
+//  // Side 1
+//        glNormal3f(0, 0, 1);
+//        glVertex3f(r, r, r);
+//        glVertex3f(-r, r, r);
+//        glVertex3f(r, -r, r);
 
-        glVertex3f(-r, r, r);
-        glVertex3f(-r, -r, r);
-        glVertex3f(r, -r, r);
-
-
-
-        // Side 2
-        glNormal3f(0, 0, -1);
-        glVertex3f(r, r, -r);
-        glVertex3f(r, -r, -r);
-        glVertex3f(-r, r, -r);
+//        glVertex3f(-r, r, r);
+//        glVertex3f(-r, -r, r);
+//        glVertex3f(r, -r, r);
 
 
-        glVertex3f(-r, r, -r);
-        glVertex3f(r, -r, -r);
-        glVertex3f(-r, -r, -r);
 
-        // Side 3
-
-        glNormal3f(-1, 0, 0);
-        glVertex3f(-r, r, -r);
-        glVertex3f(-r, -r, -r);
-        glVertex3f(-r, r, r);
+//        // Side 2
+//        glNormal3f(0, 0, -1);
+//        glVertex3f(r, r, -r);
+//        glVertex3f(r, -r, -r);
+//        glVertex3f(-r, r, -r);
 
 
-        glVertex3f(-r, r, r);
-        glVertex3f(-r, -r, -r);
-        glVertex3f(-r, -r, r);
+//        glVertex3f(-r, r, -r);
+//        glVertex3f(r, -r, -r);
+//        glVertex3f(-r, -r, -r);
 
-        // Side 4
+//        // Side 3
 
-        glNormal3f(1, 0, 0);
-        glVertex3f(r, r, -r);
-        glVertex3f(r, r, r);
-        glVertex3f(r, -r, -r);
-
-        glVertex3f(r, r, r);
-        glVertex3f(r, -r, r);
-        glVertex3f(r, -r, -r);
+//        glNormal3f(-1, 0, 0);
+//        glVertex3f(-r, r, -r);
+//        glVertex3f(-r, -r, -r);
+//        glVertex3f(-r, r, r);
 
 
-        // Side 5
+//        glVertex3f(-r, r, r);
+//        glVertex3f(-r, -r, -r);
+//        glVertex3f(-r, -r, r);
 
-        glNormal3f(0, 1, 0);
-        glVertex3f(-r, r, -r);
-        glVertex3f(-r, r, r);
-        glVertex3f(r, r, -r);
+//        // Side 4
 
-        glVertex3f(-r, r, r);
-        glVertex3f(r, r, -r);
-        glVertex3f(r, r, r);
+//        glNormal3f(1, 0, 0);
+//        glVertex3f(r, r, -r);
+//        glVertex3f(r, r, r);
+//        glVertex3f(r, -r, -r);
 
-        // Side 6
-        glNormal3f(0, -1, 0);
-        glVertex3f(-r, -r, -r);
-        glVertex3f(-r, -r, r);
-        glVertex3f(r, -r, -r);
+//        glVertex3f(r, r, r);
+//        glVertex3f(r, -r, r);
+//        glVertex3f(r, -r, -r);
 
-        glVertex3f(-r, -r, r);
-        glVertex3f(r, -r, -r);
-        glVertex3f(r, -r, r);
+
+//        // Side 5
+
+//        glNormal3f(0, 1, 0);
+//        glVertex3f(-r, r, -r);
+//        glVertex3f(-r, r, r);
+//        glVertex3f(r, r, -r);
+
+//        glVertex3f(-r, r, r);
+//        glVertex3f(r, r, -r);
+//        glVertex3f(r, r, r);
+
+//        // Side 6
+//        glNormal3f(0, -1, 0);
+//        glVertex3f(-r, -r, -r);
+//        glVertex3f(-r, -r, r);
+//        glVertex3f(r, -r, -r);
+
+//        glVertex3f(-r, -r, r);
+//        glVertex3f(r, -r, -r);
+//        glVertex3f(r, -r, r);
 
 //  glNormal3f(0,0,1);
 //  glColor3f(0,0,0);
@@ -322,7 +325,7 @@ void Walls::drawCube()
 //    glVertex3f(-w,-h,-d);
 //    glVertex3f(w,-h,-d);
 //    glVertex3f(w,-h,d);
-  glEnd();
+//  glEnd();
   glBegin(GL_LINE_STRIP);
     glColor3f(0, 1, 0);
     glVertex3f(0, 0, 0);

@@ -47,7 +47,7 @@ public:
     rotationNum = 1.0f;
 
   }
-  void cameraUpdate(std::vector<std::vector<int> > matrix,int x, int y);
+  void cameraUpdate(std::vector<std::vector<int> > matrix, int x, int y);
   void cameraStrafe();
   void enableScene();
   void displayCamera();

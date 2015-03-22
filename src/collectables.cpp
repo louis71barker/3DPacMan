@@ -1,4 +1,6 @@
 #include "header/collectables.h"
+#include <GL/glut.h>
+#include <GL/glu.h>
 
 
 
@@ -48,14 +50,27 @@ void Collecable::placeObj(int _x, int _y)
 
 void Collecable::drawBalls()
 {
+  GLfloat mat_emission[] = {1.0, 1.0, 0.0, 1.0};
+  GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
 
-  GLfloat x = 1.0f;
-  GLfloat y = 1.0f;
-  GLfloat z = 1.0f;
+  GLfloat x = 0.0f;
+  GLfloat y = -0.5f;
+  GLfloat z = 0.0f;
   glPushMatrix();
-  glPointSize(10);
-  glBegin(GL_POINTS);
-    glVertex3f(x,y,z);
+  glPointSize(30);
+  glColor3f(1.0, 0.0, 0.0);
+  //smooths the points within the game that are used for the collectables
+//  glEnable( GL_POINT_SMOOTH );
+//  glBegin(GL_POINTS);
+//    glVertex3f(x,y,z);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT7);
+    glEnable(GL_BLEND_COLOR);
+//    glEnable(GL_DEPTH_TEST)
+    glutSolidSphere(0.4,50,50);
+
+
   glEnd();
   glPopMatrix();
 }

@@ -25,14 +25,14 @@
 #endif
 
 
-int main()
+int main(int argc, char** argv)
 {
   if(SDL_Init(SDL_INIT_VIDEO)<0)
   {
     SDLErrorExit("Unable to init SDL");
   }
 
-
+  glutInit(&argc, argv);
 
   //this grabs the screen size's
   SDL_Rect _rect;
@@ -79,6 +79,8 @@ int main()
 
 
 
+
+
   int quit = 0;
   while(!quit)
   {
@@ -88,6 +90,17 @@ int main()
     int mouseX,mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;
+    std::cout<<mouseX<<"\n";
+
+
+//    if (mouseX >= w.screenW)
+//    {
+//      mouseX = 0;
+//    }
+//    else if (mouseX <= 0)
+//    {
+//      mouseX = w.screenW;
+//    }
 
 
 

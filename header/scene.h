@@ -49,7 +49,7 @@ public:
 class Vec4
 {
 public:
-  Vec4(float _x=0.0f,float _y=0.0f, float _z=0.0f, float _w=0.0f) :
+  Vec4(float _x=0.0f, float _y=0.0f, float _z=0.0f, float _w=0.0f) :
     m_x(_x), m_y(_y), m_z(_z), m_w(_w){}
 
   struct

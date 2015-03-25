@@ -7,15 +7,17 @@
 
 void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _x, float _y, float yRot)
 {
+  drawCollectiblesLeft(_x,_y,yRot);
   normalSetter(_matrix);
   collisonDetection(_matrix, _x, _y);
-  drawCollectiblesLeft(_x,_y,yRot);
+
 }
 
 
 
 void Collecable::normalSetter(std::vector<std::vector<int> > matrix)
 {
+  static float f;
   for(int i = 0; i < (int)matrix.size(); ++i)
   {
     for(int j = 0; j < (int)matrix[0].size(); ++j)
@@ -23,12 +25,8 @@ void Collecable::normalSetter(std::vector<std::vector<int> > matrix)
       if(matrix[i][j] == 0)
       {
         placeObj(i, j);
-        if (countSet == false && i ==(int)matrix.size()-1 )
-        {
-          countSet = true;
-        }
-
-        else if (countSet == false)
+        f = i-0.5;
+        if (countSet == false)
         {
           collecibleCount++;
           std::cout<<collecibleCount<<"\n";
@@ -41,6 +39,10 @@ void Collecable::normalSetter(std::vector<std::vector<int> > matrix)
         specialSetter(i,j);
 
       }
+    }
+    if(i == (int)matrix.size()-1 )
+    {
+      countSet = true;
     }
   }
 }
@@ -115,24 +117,39 @@ void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, floa
 
 void Collecable::drawCollectiblesLeft(float _x, float _y, float _yRot)
 {
+  GLint matrix;
+  glGetIntegerv(GL_MATRIX_MODE, &matrix);
 
+  glMatrixMode(GL_PROJECTION);
   glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0,1,0,1);
+    glMatrixMode(GL_MODELVIEW);
+      glPushMatrix();
+      glLoadIdentity();
+
 //  glDisable(GL_TEXTURE_2D);
 //  glLoadIdentity();
-  glColor3f(0,1.0f,0);
-  glRasterPos3f(_x +1, 0,_y+1);
-  glRotatef(_yRot,0,1.0f,0);
-  std::stringstream strm;
-  strm << "Collectibles Left = " << collecibleCount;
-  std::string text = strm.str();
-  for(std::string::iterator it = text.begin(); it != text.end(); ++it)
-  {
-    glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *it);
-//    std::cout<<"draw score god dam it \n";
-  }
-//  glEnable(GL_TEXTURE_2D);
-  glPopMatrix();
+      glPushAttrib(GL_COLOR_BUFFER_BIT);
+        glColor3f(0,1.0f,0);
+        glRasterPos3f(0.05, 0.95, 0);
+//        glRotatef(_yRot,0,1.0f,0);
+        std::stringstream strm;
+        strm << "Collectibles Left = " << collecibleCount;
+        std::string text = strm.str();
+        for(std::string::iterator it = text.begin(); it != text.end(); ++it)
+        {
+          glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *it);
+      //    std::cout<<"draw score god dam it \n";
+        }
+      //  glEnable(GL_TEXTURE_2D);
+        glPopAttrib();
+     glPopMatrix();
 
+   glMatrixMode(GL_PROJECTION);
+
+  glPopMatrix();
+  glMatrixMode(matrix);
 }
 
 

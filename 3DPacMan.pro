@@ -9,7 +9,10 @@ SOURCES+=src/main.cpp\
          src/window.cpp\
          src/camera.cpp\
          src/walls.cpp\
-         src/torch.cpp
+         src/torch.cpp\
+         src/NCCA/Mat4.cpp\
+         src/NCCA/Vec4.cpp\
+         src/NCCA/GLFunctions.cpp
 
 
 HEADERS+=header/arena.h\
@@ -20,9 +23,13 @@ HEADERS+=header/arena.h\
          header/camera.h\
          header/walls.h\
          header/torch.h\
-         header/scene.h
+         header/scene.h\
+         header/NCCA/Mat4.h\
+         header/NCCA/Vec4.h\
+         header/NCCA/GLFunctions.h
 
-OTHER_FILES+= src/MapCoor.txt
+OTHER_FILES+= src/MapCoor.txt\
+              obj/GhostObj.obj\
 
 
 QT += core

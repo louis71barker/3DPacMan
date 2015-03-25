@@ -324,12 +324,12 @@ compiler_clean:
 
 obj/main.o: src/main.cpp header/player.h \
 		header/collectables.h \
+		header/walls.h \
 		header/ghost.h \
 		header/arena.h \
 		header/window.h \
 		header/camera.h \
-		header/scene.h \
-		header/walls.h
+		header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
 
 obj/player.o: src/player.cpp header/player.h \
@@ -344,7 +344,8 @@ obj/arena.o: src/arena.cpp header/arena.h \
 		header/walls.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/arena.o src/arena.cpp
 
-obj/collectables.o: src/collectables.cpp 
+obj/collectables.o: src/collectables.cpp header/collectables.h \
+		header/walls.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/collectables.o src/collectables.cpp
 
 obj/window.o: src/window.cpp header/window.h

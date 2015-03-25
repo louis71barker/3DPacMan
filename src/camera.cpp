@@ -24,34 +24,6 @@
 void Camera::enableScene()
 {
 
-////   Somewhere in the initialization part of your program…
-//  glEnable(GL_LIGHTING);
-//  glEnable(GL_LIGHT0);
-
-//  // Create light components
-//  GLfloat ambientLight[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-//  GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
-//  GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-//  GLfloat position[] = { -playerXpos, 5.0f, -playerZpos, 0.5f };
-//  GLfloat spot_direction[] = { 1.0, 0.0, 1.0, 1.0f};
-//  std::cout<<playerXpos<<"      "<<playerZpos<<"\n";
-
-//  // Assign created components to GL_LIGHT0
-//  glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
-//  glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
-//  glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
-//  glLightfv(GL_LIGHT0, GL_POSITION, position);
-//  glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION, spot_direction);
-
-//  glEnable (GL_DEPTH_TEST);//enables depth testing
-//  glEnable(GL_LIGHTING);//enables the lights
-//  glEnable(GL_LIGHT0);//enables light0
-//  glShadeModel(GL_SMOOTH);//sets the shader to smooth
-
-//    glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 45.0);
-//    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);
-//    glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 2.0);
-
   // Light values and coordinates
   GLfloat  lightPos[] = { playerXpos, -1.0f, playerZpos , 1.0f };
   GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
@@ -60,12 +32,8 @@ void Camera::enableScene()
   GLfloat  spotDir[] = { 1, yRot, -1};
 
 //  std::cout<<xRot<<"      "<<yRot<<"\n";
-  // This function does any needed initialization on the rendering
-  // context.  Here it sets up and initializes the lighting for
-  // the scene.
 
-
-    glEnable(GL_DEPTH_TEST);   // Hidden surface removal
+    glEnable(GL_DEPTH_TEST);
     //glFrontFace(GL_CW);       // Counterclockwise polygons face out
     glEnable(GL_CULL_FACE);    // Do not try to display the back sides
 
@@ -74,7 +42,7 @@ void Camera::enableScene()
 
 
     // Enable lighting
-    glEnable(GL_LIGHTING);
+//    glEnable(GL_LIGHTING);
 
     // Set up and enable light 0
     // Supply a slight ambient light so the objects can be seen
@@ -109,20 +77,20 @@ void Camera::enableScene()
     glPushMatrix();
 
             glRotatef(-yRot, 0.0f, 1.0f, 0.0f);
-            glRotatef(0, 0.0f, 1.0f, 0.0f);
-            //spotDir[0] = asinf(xRot / 180 * M_PI);
-            //spotDir[2] = acosf(xRot / 180 * M_PI);
+            //glRotatef(0, 0.0f, 1.0f, 0.0f);
+//            spotDir[0] = asinf(-yRot / 180 * M_PI);
+//            spotDir[2] = acosf(-yRot / 180 * M_PI);
 
             // Specify new position and direction in rotated coords.
             glLightfv(GL_LIGHT0,GL_POSITION,lightPos);
             glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION,spotDir);
 
-            // Draw a red cone to enclose the light source
+//             Draw a red cone to enclose the light source
 //            glRGB(255,0,0);
 
             // Translate origin to move the cone out to where the light
             // is positioned.
-            glTranslatef(lightPos[0],0,lightPos[2]);
+            //glTranslatef(lightPos[0],0,lightPos[2]);
 //            auxSolidCone(4.0f,6.0f);
 
             // Draw a smaller displaced sphere to denote the light bulb
@@ -145,7 +113,7 @@ void Camera::enableScene()
     glColor3f(1,0,0);
     glVertex3f(playerXpos + 5, -1.0f, playerZpos );
     glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-    std::cout<<yRot<<"\n";
+//    std::cout<<yRot<<"\n";
     glRotatef(0, 0.0f, 1.0f, 0.0f);
   glEnd();
   glPopMatrix();
@@ -215,7 +183,7 @@ void Camera::displayCamera()
 
 void Camera::cameraStrafe()
 {
-  if (strafeLeft == true)
+  if (strafeLeft == true  && playerMoveing == true)
   {
     float yRotRad;
     yRotRad = (yRot / 180 * M_PI);
@@ -223,14 +191,14 @@ void Camera::cameraStrafe()
     playerZpos -= float(sin(yRotRad)) * 0.2;
 
   }
-  if (strafeRight == true)
+  if (strafeRight == true  && playerMoveing == true)
   {
     float yRotRad;
     yRotRad = (yRot / 180 * M_PI);
     playerXpos += float(cos(yRotRad)) * 0.2;
     playerZpos += float(sin(yRotRad)) * 0.2;
   }
-  if (moveBackward == true)
+  if (moveBackward == true && playerMoveing == true)
   {
     float xRotRad,yRotRad;
     yRotRad = (yRot / 180 * M_PI);
@@ -238,7 +206,7 @@ void Camera::cameraStrafe()
     playerXpos -= float(sin(yRotRad)/5);
     playerZpos += float(cos(yRotRad)/5);
   }
-  if (moveForward == true)
+  if (moveForward == true && playerMoveing == true)
   {
     float xRotRad,yRotRad;
     yRotRad = (yRot / 180 * M_PI);
@@ -247,6 +215,8 @@ void Camera::cameraStrafe()
     playerZpos -= float(cos(yRotRad)/5);
 
   }
+
+
 
 }
 
@@ -290,32 +260,117 @@ void Camera::playerCollisions(std::vector<std::vector<int> > matrix)
     {
       if(matrix[i][j] == 1)
       {
-        if((fabs((-30 + (i+0.5)*4) - playerXpos) < 3) &&
-           (fabs((30 - (j+0.5)*4) - playerZpos) < 3))
+                  float cubeCentreX = (-30 + (i+0.5)*4);
+                  float cubeCentreZ = (30 - (j+0.5)*4);
+                  float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ, normalx, normalz;
+                  cubeMinX = cubeCentreX - 2.8f;
+                  cubeMaxX = cubeCentreX + 2.8f;
+                  cubeMinZ = cubeCentreZ - 2.8f;
+                  cubeMaxZ = cubeCentreZ + 2.8f;
+        if (playerXpos > cubeMinX && playerXpos < cubeMaxX && playerZpos > cubeMinZ && playerZpos < cubeMaxZ)
         {
+          std::cout<<"boom boom bang bang \n";
+//          detectingNormals(cubeCentreX, cubeCentreZ);
+          if (playerXpos > playerZpos)
+          {
+            if(playerXpos - (cubeCentreX + 2) < 0)
+            {
+              normalx = 1.0f;
+              normalz = 0.0f;
+              std::cout<<"Front Side \n";
+            }
+            else
+            {
+              normalx = -1.0f;
+              normalz = 0.0f;
+              std::cout<<"back Side \n";
+            }
+          }
+          else
+            {
+              if (playerZpos - (cubeCentreZ + 2) < 0.0f)
+              {
+                normalx = 0.0f;
+                normalz = 1.0f;
+                std::cout<<"right Side \n";
+              }
+              else
+              {
+                normalx = 0.0f;
+                normalz = -1.0f;
+                std::cout<<"left Side \n";
+              }
+            }
 
-          float cubeCentreX = (-30 + (i+0.5)*4);
-          float cubeCentreZ = (30 - (j+0.5)*4);
 
-          if (cubeCentreX - (fabs((-30 + (i+0.5)*4) - playerXpos) < 3) > 0)
-          {
-            playerXpos -= 0.1;
-          }
-          else if (cubeCentreX - (fabs((-30 + (i+0.5)*4) - playerXpos) < 3) < 0)
-          {
-            playerXpos += 0.1 ;
-          }
-          if (cubeCentreZ - (fabs((30 - (j+0.6)*4) - playerZpos) < 3) > 0)
-          {
-            playerZpos -= 0.1;
-          }
-          else if (cubeCentreZ - (fabs((30 + (j+0.6)*4) - playerZpos) < 3) < 0)
-          {
-            playerZpos += 0.1;
-          }
-          std::cout << "Close to a wall!" << i << " " << j << " " << (30 - (j+0.5)*4) - playerZpos << "\n";
+        }
+        else
+        {
+          normalx = 0.0f;
+          normalz = 0.0f;
+        }
+
+//        if (cubeCentreX - (fabs((-30 + (i+0.5)*4) - playerXpos) < 3) > 0)
+//        {
+//          std::cout<<"front face\n";
+//        }
+//        if (cubeCentreX - (fabs((-30 + (i+0.5)*4) - playerXpos) < 3) < 0)
+//        {
+//          std::cout<<"back face\n";
+//        }
+//        if (cubeCentreZ - (fabs((30 - (j+0.6)*4) - playerZpos) < 3) > 0)
+//        {
+//          std::cout<<"left face \n";
+//        }
+//        if (cubeCentreZ - (fabs((30 + (j+0.6)*4) - playerZpos) < 3) < 0)
+//        {
+//          std::cout<<"right face\n";
+//        }
+
+
+
+
+//          std::cout << "Close to a wall!" << i << " " << j << " " << (30 - (j+0.5)*4) - playerZpos << "\n";
         }
       }
     }
   }
+//}
+
+void Camera::detectingNormals(float cubeXcentre, float cubeZcentre)
+{
+//  float cubeCentreX = (-30 + (i+0.5)*4);
+//  float cubeCentreZ = (30 - (j+0.5)*4);
+//  float cubeSize = 4;
+//  for (int i=0; i<1; i++)
+//  {
+//    if ((playerXpos + cubeSize) >= (cubeXcentre + cubeSize))
+//    {
+//  //    front face
+//      std::cout<<"front face \n"<<i<<"\n";
+
+//      break;
+//    }
+
+//    else if ((playerZpos - cubeSize) <= (cubeZcentre - cubeSize))
+//    {
+//  //    right face
+//      std::cout<<"right face \n";
+//      break;
+//    }
+
+//    else if ((playerXpos - cubeSize) <= (cubeXcentre - cubeSize))
+//    {
+//  //    back face
+//      std::cout<<"back face \n";
+//      break;
+//    }
+
+//    else if ((playerZpos + cubeSize) >= (cubeZcentre + cubeSize))
+//    {
+//  //    left face
+//      std::cout<<"left face \n";
+//      break;
+//    }
+//  }
 }

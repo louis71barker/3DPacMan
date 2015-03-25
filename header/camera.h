@@ -35,6 +35,7 @@ public:
     mouseInScreen = false;
     firstPersonCam = true;
     thirdPersonCam = false;
+    playerMoveing = true;
 
     angle = 0.0f;
     playerXpos = 0.0f;
@@ -57,9 +58,10 @@ public:
   void thirdPerson();
   void spotLight();
   void playerCollisions(std::vector<std::vector<int> > matrix);
+  void detectingNormals(float cubeXcentre, float cubeZcentre);
 
 
-  bool strafeLeft,strafeRight,moveForward,moveBackward,mouseInScreen,firstPersonCam,thirdPersonCam;
+  bool strafeLeft,strafeRight,moveForward,moveBackward,mouseInScreen,firstPersonCam,thirdPersonCam, playerMoveing;
   Vec3 camEye;
   Vec3 camCentre;
   Vec3 camUp;

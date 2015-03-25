@@ -19,6 +19,8 @@ public:
   void cubeInit(const std::string &_fname);
   void fileReader(const std::string &);
   void draw();
+  void initMaze();
+  void propChanger(std::vector<std::vector<int> > matrix, int w, int h);
   std::vector< std::vector<int> > matrix;
 
 
@@ -37,7 +39,7 @@ private:
   void cubeSetter() const;
   void mapCoorSetter();
   void mapBuilder(std::vector<std::vector<int> > matrix, int sortCount);
-  void initMaze();
+
   void letsDraw(int _x, int _y);
   void drawCube();
   void triangleCubCoor(GLfloat cube_buffer);
@@ -84,7 +86,7 @@ private:
 
   0 = path and collectable
   1 = wall
-  2 =
+  2 = collectable collected
   3 = player start
   4 = ghost spawn
   5 = specials

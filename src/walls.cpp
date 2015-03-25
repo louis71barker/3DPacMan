@@ -21,7 +21,7 @@ Walls::Walls(const std::string &_fname) :  CUBEDEPTH(2.0f), CUBEWIDTH(2.0f), CUB
   gridXPos = -15;
   gridZPos = 15;
   mapCoorSetter();
-  initMaze();
+//  initMaze();
 //  std::cout << dList.size() << "\n";
 }
 
@@ -156,11 +156,6 @@ void Walls::initMaze()
         letsDraw(i, j);
         //std::cout<<matrix[i][j]<<"  asdgakjd     "<<j<<"\n";
       }
-      if(matrix[i][j] == 0)
-      {
-        //draw collectables here
-
-      }
     }
   }
   glEndList();
@@ -176,12 +171,17 @@ void Walls::letsDraw(int _x, int _y)
     glPopMatrix();
 }
 
+void Walls::propChanger(std::vector<std::vector<int> > matrix, int w, int h)
+{
+  matrix[w][h] = 2;
+}
+
 void Walls::drawCube()
 {
-  GLfloat w=CUBEWIDTH;
-  GLfloat h=CUBEHEIGHT;
-  GLfloat d=CUBEDEPTH;
-  GLfloat r = CUBEWIDTH;
+//  GLfloat w=CUBEWIDTH;
+//  GLfloat h=CUBEHEIGHT;
+//  GLfloat d=CUBEDEPTH;
+//  GLfloat r = CUBEWIDTH;
 
   glColor3f(1,1,1);
   glutSolidCube(4);
@@ -326,12 +326,16 @@ void Walls::drawCube()
 //    glVertex3f(w,-h,-d);
 //    glVertex3f(w,-h,d);
 //  glEnd();
+  glPushMatrix();
   glBegin(GL_LINE_STRIP);
     glColor3f(0, 1, 0);
     glVertex3f(0, 0, 0);
-    glVertex3f(0, (CUBEWIDTH+0.1), 0);
+    glVertex3f((CUBEWIDTH+0.1), 0, 0);
   glEnd();
+  glPopMatrix();
 }
+
+
 
 
 

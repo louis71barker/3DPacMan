@@ -61,6 +61,8 @@ int main(int argc, char** argv)
   Player p;
   Collecable col;
 
+  wa.initMaze();
+
 
 
   SDL_GL_MakeCurrent(win,gl);
@@ -90,7 +92,7 @@ int main(int argc, char** argv)
     int mouseX,mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;
-    std::cout<<mouseX<<"\n";
+//    std::cout<<mouseX<<"\n";
 
 
 //    if (mouseX >= w.screenW)
@@ -176,7 +178,7 @@ int main(int argc, char** argv)
     }
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
-    col.drawCollectable(wa.matrix);
+    col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos,cam.yRot);
     p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     a.drawArena();
     wa.draw();

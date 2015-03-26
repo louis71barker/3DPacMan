@@ -10,7 +10,6 @@
 #include <vector>
 #include <stdlib.h>
 #include <iostream>
-#include <GL/gl.h>
 //#include "header/NCCA/Vec4.h"
 
 
@@ -23,17 +22,35 @@
 
 class Ghost
 {
+
+
 public:
-  void updater();
+  void updater(const std::string &_objName);
   void drawGhosts();
-  std::vector<Vec3> Vertex;
-  std::vector<Vec3> Normal;
-  std::vector<Vec3> Texture;
+
+  std::vector<Vec3> m_Vertex;
+  std::vector<Vec3> m_Normal;
+  std::vector<Vec3> m_Texture;
+  std::vector<int> m_VId;
+
+  Ghost(){}
+  ~Ghost()
+  {
+    m_Vertex.clear();
+    std::vector<Vec3>().swap (m_Vertex);
+    m_Normal.clear();
+    std::vector<Vec3>().swap (m_Normal);
+    m_Texture.clear();
+    std::vector<Vec3>().swap (m_Texture);
+    m_VId.clear();
+    std::vector<int>().swap (m_VId);
+  }
 
 
 private:
   typedef boost::tokenizer<boost::char_separator<char> >tokenizer;
   void objFileParser(const std::string &);
+  void vectorBuilder();
 
 
 

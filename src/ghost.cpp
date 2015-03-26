@@ -1,11 +1,14 @@
 #include "header/ghost.h"
 
 
+void Ghost::updater(const std::string &_objName)
+{
+  objFileParser(_objName);
+}
+
+
 void Ghost::objFileParser(const std::string &_objName)
 {
-  int lineCount = 0, sortCount = 0;
-
-
   std::fstream fileIn;
   fileIn.open(_objName.c_str(),std::ios::in);
   if (!fileIn.is_open())
@@ -15,7 +18,7 @@ void Ghost::objFileParser(const std::string &_objName)
   }
 
   //boost parser separtor
-  boost::char_separator<char> sep(" \t\r\n");
+  boost::char_separator<char> sep(" /\t\r\n");
 
   std::string lineBuffer;
   while(!fileIn.eof())
@@ -24,48 +27,67 @@ void Ghost::objFileParser(const std::string &_objName)
     if (lineBuffer.size() !=0)
     {
       tokenizer tokens(lineBuffer,sep);
-      tokenizer::iterator firstWord=tokens.begin();
+      tokenizer::iterator firstWord = tokens.begin();
       if (*firstWord == "#")
       {
-        std::cerr<<"Found a comment \n";
+        std::cerr<<"Found a comment in obj file \n";
       }
       else if (*firstWord=="v")
       {
-        Vec3 vert(boost::lexical_cast<float>(*firstWord++),
-                  boost::lexical_cast<float>(*firstWord++),
-                  boost::lexical_cast<float>(*firstWord++));
-        Vertex.push_back(vert);
+        std::cout<<"aslkdjlkasjd"<<"\n";
+        Vec3 vert(boost::lexical_cast<float>(*++firstWord),
+                  boost::lexical_cast<float>(*++firstWord),
+                  boost::lexical_cast<float>(*++firstWord));
+
+        m_Vertex.push_back(vert);
       }
       else if (*firstWord == "vt")
       {
-        Vec3 text(boost::lexical_cast<float>(*firstWord++),
-                  boost::lexical_cast<float>(*firstWord++),
-                  boost::lexical_cast<float>(*firstWord++));
-        Texture.push_back(text);
+        std::cout<<"aslkdjlkasjdalkhsdkashdkh"<<"\n";
+        Vec3 text(boost::lexical_cast<float>(*++firstWord),
+                  boost::lexical_cast<float>(*++firstWord),
+                  boost::lexical_cast<float>(*++firstWord));
+
+        m_Texture.push_back(text);
       }
       else if (*firstWord == "vn")
       {
-        Vec3 norm(boost::lexical_cast<float>(*firstWord++),
-                  boost::lexical_cast<float>(*firstWord++),
-                  boost::lexical_cast<float>(*firstWord++));
-        Normal.push_back(norm);
+        Vec3 norm(boost::lexical_cast<float>(*++firstWord),
+                  boost::lexical_cast<float>(*++firstWord),
+                  boost::lexical_cast<float>(*++firstWord));
+
+        m_Normal.push_back(norm);
       }
     }
 
+
   }
+  fileIn.close();
 }
 
 void Ghost::drawGhosts()
 {
 
-  for (int i = 0; i >= Vertex.size(); i += 3)
-  {
+    vectorBuilder();
+    GLuint id = glGenLists(1);
+    glNewList(id, GL_COMPILE);
     glPushMatrix();
       glBegin(GL_TRIANGLES);
-
+        for (int i = 0; i < (int)m_Normal.size(); i++)
+        {
+          m_Normal[i].normalGL();
+          m_Vertex[i].vertexGL();
+        }
 
       glEnd();
     glPopMatrix();
+}
+
+void Ghost::vectorBuilder()
+{
+  for (int i=0; i < (int)m_Normal.size(); i += 3)
+  {
+    m_VId.push_back(i);
   }
 }
 

@@ -58,6 +58,7 @@ int main(int argc, char** argv)
   Arena a;
   Camera cam;
   Walls wa("src/MapCoor.txt");
+  Ghost gho;
   Player p;
   Collecable col;
 
@@ -179,6 +180,7 @@ int main(int argc, char** argv)
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos,cam.yRot);
+    gho.updater("obj/GhostObj.obj");
     p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     a.drawArena();
     wa.draw();

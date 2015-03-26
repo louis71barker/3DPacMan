@@ -1,7 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
-
-mtllib GhostObj.mtl
-g default
+# This file uses centimeters as units for non-parametric coordinates.
+# This file uses centimeters as units for non-parametric coordinates.
 v -0.667341 0.000000 -8.589233
 v -1.738595 0.000000 -8.437864
 v -2.782430 0.000000 -8.153425

@@ -7,6 +7,14 @@
 #include <GL/glut.h>
 
 
+#ifdef LINUX
+  #include <GL/gl.h>
+#endif
+#ifdef DARWIN
+  #include <OpenGL/gl.h>
+#endif
+
+
 
 typedef struct {
   GLfloat x;
@@ -32,6 +40,8 @@ class Vec3
 public:
   Vec3(float _x=0.0f,float _y=0.0f, float _z=0.0f) :
     m_x(_x), m_y(_y), m_z(_z){}
+  void normalGL();
+  void vertexGL();
 
   struct
   {
@@ -51,6 +61,8 @@ class Vec4
 public:
   Vec4(float _x=0.0f, float _y=0.0f, float _z=0.0f, float _w=0.0f) :
     m_x(_x), m_y(_y), m_z(_z), m_w(_w){}
+  void normalGL();
+  void vertexGL();
 
   struct
   {
@@ -61,6 +73,8 @@ public:
   };
 
 };
+
+
 
 
 

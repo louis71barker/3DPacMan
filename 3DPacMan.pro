@@ -10,9 +10,10 @@ SOURCES+=src/main.cpp\
          src/camera.cpp\
          src/walls.cpp\
          src/torch.cpp\
-         src/NCCA/Mat4.cpp\
-         src/NCCA/Vec4.cpp\
-         src/NCCA/GLFunctions.cpp
+         src/Vec.cpp
+#         src/NCCA/Mat4.cpp\
+#         src/NCCA/Vec4.cpp\
+#         src/NCCA/GLFunctions.cpp
 
 
 HEADERS+=header/arena.h\
@@ -24,9 +25,9 @@ HEADERS+=header/arena.h\
          header/walls.h\
          header/torch.h\
          header/scene.h\
-         header/NCCA/Mat4.h\
-         header/NCCA/Vec4.h\
-         header/NCCA/GLFunctions.h
+#         header/NCCA/Mat4.h\
+#         header/NCCA/Vec4.h\
+#         header/NCCA/GLFunctions.h
 
 OTHER_FILES+= src/MapCoor.txt\
               obj/GhostObj.obj\

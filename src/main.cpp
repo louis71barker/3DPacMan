@@ -180,7 +180,7 @@ int main(int argc, char** argv)
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos,cam.yRot);
-    gho.updater("obj/GhostObj.obj");
+    gho.updater();
     p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     a.drawArena();
     wa.draw();

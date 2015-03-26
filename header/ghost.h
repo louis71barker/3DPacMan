@@ -24,16 +24,21 @@ class Ghost
 {
 
 
+
+
+
 public:
-  void updater(const std::string &_objName);
+  void updater();
   void drawGhosts();
 
   std::vector<Vec3> m_Vertex;
   std::vector<Vec3> m_Normal;
   std::vector<Vec3> m_Texture;
+  std::vector<Vec3> m_Index;
   std::vector<int> m_VId;
+  std::vector<GLuint> m_displayList;
 
-  Ghost(){}
+  Ghost(){objFileParser("obj/GhostObj.obj"); drawGhosts(); }
   ~Ghost()
   {
     m_Vertex.clear();

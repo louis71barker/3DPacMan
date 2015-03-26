@@ -1,9 +1,9 @@
 #include "header/ghost.h"
 
 
-void Ghost::updater(const std::string &_objName)
+void Ghost::updater()
 {
-  objFileParser(_objName);
+  glCallLists(m_displayList.size(), GL_UNSIGNED_INT, &m_displayList[0]);
 }
 
 
@@ -28,13 +28,9 @@ void Ghost::objFileParser(const std::string &_objName)
     {
       tokenizer tokens(lineBuffer,sep);
       tokenizer::iterator firstWord = tokens.begin();
-      if (*firstWord == "#")
+      if (*firstWord=="v")
       {
-        std::cerr<<"Found a comment in obj file \n";
-      }
-      else if (*firstWord=="v")
-      {
-        std::cout<<"aslkdjlkasjd"<<"\n";
+//        std::cout<<"aslkdjlkasjd"<<"\n";
         Vec3 vert(boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord));
@@ -43,9 +39,8 @@ void Ghost::objFileParser(const std::string &_objName)
       }
       else if (*firstWord == "vt")
       {
-        std::cout<<"aslkdjlkasjdalkhsdkashdkh"<<"\n";
+//        std::cout<<"aslkdjlkasjdalkhsdkashdkh"<<"\n";
         Vec3 text(boost::lexical_cast<float>(*++firstWord),
-                  boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord));
 
         m_Texture.push_back(text);
@@ -58,6 +53,13 @@ void Ghost::objFileParser(const std::string &_objName)
 
         m_Normal.push_back(norm);
       }
+      else if (*firstWord == "f")
+      {
+          Vec3 comp(boost::lexical_cast<float>(*++firstWord),
+                    boost::lexical_cast<float>(*++firstWord),
+                    boost::lexical_cast<float>(*++firstWord));
+          m_Index.push_back(comp);
+      }
     }
 
 
@@ -68,19 +70,24 @@ void Ghost::objFileParser(const std::string &_objName)
 void Ghost::drawGhosts()
 {
 
+  //load the texture here and bind inside the list bellow!!!!!! :)
+
     vectorBuilder();
     GLuint id = glGenLists(1);
     glNewList(id, GL_COMPILE);
     glPushMatrix();
+      glPointSize(120);
       glBegin(GL_TRIANGLES);
-        for (int i = 0; i < (int)m_Normal.size(); i++)
+        for (int i = 0; i < (int)m_Index.size(); i += 3)
         {
-          m_Normal[i].normalGL();
-          m_Vertex[i].vertexGL();
+          m_Index[i + 2].normalGL();
+          m_Index[i].vertexGL();
         }
+
 
       glEnd();
     glPopMatrix();
+    m_displayList.push_back(id);
 }
 
 void Ghost::vectorBuilder()

@@ -10,7 +10,8 @@ SOURCES+=src/main.cpp\
          src/camera.cpp\
          src/walls.cpp\
          src/torch.cpp\
-         src/Vec.cpp
+         src/Vec.cpp\
+         src/objLoader.cpp
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
@@ -31,6 +32,7 @@ HEADERS+=header/arena.h\
 
 OTHER_FILES+= src/MapCoor.txt\
               obj/GhostObj.obj\
+              obj/CherryObj.obj
 
 
 QT += core

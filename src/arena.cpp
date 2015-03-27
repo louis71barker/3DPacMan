@@ -62,7 +62,7 @@ void Arena::ground()
 //    glVertex3f(w,h,-d);
 //    glVertex3f(w,h,d);
     // Bottom face
-    glNormal3f(0,1,0);
+    glNormal3f(0,-1,0);
     glVertex3f(-w,-h,d);
     glVertex3f(-w,-h,-d);
     glVertex3f(w,-h,-d);

@@ -47,6 +47,8 @@ public:
     yRot = 0.0f;
     rotationNum = 1.0f;
 
+
+
   }
   void cameraUpdate(std::vector<std::vector<int> > matrix, int x, int y);
   void cameraStrafe();
@@ -72,6 +74,7 @@ public:
 
 
 private:
+
 };
 
 

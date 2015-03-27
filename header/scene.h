@@ -2,9 +2,16 @@
 #define SCENE_H__
 
 #include <SDL.h>
+#include <boost/lexical_cast.hpp>
+#include <boost/format.hpp>
+#include <boost/tokenizer.hpp>
+#include <fstream>
+#include <stdlib.h>
+#include <iostream>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+
 
 
 #ifdef LINUX
@@ -13,6 +20,8 @@
 #ifdef DARWIN
   #include <OpenGL/gl.h>
 #endif
+
+
 
 
 
@@ -74,6 +83,8 @@ public:
 
 };
 
+
+void ObjLoader(const std::string &, std::vector<Vec3> &_vec, std::vector<Vec3> &_norm, std::vector<Vec3> &_text, std::vector<int> &_index);
 
 
 

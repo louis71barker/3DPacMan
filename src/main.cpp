@@ -60,7 +60,7 @@ int main(int argc, char** argv)
   Walls wa("src/MapCoor.txt");
   Ghost gho;
   Player p;
-  Collecable col;
+  Collecable col(wa.matrix);
 
   wa.initMaze();
 
@@ -93,17 +93,6 @@ int main(int argc, char** argv)
     int mouseX,mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;
-//    std::cout<<mouseX<<"\n";
-
-
-//    if (mouseX >= w.screenW)
-//    {
-//      mouseX = 0;
-//    }
-//    else if (mouseX <= 0)
-//    {
-//      mouseX = w.screenW;
-//    }
 
 
 

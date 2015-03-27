@@ -34,11 +34,10 @@ public:
   std::vector<Vec3> m_Vertex;
   std::vector<Vec3> m_Normal;
   std::vector<Vec3> m_Texture;
-  std::vector<Vec3> m_Index;
-  std::vector<int> m_VId;
+  std::vector<int> m_Index;
   std::vector<GLuint> m_displayList;
 
-  Ghost(){objFileParser("obj/GhostObj.obj"); drawGhosts(); }
+  Ghost(){ObjLoader("obj/GhostObj.obj",m_Vertex,m_Normal,m_Texture,m_Index); drawGhosts(); }
   ~Ghost()
   {
     m_Vertex.clear();
@@ -47,8 +46,10 @@ public:
     std::vector<Vec3>().swap (m_Normal);
     m_Texture.clear();
     std::vector<Vec3>().swap (m_Texture);
-    m_VId.clear();
-    std::vector<int>().swap (m_VId);
+    m_displayList.clear();
+    std::vector<GLuint>().swap (m_displayList);
+    m_Index.clear();
+    std::vector<int>().swap (m_Index);
   }
 
 

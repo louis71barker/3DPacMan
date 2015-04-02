@@ -13,6 +13,11 @@
 #include <GL/glut.h>
 
 
+#define CUBESIZE 4
+#define SCREENWIDTH 1000
+#define SCREENHEIGHT 700
+#define MAXMAPSIZE 400
+
 
 #ifdef LINUX
   #include <GL/gl.h>
@@ -40,7 +45,7 @@ typedef struct {
   GLfloat w;
 }Vector4;
 
-Vector4 NormalizeVec3(Vector4 Vector);
+Vector4 NormalizeVec4(Vector4 Vector);
 
 
 //vector 3 class
@@ -85,6 +90,7 @@ public:
 
 
 void ObjLoader(const std::string &, std::vector<Vec3> &_vec, std::vector<Vec3> &_norm, std::vector<Vec3> &_text, std::vector<int> &_index);
+void textLoader(const std::string &_fname, GLuint &_tid);
 
 
 

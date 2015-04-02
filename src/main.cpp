@@ -15,6 +15,7 @@
 #include "header/window.h"
 #include "header/camera.h"
 #include "header/walls.h"
+#include "header/lights.h"
 
 
 #ifdef LINUX
@@ -33,6 +34,7 @@ int main(int argc, char** argv)
   }
 
   glutInit(&argc, argv);
+  SDL_Init(SDL_INIT_VIDEO);
 
   //this grabs the screen size's
   SDL_Rect _rect;
@@ -55,14 +57,17 @@ int main(int argc, char** argv)
   {
     SDLErrorExit("Problem creating OpenGL Context");
   }
+
+  Walls wa("src/MapCoor.txt");
   Arena a;
   Camera cam;
-  Walls wa("src/MapCoor.txt");
   Ghost gho;
   Player p;
   Collecable col(wa.matrix);
+  Lights l;
 
   wa.initMaze();
+
 
 
 
@@ -70,7 +75,7 @@ int main(int argc, char** argv)
   SDL_GL_SetSwapInterval(1);
 
   glMatrixMode(GL_PROJECTION);
-  gluPerspective(45.0f,float(_rect.w)/_rect.h,1.0,100.0);
+  gluPerspective(45.0f,float(_rect.w)/_rect.h,0.5,100.0);
   glMatrixMode(GL_MODELVIEW);
 
   glEnable(GL_NORMALIZE);
@@ -80,7 +85,7 @@ int main(int argc, char** argv)
 
 
 
-
+  w.Lighting();
 
 
 
@@ -161,22 +166,23 @@ int main(int argc, char** argv)
          break;
 
        }
-
-      if(e.type == SDL_MOUSEMOTION)
-      {
-      }
     }
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
-    col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos,cam.yRot);
+    col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
     gho.updater();
-    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
-    a.drawArena();
+//    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
+    a.drawArena(wa.matrix);
     wa.draw();
+    l.distanceCal(wa.matrix);
 
     SDL_GL_SwapWindow(win);
 
   }
+
+
+
+  SDL_DestroyWindow(win);
 
   SDL_Quit();
   return 0;

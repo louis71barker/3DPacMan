@@ -3,6 +3,7 @@
 #include <math.h>
 #include "header/scene.h"
 #include <vector>
+#include "walls.h"
 
 
 
@@ -28,6 +29,7 @@ public:
     camUp(0, 1, 0),
     camCoor(0, 0, 0)
   {
+
     strafeLeft = false;
     strafeRight = false;
     moveForward = false;
@@ -36,6 +38,10 @@ public:
     firstPersonCam = true;
     thirdPersonCam = false;
     playerMoveing = true;
+    xTrue = false;
+    zTrue = false;
+    playerSet = false;
+
 
     angle = 0.0f;
     playerXpos = 0.0f;
@@ -46,34 +52,50 @@ public:
     xRot = 0.0f;
     yRot = 0.0f;
     rotationNum = 1.0f;
+    xInvEntry = 0.0f;
+    yInvEntry = 0.0f;
+    xInvExit = 0.0f;
+    yInvExit = 0.0f;
+    diffx = 0.0f;
+    diffy = 0.0f;
+    xEntry = 0.0f;
+    yEntry = 0.0f;
+    xExit = 0.0f;
+    yExit = 0.0f;
+    entryTime = 0.0f;
+    exitTime = 0.0f;
+    oldxPos = 0.0f;
+    oldzPos = 0.0f;
 
 
 
   }
   void cameraUpdate(std::vector<std::vector<int> > matrix, int x, int y);
-  void cameraStrafe();
-  void enableScene();
-  void displayCamera();
-  void CameraSet();
-  void mouseMovementCapture(int x, int y);
-  void WidowSetting();
-  void thirdPerson();
-  void spotLight();
-  void playerCollisions(std::vector<std::vector<int> > matrix);
-  void detectingNormals(float cubeXcentre, float cubeZcentre);
 
+  bool strafeLeft,strafeRight,moveForward,moveBackward,mouseInScreen,firstPersonCam,thirdPersonCam, playerMoveing, xTrue, zTrue;
 
-  bool strafeLeft,strafeRight,moveForward,moveBackward,mouseInScreen,firstPersonCam,thirdPersonCam, playerMoveing;
   Vec3 camEye;
   Vec3 camCentre;
   Vec3 camUp;
   Vec3 camCoor;
 
-  float angle,playerXpos,playerYpos,playerZpos,lastPlayerPosx,lastPlayerPosy,xRot,yRot,rotationNum;
+  float playerSet,angle,playerXpos,playerYpos,playerZpos,lastPlayerPosx,lastPlayerPosy,xRot,yRot,rotationNum,xInvEntry,yInvEntry,xInvExit,yInvExit,diffx,diffy,xEntry,yEntry,xExit,yExit,entryTime,exitTime,oldxPos,oldzPos;
 
 
 
 private:
+    void collisionDistance(float cubeX, float cubeZ);
+    void cameraStrafe();
+    void enableScene();
+    void displayCamera();
+    void CameraSet();
+    void mouseMovementCapture(int x, int y);
+    void WidowSetting();
+    void thirdPerson();
+    void spotLight();
+    void playerCollisions(std::vector<std::vector<int> > matrix);
+    void detectingNormals(float cubeXcentre, float cubeZcentre);
+    void setPlayer(std::vector<std::vector<int> > _matrix);
 
 };
 

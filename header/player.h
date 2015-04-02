@@ -24,8 +24,8 @@ public:
   playerMoveAllowed = true;
   }
 
-  void colliosion(std::vector<std::vector<int> > matrix, float playerXpos, float playerZpos);
-  void update(std::vector<std::vector<int> > matrix, float playerXpos, float playerZpos);
+
+  void update();
   void draw();
 
 

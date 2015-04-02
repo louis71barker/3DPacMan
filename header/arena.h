@@ -1,6 +1,9 @@
 #ifndef ARENA_H__
 #define ARENA_H__
 
+#include <vector>
+#include "walls.h"
+
 
 
 
@@ -8,17 +11,18 @@
 class Arena
 {
 public:
-  Arena () : MAPGRIDSIZE(15.0f)
+  Arena ()
   {
+
   }
 
-  void ground();
+  void ground(std::vector<std::vector<int> > _matrix);
   void sky();
-  void drawArena();
+  void drawArena(std::vector<std::vector<int> > _matrix);
 
 
 private:
-  const float MAPGRIDSIZE;
+
 
 
 };

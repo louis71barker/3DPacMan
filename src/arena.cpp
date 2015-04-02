@@ -22,73 +22,33 @@
 
 
 
-void Arena::ground()
+void Arena::ground(std::vector<std::vector<int> > _matrix)
 {
-  // assume the  cube centered at the origin
-  GLfloat w=2.0f * MAPGRIDSIZE;
-  GLfloat h=2.0f;
-  GLfloat d=2.0f * MAPGRIDSIZE;
-
-  glPushMatrix();
-  glBegin(GL_QUADS);
-    // front face
-    glNormal3f(0,0,-1);
-    glVertex3f(-w,h,d);
-    glVertex3f(w,h,d);
-    glVertex3f(w,-h,d);
-    glVertex3f(-w,-h,d);
-    // back face
-    glNormal3d(0,0,1);
-    glVertex3f(-w,h,-d);
-    glVertex3f(w,h,-d);
-    glVertex3f(w,-h,-d);
-    glVertex3f(-w,-h,-d);
-    // Left face
-    glNormal3f(-1,0,0);
-    glVertex3f(-w,-h,d);
-    glVertex3f(-w,-h,-d);
-    glVertex3f(-w,h,-d);
-    glVertex3f(-w,h,d);
-    // Right face
-    glNormal3f(1,0,0);
-    glVertex3f(w,-h,d);
-    glVertex3f(w,-h,-d);
-    glVertex3f(w,h,-d);
-    glVertex3f(w,h,d);
-    // Top face
-//    glNormal3f(0,1,0);
-//    glVertex3f(-w,h,d);
-//    glVertex3f(-w,h,-d);
-//    glVertex3f(w,h,-d);
-//    glVertex3f(w,h,d);
-    // Bottom face
-    glNormal3f(0,-1,0);
-    glVertex3f(-w,-h,d);
-    glVertex3f(-w,-h,-d);
-    glVertex3f(w,-h,-d);
-    glVertex3f(w,-h,d);
-
-  glEnd();
-  glPopMatrix();
+  for(int i = 0; i < (int)_matrix.size(); ++i)
+  {
+    for(int j = 0; j < (int)_matrix[0].size(); ++j)
+    {
+      if(_matrix[i][j] <= 10)
+      {
+        glPushMatrix();
+          glTranslatef((i)*CUBESIZE, -4, ((int)_matrix.size() *CUBESIZE) - (j) * CUBESIZE);
+          glColor3f(1,1,1);
+          glutSolidCube(CUBESIZE);
+        glPopMatrix();
+      }
+    }
+  }
 }
 
 void Arena::sky()
 {
     // Draw ground
-  glPushMatrix();
-    glColor3f(0.0f, 0.9f, 0.9f);
-    glBegin(GL_QUADS);
-      glVertex3f(-100.0f, 0.0f, -100.0f);
-      glVertex3f(-100.0f, 0.0f,  100.0f);
-      glVertex3f( 100.0f, 0.0f,  100.0f);
-      glVertex3f( 100.0f, 0.0f, -100.0f);
-    glEnd();
-  glPopMatrix();
 }
 
-void Arena::drawArena()
+void Arena::drawArena(std::vector<std::vector<int> > _matrix)
 {
-  ground();
+  ground(_matrix);
+  sky();
 
 }
 

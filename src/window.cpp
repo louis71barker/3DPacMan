@@ -31,3 +31,15 @@ void Window::ReshapeScreen()
   glMatrixMode( GL_MODELVIEW) ;
 }
 
+void Window::Lighting() const
+{
+  glEnable(GL_TEXTURE_2D);
+  glEnable(GL_POINT_SPRITE);
+  glEnable(GL_BLEND);
+  glShadeModel(GL_SMOOTH);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
+  glEnable(GL_COLOR_MATERIAL);
+  glEnable(GL_DEPTH_TEST);
+  glEnable(GL_NORMALIZE);
+}

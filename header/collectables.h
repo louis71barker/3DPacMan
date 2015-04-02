@@ -36,7 +36,7 @@ public:
     std::vector<int>().swap (m_Index);
   }
 
-  void drawCollectable(std::vector<std::vector<int> > &_matrix, float _x, float _y, float yRot);
+  void drawCollectable(std::vector<std::vector<int> > &_matrix, float _x, float _y);
   int collecibleCount;
 
 
@@ -46,7 +46,7 @@ private:
   void placeSpecials(std::vector<std::vector<int> > &_matrix);
   void normalSetter(std::vector<std::vector<int> > matrix);
   void specialSetter(int _x, int _y);
-  void placeObj(int _x, int _y);
+  void placeObj(int _x, int _y, std::vector<std::vector<int> > _matrix);
   void drawBalls();
   void drawSpecials();
   void collisonDetection(std::vector<std::vector<int> > &_matrix, float _x, float _y);

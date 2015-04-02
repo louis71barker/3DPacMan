@@ -5,6 +5,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#include "camera.h"
 
 
 
@@ -30,6 +31,7 @@ public:
   static void SDLInit();
   static void Input();
   void ReshapeScreen();
+  void Lighting() const;
 
 
 protected:
@@ -37,6 +39,8 @@ protected:
 
 
 };
+
+
 
 
 

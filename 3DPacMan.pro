@@ -11,7 +11,9 @@ SOURCES+=src/main.cpp\
          src/walls.cpp\
          src/torch.cpp\
          src/Vec.cpp\
-         src/objLoader.cpp
+         src/objLoader.cpp \
+         src/lighting.cpp \
+         src/TextLoader.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
@@ -26,13 +28,16 @@ HEADERS+=header/arena.h\
          header/walls.h\
          header/torch.h\
          header/scene.h\
+         header/lights.h\
 #         header/NCCA/Mat4.h\
 #         header/NCCA/Vec4.h\
 #         header/NCCA/GLFunctions.h
 
 OTHER_FILES+= src/MapCoor.txt\
               obj/GhostObj.obj\
-              obj/CherryObj.obj
+              obj/CherryObj.obj \
+              textures/Ground.png \
+              textures/Hedge.jpg \
 
 
 QT += core
@@ -53,11 +58,10 @@ linux-g++-64:QMAKE_CXXFLAGS +=  -march=native
 QMAKE_CXXFLAGS+=$$system(sdl2-config  --cflags)
 message(output from sdl2-config --cflags added to CXXFLAGS= $$QMAKE_CXXFLAGS)
 
-LIBS += -lglut -lGLU
+LIBS += -lglut -lGLU -lSDL_image
 
 LIBS+=$$system(sdl2-config  --libs)
 message(output from sdl2-config --libs added to LIB=$$LIBS)
-
 
 
 LIBS += -L/usr/local/lib

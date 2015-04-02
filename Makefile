@@ -18,7 +18,7 @@ CXXFLAGS      = -pipe -msse -msse2 -msse3 -I/usr/include/SDL2 -D_REENTRANT -g -W
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I. -Iheader -Iheader/NCCA -Iusr/local/lib -I/usr/include/qt5 -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I.
 LINK          = clang++
 LFLAGS        = -ccc-gcc-name g++
-LIBS          = $(SUBLIBS) -lglut -lGLU -L/usr/lib/x86_64-linux-gnu -lSDL2 -L/usr/local/lib -lGLEW -lQt5Gui -L/usr/X11R6/lib64 -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lglut -lGLU -lSDL_image -L/usr/lib/x86_64-linux-gnu -lSDL2 -L/usr/local/lib -lGLEW -lQt5Gui -L/usr/X11R6/lib64 -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -55,7 +55,9 @@ SOURCES       = src/main.cpp \
 		src/walls.cpp \
 		src/torch.cpp \
 		src/Vec.cpp \
-		src/objLoader.cpp 
+		src/objLoader.cpp \
+		src/lighting.cpp \
+		src/TextLoader.cpp 
 OBJECTS       = obj/main.o \
 		obj/player.o \
 		obj/ghost.o \
@@ -66,7 +68,9 @@ OBJECTS       = obj/main.o \
 		obj/walls.o \
 		obj/torch.o \
 		obj/Vec.o \
-		obj/objLoader.o
+		obj/objLoader.o \
+		obj/lighting.o \
+		obj/TextLoader.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -289,7 +293,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d obj/PacMan3D1.0.0 || mkdir -p obj/PacMan3D1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp obj/PacMan3D1.0.0/ && (cd `dirname obj/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname obj/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r obj/PacMan3D1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h header/lights.h obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp src/lighting.cpp src/TextLoader.cpp obj/PacMan3D1.0.0/ && (cd `dirname obj/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname obj/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r obj/PacMan3D1.0.0
 
 
 clean:compiler_clean 
@@ -329,11 +333,12 @@ compiler_clean:
 obj/main.o: src/main.cpp header/player.h \
 		header/collectables.h \
 		header/walls.h \
-		header/ghost.h \
 		header/scene.h \
+		header/ghost.h \
 		header/arena.h \
 		header/window.h \
-		header/camera.h
+		header/camera.h \
+		header/lights.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
 
 obj/player.o: src/player.cpp header/player.h \
@@ -346,21 +351,26 @@ obj/ghost.o: src/ghost.cpp header/ghost.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ghost.o src/ghost.cpp
 
 obj/arena.o: src/arena.cpp header/arena.h \
-		header/walls.h
+		header/walls.h \
+		header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/arena.o src/arena.cpp
 
 obj/collectables.o: src/collectables.cpp header/collectables.h \
-		header/walls.h
+		header/walls.h \
+		header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/collectables.o src/collectables.cpp
 
-obj/window.o: src/window.cpp header/window.h
+obj/window.o: src/window.cpp header/window.h \
+		header/camera.h \
+		header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/window.o src/window.cpp
 
 obj/camera.o: src/camera.cpp header/camera.h \
 		header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/camera.o src/camera.cpp
 
-obj/walls.o: src/walls.cpp header/walls.h
+obj/walls.o: src/walls.cpp header/walls.h \
+		header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/walls.o src/walls.cpp
 
 obj/torch.o: src/torch.cpp header/torch.h \
@@ -370,8 +380,16 @@ obj/torch.o: src/torch.cpp header/torch.h \
 obj/Vec.o: src/Vec.cpp header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Vec.o src/Vec.cpp
 
-obj/objLoader.o: src/objLoader.cpp 
+obj/objLoader.o: src/objLoader.cpp header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/objLoader.o src/objLoader.cpp
+
+obj/lighting.o: src/lighting.cpp header/lights.h \
+		header/camera.h \
+		header/scene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/lighting.o src/lighting.cpp
+
+obj/TextLoader.o: src/TextLoader.cpp header/scene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/TextLoader.o src/TextLoader.cpp
 
 ####### Install
 

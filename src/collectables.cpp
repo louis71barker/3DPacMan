@@ -5,7 +5,7 @@
 
 
 
-void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _x, float _y, float yRot)
+void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _x, float _y)
 {
   drawCollectiblesLeft();
   normalSetter(_matrix);
@@ -15,24 +15,24 @@ void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _
 
 
 
-void Collecable::normalSetter(std::vector<std::vector<int> > matrix)
+void Collecable::normalSetter(std::vector<std::vector<int> > _matrix)
 {
-  for(int i = 0; i < (int)matrix.size(); ++i)
+  for(int i = 0; i < (int)_matrix.size(); ++i)
   {
-    for(int j = 0; j < (int)matrix[0].size(); ++j)
+    for(int j = 0; j < (int)_matrix[0].size(); ++j)
     {
-      if(matrix[i][j] == 0)
+      if(_matrix[i][j] == 0)
       {
-        placeObj(i, j);
+        placeObj(i, j, _matrix);
 
         if (countSet == false)
         {
           collecibleCount++;
-          std::cout<<collecibleCount<<"\n";
+//          std::cout<<collecibleCount<<"\n";
         }
       }
     }
-    if(i == (int)matrix.size()-1 )
+    if(i == (int)_matrix.size()-1 )
     {
       countSet = true;
     }
@@ -40,10 +40,11 @@ void Collecable::normalSetter(std::vector<std::vector<int> > matrix)
 }
 
 
-void Collecable::placeObj(int _x, int _y)
+void Collecable::placeObj(int _x, int _y,std::vector<std::vector<int> > _matrix)
 {
   glPushMatrix();
-    glTranslatef(-30 + (_x+0.5)*4, -1, 30 - (_y+0.5)*4);
+//    glTranslatef(-30 + (_x+0.5)*4, -1, 30 - (_y+0.5)*4);
+      glTranslatef((_x)*4, -1, ((int)_matrix[0].size() * 4) - (_y)*4);
 
     drawBalls();
   glPopMatrix();
@@ -62,7 +63,8 @@ void Collecable::placeSpecials(std::vector<std::vector<int> > &_matrix)
         GLuint id = glGenLists(1);
         glNewList(id, GL_COMPILE);
         glPushMatrix();
-          glTranslatef(-30 + (i+0.5)*4, 0 , 30 - (j+0.5)*4);
+//          glTranslatef(-30 + (i+0.5)*4, 0 , 30 - (j+0.5)*4);
+          glTranslatef((i)*4, -0.5, ((int)_matrix[0].size() * 4) - (j)*4);
           glScalef(0.1,0.1,0.1);
           glTranslatef(0,-6,0);
           glBegin(GL_TRIANGLES);
@@ -119,8 +121,10 @@ void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, floa
     {
       if(_matrix[i][j] == 0)
       {
-        float collecableCentreX = (-30 + (i+0.5)*4);
-        float collecableCentreZ = (30 - (j+0.5)*4);
+//        float collecableCentreX = (-30 + (i+0.5)*4);
+//        float collecableCentreZ = (30 - (j+0.5)*4);
+        float collecableCentreX = (i * 4);
+        float collecableCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
         float collecableMinX, collecableMaxX, collecableMinZ, collecableMaxZ;
         collecableMinX = collecableCentreX - 1.0f;
         collecableMaxX = collecableCentreX + 1.0f;
@@ -137,8 +141,10 @@ void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, floa
       //specials collision detection
       if(_matrix[i][j] == 5)
       {
-        float collecableCentreX = (-30 + (i+0.5)*4);
-        float collecableCentreZ = (30 - (j+0.5)*4);
+//        float collecableCentreX = (-30 + (i+0.5)*4);
+//        float collecableCentreZ = (30 - (j+0.5)*4);
+        float collecableCentreX = (i * 4);
+        float collecableCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
         float collecableMinX, collecableMaxX, collecableMinZ, collecableMaxZ;
         collecableMinX = collecableCentreX - 1.0f;
         collecableMaxX = collecableCentreX + 1.0f;

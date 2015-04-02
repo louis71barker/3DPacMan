@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <GL/gl.h>
+#include "scene.h"
 
 
 
@@ -16,6 +17,7 @@ class Walls
 {
 public:
   Walls(const std::string &_fname);
+
   void cubeInit(const std::string &_fname);
   void fileReader(const std::string &);
   void draw();
@@ -24,9 +26,6 @@ public:
   std::vector< std::vector<int> > matrix;
 
 
-  const float CUBEDEPTH;
-  const float CUBEWIDTH;
-  const float CUBEHEIGHT;
 
 
 
@@ -37,26 +36,17 @@ private:
   typedef boost::tokenizer<boost::char_separator<char> >tokenizer;
   void parseVector(tokenizer::iterator &, int lineCount, int sortCount);
   void cubeSetter() const;
-  void mapCoorSetter();
   void mapBuilder(std::vector<std::vector<int> > matrix, int sortCount);
 
   void letsDraw(int _x, int _y);
   void drawCube();
   void triangleCubCoor(GLfloat cube_buffer);
-  const float GRIDCOUNTTOTAL;
 
   int gridCounter;
   float gridXPos, gridZPos;
 //  std::vector< std::vector<int> > matrix;
   std::vector <GLuint> dList;
-
-  struct GridPos
-  {
-    int m_gridPoint;
-    float m_Gx;
-    float m_Gz;
-  };
-  GridPos GridCoor[15][15];
+  GLuint WallTextID;
 
   // A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
 

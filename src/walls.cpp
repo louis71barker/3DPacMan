@@ -94,7 +94,7 @@ void Walls::parseVector(tokenizer::iterator &_firstWord, int lineCount, int sort
 void Walls::initMaze()
 {
   //loads in the wall texure
-//  textLoader("textures/Hedge.jpg", WallTextID);
+  textLoader("textures/Hedge.jpg", WallTextID);
 
   GLuint id = glGenLists(1);
   glNewList(id, GL_COMPILE);
@@ -106,8 +106,12 @@ void Walls::initMaze()
       if(matrix[i][j] == 1)
       {
         //std::cout<<i<<"         "<<j<<"\n";
+        glEnable(GL_TEXTURE_GEN_S);
+        glEnable(GL_TEXTURE_GEN_T);
         glBindTexture(GL_TEXTURE_2D, WallTextID);
         letsDraw(i, j);
+        glDisable(GL_TEXTURE_GEN_S);
+        glDisable(GL_TEXTURE_GEN_T);
         //std::cout<<matrix[i][j]<<"  asdgakjd     "<<j<<"\n";
       }
     }

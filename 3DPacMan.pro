@@ -58,7 +58,7 @@ linux-g++-64:QMAKE_CXXFLAGS +=  -march=native
 QMAKE_CXXFLAGS+=$$system(sdl2-config  --cflags)
 message(output from sdl2-config --cflags added to CXXFLAGS= $$QMAKE_CXXFLAGS)
 
-LIBS += -lglut -lGLU -lSDL_image
+LIBS += -lglut -lGLU -lSDL2_image
 
 LIBS+=$$system(sdl2-config  --libs)
 message(output from sdl2-config --libs added to LIB=$$LIBS)

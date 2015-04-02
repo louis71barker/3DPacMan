@@ -312,14 +312,14 @@ void Camera::playerCollisions(std::vector<std::vector<int> > matrix)
             {
               normalx = 1.0f;
               normalz = 0.0f;
-              playerZpos = oldzPos-0.5;
+              playerXpos = oldxPos+0.01;
               std::cout<<"Front Side \n";
             }
             else
             {
               normalx = -1.0f;
               normalz = 0.0f;
-              playerZpos = oldzPos+0.5;
+              playerXpos = oldxPos-0.01;
               std::cout<<"back Side \n";
             }
           }
@@ -329,7 +329,7 @@ void Camera::playerCollisions(std::vector<std::vector<int> > matrix)
               {
                 normalx = 0.0f;
                 normalz = 1.0f;
-                playerZpos = oldzPos-0.5;
+                playerZpos = oldzPos+0.01;
                 std::cout<<"right Side \n";
               }
               else
@@ -337,7 +337,7 @@ void Camera::playerCollisions(std::vector<std::vector<int> > matrix)
                 normalx = 0.0f;
                 normalz = -1.0f;
 //                if (playerZpos > 0)
-                playerZpos = oldzPos+0.5;
+                playerZpos = oldzPos-0.01;
                 std::cout<<"left Side \n";
               }
             }

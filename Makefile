@@ -18,7 +18,7 @@ CXXFLAGS      = -pipe -msse -msse2 -msse3 -I/usr/include/SDL2 -D_REENTRANT -g -W
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I. -Iheader -Iheader/NCCA -Iusr/local/lib -I/usr/include/qt5 -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I.
 LINK          = clang++
 LFLAGS        = -ccc-gcc-name g++
-LIBS          = $(SUBLIBS) -lglut -lGLU -lSDL_image -L/usr/lib/x86_64-linux-gnu -lSDL2 -L/usr/local/lib -lGLEW -lQt5Gui -L/usr/X11R6/lib64 -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lglut -lGLU -lSDL2_image -L/usr/lib/x86_64-linux-gnu -lSDL2 -L/usr/local/lib -lGLEW -lQt5Gui -L/usr/X11R6/lib64 -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -343,7 +343,8 @@ obj/main.o: src/main.cpp header/player.h \
 
 obj/player.o: src/player.cpp header/player.h \
 		header/camera.h \
-		header/scene.h
+		header/scene.h \
+		header/walls.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/player.o src/player.cpp
 
 obj/ghost.o: src/ghost.cpp header/ghost.h \
@@ -362,11 +363,13 @@ obj/collectables.o: src/collectables.cpp header/collectables.h \
 
 obj/window.o: src/window.cpp header/window.h \
 		header/camera.h \
-		header/scene.h
+		header/scene.h \
+		header/walls.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/window.o src/window.cpp
 
 obj/camera.o: src/camera.cpp header/camera.h \
-		header/scene.h
+		header/scene.h \
+		header/walls.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/camera.o src/camera.cpp
 
 obj/walls.o: src/walls.cpp header/walls.h \
@@ -385,7 +388,8 @@ obj/objLoader.o: src/objLoader.cpp header/scene.h
 
 obj/lighting.o: src/lighting.cpp header/lights.h \
 		header/camera.h \
-		header/scene.h
+		header/scene.h \
+		header/walls.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/lighting.o src/lighting.cpp
 
 obj/TextLoader.o: src/TextLoader.cpp header/scene.h

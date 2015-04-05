@@ -89,26 +89,13 @@ void Collecable::placeSpecials(std::vector<std::vector<int> > &_matrix)
 void Collecable::drawBalls()
 {
 
-        //  GLfloat mat_emission[] = {1.0, 1.0, 0.0, 1.0};
           GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
 
           glPushMatrix();
           glColor3f(1.0, 0.0, 0.0);
-          //smooths the points within the game that are used for the collectables
-          glRasterPos3f(0,0,0);
-        //  glEnable( GL_POINT_SMOOTH );
-        //  glBegin(GL_POINTS);
-        //    glVertex3f(x,y,z);
             glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
-        //    glEnable(GL_LIGHTING);
-        //    glEnable(GL_LIGHT7);
             glEnable(GL_BLEND_COLOR);
-        //    glEnable(GL_DEPTH_TEST)
             glutSolidSphere(0.4,50,50);
-
-
-
-        //  glEnd();
           glPopMatrix();
 
 }
@@ -121,10 +108,9 @@ void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, floa
     {
       if(_matrix[i][j] == 0)
       {
-//        float collecableCentreX = (-30 + (i+0.5)*4);
-//        float collecableCentreZ = (30 - (j+0.5)*4);
-        float collecableCentreX = (i * 4);
-        float collecableCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
+
+        float collecableCentreX = (i * CUBESIZE);
+        float collecableCentreZ = (((int)_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
         float collecableMinX, collecableMaxX, collecableMinZ, collecableMaxZ;
         collecableMinX = collecableCentreX - 1.0f;
         collecableMaxX = collecableCentreX + 1.0f;
@@ -141,10 +127,9 @@ void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, floa
       //specials collision detection
       if(_matrix[i][j] == 5)
       {
-//        float collecableCentreX = (-30 + (i+0.5)*4);
-//        float collecableCentreZ = (30 - (j+0.5)*4);
-        float collecableCentreX = (i * 4);
-        float collecableCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
+
+        float collecableCentreX = (i * CUBESIZE);
+        float collecableCentreZ = (((int)_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
         float collecableMinX, collecableMaxX, collecableMinZ, collecableMaxZ;
         collecableMinX = collecableCentreX - 1.0f;
         collecableMaxX = collecableCentreX + 1.0f;

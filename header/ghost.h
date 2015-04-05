@@ -29,7 +29,7 @@ class Ghost
 
 public:
   void updater();
-  void drawGhosts();
+  void drawGhosts(std::vector<std::vector<int> > _matrix);
 
   std::vector<Vec3> m_Vertex;
   std::vector<Vec3> m_Normal;
@@ -37,7 +37,11 @@ public:
   std::vector<int> m_Index;
   std::vector<GLuint> m_displayList;
 
-  Ghost(){ObjLoader("obj/GhostObj.obj",m_Vertex,m_Normal,m_Texture,m_Index); drawGhosts(); }
+  Ghost(std::vector<std::vector<int> > _matrix)
+  {
+    ObjLoader("obj/GhostObj.obj",m_Vertex,m_Normal,m_Texture,m_Index);
+    drawGhosts(_matrix);
+  }
   ~Ghost()
   {
     m_Vertex.clear();

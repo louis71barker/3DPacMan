@@ -107,6 +107,7 @@ void Camera::enableScene()
         glPopMatrix();
 
   glPushMatrix();
+  glLoadIdentity();
   glPointSize(10);
   glColor3f(1,0,0);
   glBegin(GL_POINTS);
@@ -158,6 +159,7 @@ void Camera::CameraSet()
 
   glRotatef(yRot,0.0,1.0,0.0);
   glTranslated(-playerXpos,0,-playerZpos);
+//  gluLookAt();
 }
 
 void Camera::displayCamera()
@@ -237,7 +239,7 @@ void Camera::mouseMovementCapture(int x, int y)
   lastPlayerPosy = y;
   xRot += (float) diffy;
   yRot += (float) diffx;
-  std::cout<<playerXpos<<"  "<<playerZpos<<"\n";
+//  std::cout<<playerXpos<<"  "<<playerZpos<<"\n";
 
 
 }

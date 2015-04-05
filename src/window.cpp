@@ -42,4 +42,6 @@ void Window::Lighting() const
   glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_NORMALIZE);
+  glDepthFunc(GL_LEQUAL);
+  glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }

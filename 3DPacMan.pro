@@ -36,6 +36,17 @@ HEADERS+=header/arena.h\
 OTHER_FILES+= src/MapCoor.txt\
               obj/GhostObj.obj\
               obj/CherryObj.obj \
+              obj/cubeTri.obj \
+              obj/cubeSquared.obj \
+              obj/01_Wall_Crack.obj \
+              obj/02_Wall_Shelf.obj \
+              obj/03_Wall_Hypnotic.obj \
+              obj/04_Wall_Boiler.obj \
+              obj/crackedWall.obj \
+              obj/cubeBoiler.obj \
+              obj/cubeHypno.obj \
+              obj/cubeWindow.obj \
+              obj/stripLight.obj \
               textures/Ground.png \
               textures/Hedge.jpg \
 
@@ -44,7 +55,7 @@ QT += core
 QT -= opengl
 CONFIG-=app_bundle
 DESTDIR=./
-OBJECTS_DIR=obj
+OBJECTS_DIR=buildFiles
 
 INCLUDEPATH += header
 INCLUDEPATH += header/NCCA

@@ -56,6 +56,7 @@ public:
     m_x(_x), m_y(_y), m_z(_z){}
   void normalGL();
   void vertexGL();
+  void textureGL();
 
   struct
   {
@@ -77,6 +78,7 @@ public:
     m_x(_x), m_y(_y), m_z(_z), m_w(_w){}
   void normalGL();
   void vertexGL();
+  void textureGL();
 
   struct
   {

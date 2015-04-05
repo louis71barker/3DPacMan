@@ -59,9 +59,9 @@ int main(int argc, char** argv)
   }
 
   Walls wa("src/MapCoor.txt");
-  Arena a;
+  Arena a(wa.matrix);
   Camera cam;
-  Ghost gho;
+  Ghost gho(wa.matrix);
   Player p;
   Collecable col(wa.matrix);
   Lights l;
@@ -93,8 +93,8 @@ int main(int argc, char** argv)
   while(!quit)
   {
 
-      SDL_ShowCursor(SDL_DISABLE);
-      SDL_SetWindowGrab(win, SDL_TRUE);
+    SDL_ShowCursor(SDL_DISABLE);
+    SDL_SetWindowGrab(win, SDL_TRUE);
     int mouseX,mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;
@@ -175,6 +175,7 @@ int main(int argc, char** argv)
     a.drawArena(wa.matrix);
     wa.draw();
     l.distanceCal(wa.matrix);
+
 
     SDL_GL_SwapWindow(win);
 

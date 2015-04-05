@@ -41,7 +41,7 @@ MKDIR         = mkdir -p
 
 ####### Output directory
 
-OBJECTS_DIR   = obj/
+OBJECTS_DIR   = buildFiles/
 
 ####### Files
 
@@ -58,19 +58,19 @@ SOURCES       = src/main.cpp \
 		src/objLoader.cpp \
 		src/lighting.cpp \
 		src/TextLoader.cpp 
-OBJECTS       = obj/main.o \
-		obj/player.o \
-		obj/ghost.o \
-		obj/arena.o \
-		obj/collectables.o \
-		obj/window.o \
-		obj/camera.o \
-		obj/walls.o \
-		obj/torch.o \
-		obj/Vec.o \
-		obj/objLoader.o \
-		obj/lighting.o \
-		obj/TextLoader.o
+OBJECTS       = buildFiles/main.o \
+		buildFiles/player.o \
+		buildFiles/ghost.o \
+		buildFiles/arena.o \
+		buildFiles/collectables.o \
+		buildFiles/window.o \
+		buildFiles/camera.o \
+		buildFiles/walls.o \
+		buildFiles/torch.o \
+		buildFiles/Vec.o \
+		buildFiles/objLoader.o \
+		buildFiles/lighting.o \
+		buildFiles/TextLoader.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -292,8 +292,8 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist: 
-	@test -d obj/PacMan3D1.0.0 || mkdir -p obj/PacMan3D1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h header/lights.h obj/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp src/lighting.cpp src/TextLoader.cpp obj/PacMan3D1.0.0/ && (cd `dirname obj/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname obj/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r obj/PacMan3D1.0.0
+	@test -d buildFiles/PacMan3D1.0.0 || mkdir -p buildFiles/PacMan3D1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h header/lights.h buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp src/lighting.cpp src/TextLoader.cpp buildFiles/PacMan3D1.0.0/ && (cd `dirname buildFiles/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname buildFiles/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r buildFiles/PacMan3D1.0.0
 
 
 clean:compiler_clean 
@@ -330,7 +330,7 @@ compiler_clean:
 
 ####### Compile
 
-obj/main.o: src/main.cpp header/player.h \
+buildFiles/main.o: src/main.cpp header/player.h \
 		header/collectables.h \
 		header/walls.h \
 		header/scene.h \
@@ -339,61 +339,61 @@ obj/main.o: src/main.cpp header/player.h \
 		header/window.h \
 		header/camera.h \
 		header/lights.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/main.o src/main.cpp
 
-obj/player.o: src/player.cpp header/player.h \
+buildFiles/player.o: src/player.cpp header/player.h \
 		header/camera.h \
 		header/scene.h \
 		header/walls.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/player.o src/player.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/player.o src/player.cpp
 
-obj/ghost.o: src/ghost.cpp header/ghost.h \
+buildFiles/ghost.o: src/ghost.cpp header/ghost.h \
 		header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ghost.o src/ghost.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/ghost.o src/ghost.cpp
 
-obj/arena.o: src/arena.cpp header/arena.h \
+buildFiles/arena.o: src/arena.cpp header/arena.h \
 		header/walls.h \
 		header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/arena.o src/arena.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/arena.o src/arena.cpp
 
-obj/collectables.o: src/collectables.cpp header/collectables.h \
+buildFiles/collectables.o: src/collectables.cpp header/collectables.h \
 		header/walls.h \
 		header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/collectables.o src/collectables.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/collectables.o src/collectables.cpp
 
-obj/window.o: src/window.cpp header/window.h \
+buildFiles/window.o: src/window.cpp header/window.h \
 		header/camera.h \
 		header/scene.h \
 		header/walls.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/window.o src/window.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/window.o src/window.cpp
 
-obj/camera.o: src/camera.cpp header/camera.h \
+buildFiles/camera.o: src/camera.cpp header/camera.h \
 		header/scene.h \
 		header/walls.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/camera.o src/camera.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/camera.o src/camera.cpp
 
-obj/walls.o: src/walls.cpp header/walls.h \
+buildFiles/walls.o: src/walls.cpp header/walls.h \
 		header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/walls.o src/walls.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/walls.o src/walls.cpp
 
-obj/torch.o: src/torch.cpp header/torch.h \
+buildFiles/torch.o: src/torch.cpp header/torch.h \
 		header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/torch.o src/torch.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/torch.o src/torch.cpp
 
-obj/Vec.o: src/Vec.cpp header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Vec.o src/Vec.cpp
+buildFiles/Vec.o: src/Vec.cpp header/scene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/Vec.o src/Vec.cpp
 
-obj/objLoader.o: src/objLoader.cpp header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/objLoader.o src/objLoader.cpp
+buildFiles/objLoader.o: src/objLoader.cpp header/scene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/objLoader.o src/objLoader.cpp
 
-obj/lighting.o: src/lighting.cpp header/lights.h \
+buildFiles/lighting.o: src/lighting.cpp header/lights.h \
 		header/camera.h \
 		header/scene.h \
 		header/walls.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/lighting.o src/lighting.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/lighting.o src/lighting.cpp
 
-obj/TextLoader.o: src/TextLoader.cpp header/scene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/TextLoader.o src/TextLoader.cpp
+buildFiles/TextLoader.o: src/TextLoader.cpp header/scene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/TextLoader.o src/TextLoader.cpp
 
 ####### Install
 

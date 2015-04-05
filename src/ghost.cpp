@@ -6,7 +6,7 @@ void Ghost::updater()
   glCallLists(m_displayList.size(), GL_UNSIGNED_INT, &m_displayList[0]);
 }
 
-void Ghost::drawGhosts()
+void Ghost::drawGhosts(std::vector<std::vector<int> > _matrix)
 {
 
   //load the texture here and bind inside the list bellow!!!!!! :)
@@ -15,15 +15,25 @@ void Ghost::drawGhosts()
     glNewList(id, GL_COMPILE);
     glPushMatrix();
       glScalef(0.2,0.2,0.2);
-      glTranslatef(0,2,0);
+//      glTranslatef(0,2,0);
       glBegin(GL_TRIANGLES);
-
-
-        for (int i = 0; i < (int)m_Index.size(); i ++)
+      for(int i = 0; i < (int)_matrix.size(); ++i)
+      {
+        for(int j = 0; j < (int)_matrix[0].size(); ++j)
         {
-          m_Normal[m_Index[i+2]-1].normalGL();
-          m_Vertex[m_Index[i]-1].vertexGL();
+          if(_matrix[i][j] == 4)
+          {
+            std::cout<<"spawn Ghost please\n";
+            glTranslatef((i)*4, 0, ((int)_matrix[0].size() * 4) - (j)*4);
+            for (int a = 0; a < (int)m_Index.size(); a ++)
+            {
+              m_Normal[m_Index[a+2]-1].normalGL();
+              m_Vertex[m_Index[a]-1].vertexGL();
+            }
+            std::cout<<"spawned Ghost thank you\n";
+          }
         }
+      }
 
 
       glEnd();

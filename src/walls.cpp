@@ -21,6 +21,8 @@ Walls::Walls(const std::string &_fname)
   gridCounter = 0;
   gridXPos = -15;
   gridZPos = 15;
+//  initMaze();
+//  draw();
 }
 
 void Walls::draw()
@@ -68,14 +70,10 @@ void Walls::fileReader(const std::string &_fname)
 
 void Walls::parseVector(tokenizer::iterator &_firstWord, int lineCount, int sortCount)
 {
-
-
   int max1 = 17;
   double init_value = 1;
 
   std::cout<<lineCount<<"ajghksjhdkjhalk\n";
-
-
 
   //now we have an empty 2D-matrix of size (0,0). Resizing it with one single command:
   matrix.resize( max1 , std::vector<int>( max1 , init_value ) );
@@ -98,6 +96,7 @@ void Walls::initMaze()
 
   GLuint id = glGenLists(1);
   glNewList(id, GL_COMPILE);
+  glPushMatrix();
 
   for(int i = 0; i < (int)matrix.size(); ++i)
   {
@@ -105,20 +104,22 @@ void Walls::initMaze()
     {
       if(matrix[i][j] == 1)
       {
-        //std::cout<<i<<"         "<<j<<"\n";
         glEnable(GL_TEXTURE_GEN_S);
         glEnable(GL_TEXTURE_GEN_T);
         glBindTexture(GL_TEXTURE_2D, WallTextID);
         letsDraw(i, j);
         glDisable(GL_TEXTURE_GEN_S);
         glDisable(GL_TEXTURE_GEN_T);
+        glBindTexture(GL_TEXTURE_2D, 0);
         //std::cout<<matrix[i][j]<<"  asdgakjd     "<<j<<"\n";
       }
     }
   }
-  glBindTexture(GL_TEXTURE_2D, 0);
+  glPopMatrix();
+
   glEndList();
   dList.push_back(id);
+
 }
 
 void Walls::letsDraw(int _x, int _y)
@@ -139,10 +140,10 @@ void Walls::propChanger(std::vector<std::vector<int> > matrix, int w, int h)
 void Walls::drawCube()
 {
 
-  glColor3f(1,1,1);
-  glutSolidCube(CUBESIZE);
 
   glPushMatrix();
+  glutSolidCube(CUBESIZE);
+
   glBegin(GL_LINE_STRIP);
     glColor3f(0, 1, 0);
     glVertex3f(0, 0, 0);

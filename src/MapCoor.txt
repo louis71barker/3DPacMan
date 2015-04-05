@@ -1,20 +1,3 @@
-#MAP1 1 0 0 5 0 0 0 0 0 0 0 0 0 0 0
-#MAP1 1 0 1 1 1 0 1 1 0 1 1 1 1 1 0
-#MAP1 1 0 0 1 0 0 0 1 0 1 0 0 5 1 0
-#MAP1 1 1 0 0 0 1 0 0 0 0 0 1 0 1 0
-#MAP1 0 0 0 1 1 1 0 1 1 1 0 1 0 0 0
-#MAP1 0 1 0 5 1 0 0 0 0 0 0 1 0 1 0
-#MAP1 0 1 1 0 1 0 1 6 1 1 0 1 0 1 0
-#MAP1 0 0 0 0 0 0 1 4 4 1 0 0 0 1 0
-#MAP1 1 0 1 0 1 0 1 4 4 1 0 1 0 0 0
-#MAP1 1 0 1 0 1 0 1 1 1 1 0 1 1 1 0
-#MAP1 0 0 5 0 0 0 0 0 0 0 0 1 5 0 0
-#MAP1 0 1 1 1 1 1 0 1 1 0 1 1 0 1 0
-#MAP1 0 1 0 0 0 0 0 5 1 0 0 0 0 1 0
-#MAP1 0 1 0 1 1 0 1 0 1 0 1 1 0 1 0
-#MAP1 3 0 0 0 0 0 1 0 0 0 0 0 0 0 0
-
-
 MAP1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 MAP1 1 1 0 0 5 0 0 0 0 0 0 0 0 0 0 0 1
 MAP1 1 1 0 1 1 1 0 1 1 0 1 1 1 1 1 0 1
@@ -32,3 +15,17 @@ MAP1 1 0 1 0 0 0 0 0 5 1 0 0 0 0 1 0 1
 MAP1 1 0 1 0 1 1 0 1 0 1 0 1 1 0 1 0 1
 MAP1 1 3 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1
 MAP1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+
+
+  0 = path and collectable
+  1 = wall
+  2 = collectable collected
+  3 = player start
+  4 = ghost spawn
+  5 = specials
+  6 = 1 direction wall for ghosts
+  7 = HypnoIndent Wall
+  8 = Boiler Wall
+  9 = Window Wall
+  10 = Cracked Wall

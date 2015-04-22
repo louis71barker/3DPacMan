@@ -72,7 +72,7 @@ void Collecable::placeSpecials(std::vector<std::vector<int> > &_matrix)
 
             for (int i = 0; i < (int)m_Index.size(); i ++)
             {
-              m_Normal[m_Index[i+2]-1].normalGL();
+//              m_Normal[m_Index[i+2]-1].normalGL();
               m_Vertex[m_Index[i]-1].vertexGL();
             }
 
@@ -92,10 +92,11 @@ void Collecable::drawBalls()
           GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
 
           glPushMatrix();
-          glColor3f(1.0, 0.0, 0.0);
+            glColor3f(1.0, 0.0, 0.0);
             glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
             glEnable(GL_BLEND_COLOR);
             glutSolidSphere(0.4,50,50);
+            glColor3f(1.0, 1.0, 1.0);
           glPopMatrix();
 
 }

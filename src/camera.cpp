@@ -109,9 +109,9 @@ void Camera::enableScene()
   glPushMatrix();
   glLoadIdentity();
   glPointSize(10);
-  glColor3f(1,0,0);
+//  glColor3f(1,0,0);
   glBegin(GL_POINTS);
-    glColor3f(1,0,0);
+//    glColor3f(1,0,0);
     glVertex3f(playerXpos + 5, -1.0f, playerZpos );
     glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 //    std::cout<<yRot<<"\n";

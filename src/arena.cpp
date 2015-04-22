@@ -73,5 +73,3 @@ void Arena::drawArena(std::vector<std::vector<int> > _matrix)
   sky();
 
 }
-
-

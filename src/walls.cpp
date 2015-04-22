@@ -21,6 +21,7 @@ Walls::Walls(const std::string &_fname)
   gridCounter = 0;
   gridXPos = -15;
   gridZPos = 15;
+  ObjLoader("obj/BushWallHighPoly.obj",m_Vertex,m_Normal,m_Texture,m_Index);
 //  initMaze();
 //  draw();
 }
@@ -89,7 +90,7 @@ void Walls::parseVector(tokenizer::iterator &_firstWord, int lineCount, int sort
   }
 }
 
-void Walls::initMaze()
+void Walls::initMaze(std::vector<std::vector<int> > _matrix)
 {
   //loads in the wall texure
   textLoader("textures/Hedge.jpg", WallTextID);
@@ -104,12 +105,10 @@ void Walls::initMaze()
     {
       if(matrix[i][j] == 1)
       {
-        glEnable(GL_TEXTURE_GEN_S);
-        glEnable(GL_TEXTURE_GEN_T);
+
         glBindTexture(GL_TEXTURE_2D, WallTextID);
-        letsDraw(i, j);
-        glDisable(GL_TEXTURE_GEN_S);
-        glDisable(GL_TEXTURE_GEN_T);
+        letsDraw(i, j, _matrix);
+
         glBindTexture(GL_TEXTURE_2D, 0);
         //std::cout<<matrix[i][j]<<"  asdgakjd     "<<j<<"\n";
       }
@@ -122,13 +121,13 @@ void Walls::initMaze()
 
 }
 
-void Walls::letsDraw(int _x, int _y)
+void Walls::letsDraw(int _x, int _y,std::vector<std::vector<int> > _matrix)
 {
     glPushMatrix();
 //      glTranslatef(-30 + (_x+0.5)*4, 0, 30 - (_y+0.5)*4);
       glTranslatef((_x)*4, 0, ((int)matrix[0].size() * 4) - (_y)*4);
 
-      drawCube();
+      drawCube(_matrix);
     glPopMatrix();
 }
 
@@ -137,19 +136,62 @@ void Walls::propChanger(std::vector<std::vector<int> > matrix, int w, int h)
   matrix[w][h] = 2;
 }
 
-void Walls::drawCube()
+void Walls::drawCube(std::vector<std::vector<int> > _matrix)
 {
 
 
-  glPushMatrix();
-  glutSolidCube(CUBESIZE);
+//  glPushMatrix();
+//  glutSolidCube(CUBESIZE);
 
-  glBegin(GL_LINE_STRIP);
-    glColor3f(0, 1, 0);
-    glVertex3f(0, 0, 0);
-    glVertex3f((CUBESIZE+0.1), 0, 0);
-  glEnd();
+//  glBegin(GL_LINE_STRIP);
+//    glColor3f(0, 1, 0);
+//    glVertex3f(0, 0, 0);
+//    glVertex3f((CUBESIZE+0.1), 0, 0);
+//  glEnd();
+//  glPopMatrix();
+  GLuint id = glGenLists(1);
+  glNewList(id, GL_COMPILE);
+  glPushMatrix();
+    glScalef(0.2,0.2,0.2);
+//      glTranslatef(0,2,0);
+    glBegin(GL_TRIANGLES);
+    for(int i = 0; i < (int)_matrix.size(); ++i)
+    {
+      for(int j = 0; j < (int)_matrix[0].size(); ++j)
+      {
+        if(_matrix[i][j] == 3)
+        {
+          std::cout<<"spawn bus please\n";
+          glTranslatef((i)*4, 0, ((int)_matrix[0].size() * 4) - (j)*4);
+          for (int a = 0; a < (int)m_Index.size(); a ++)
+          {
+            m_Texture[m_Index[a+1]-1].textureGL();
+            m_Normal[m_Index[a+2]-1].normalGL();
+            m_Vertex[m_Index[a]-1].vertexGL();
+          }
+          std::cout<<"spawned Ghost thank you\n";
+        }
+//        if(_matrix[i][j] <= 10)
+//        {
+//          std::cout<<"draw ground here\n";
+//          glTranslatef((i)*4, -4, ((int)_matrix[0].size() * 4) - (j)*4);
+//          for (int a = 0; a < (int)m_Index.size(); a ++)
+//          {
+//            m_Texture[m_Index[a+1]-1].textureGL();
+//            m_Normal[m_Index[a+2]-1].normalGL();
+//            m_Vertex[m_Index[a]-1].vertexGL();
+//          }
+
+//        }
+      }
+    }
+
+
+    glEnd();
   glPopMatrix();
+  m_displayList.push_back(id);
+
+
 }
 
 

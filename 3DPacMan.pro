@@ -47,8 +47,11 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/cubeHypno.obj \
               obj/cubeWindow.obj \
               obj/stripLight.obj \
+              obj/BushWall.obj \
+              obj/BushWallHighPoly.obj \
               textures/Ground.png \
               textures/Hedge.jpg \
+
 
 
 QT += core

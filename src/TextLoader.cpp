@@ -1,5 +1,6 @@
 #include "scene.h"
-#include <SDL/SDL_image.h>
+//#include <SDL/SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include <GL/gl.h>
 
 void textLoader(const std::string &_fname, GLuint &_tid)

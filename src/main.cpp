@@ -45,7 +45,7 @@ int main(int argc, char** argv)
   Window w;
   w.screenH = _rect.w;
   w.screenH = _rect.h;
-  win=SDL_CreateWindow("Pacnesia", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _rect.w/2, _rect.h/2, SDL_WINDOW_OPENGL);
+  win=SDL_CreateWindow("Pacnesia", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _rect.w, _rect.h, SDL_WINDOW_OPENGL);
 
   if (!win)
   {
@@ -66,7 +66,10 @@ int main(int argc, char** argv)
   Collecable col(wa.matrix);
   Lights l;
 
-  wa.initMaze();
+
+  wa.initMaze(wa.matrix);
+  a.ground(wa.matrix);
+
 
 
 
@@ -172,8 +175,9 @@ int main(int argc, char** argv)
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
     gho.updater();
 //    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
-    a.drawArena(wa.matrix);
     wa.draw();
+    a.drawArena(wa.matrix);
+
     l.distanceCal(wa.matrix);
 
 

@@ -25,6 +25,7 @@ void Vec4::textureGL()
 {
   glTexCoord2f(m_x, m_y);
 }
+
 void Vec3::textureGL()
 {
   glTexCoord2f(m_x, m_y);

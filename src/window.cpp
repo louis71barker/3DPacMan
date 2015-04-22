@@ -27,7 +27,7 @@ void Window::ReshapeScreen()
   glViewport(0, 0, (GLsizei)screenW, (GLsizei)screenH);
   glMatrixMode( GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(60, (GLfloat)screenW / (GLfloat)screenH, 1.0, 1000.0);
+  gluPerspective(60, (GLfloat)screenW / (GLfloat)screenH, 1.0, 500.0);
   glMatrixMode( GL_MODELVIEW) ;
 }
 

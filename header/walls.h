@@ -21,7 +21,7 @@ public:
   void cubeInit(const std::string &_fname);
   void fileReader(const std::string &);
   void draw();
-  void initMaze();
+  void initMaze(std::vector<std::vector<int> > _matrix);
   void propChanger(std::vector<std::vector<int> > matrix, int w, int h);
   std::vector< std::vector<int> > matrix;
 
@@ -38,8 +38,14 @@ private:
   void cubeSetter() const;
   void mapBuilder(std::vector<std::vector<int> > matrix, int sortCount);
 
-  void letsDraw(int _x, int _y);
-  void drawCube();
+  std::vector<Vec3> m_Vertex;
+  std::vector<Vec3> m_Normal;
+  std::vector<Vec3> m_Texture;
+  std::vector<int> m_Index;
+  std::vector<GLuint> m_displayList;
+
+  void letsDraw(int _x, int _y, std::vector<std::vector<int> > _matrix);
+  void drawCube(std::vector<std::vector<int> > _matrix);
   void triangleCubCoor(GLfloat cube_buffer);
 
   int gridCounter;

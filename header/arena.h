@@ -11,16 +11,20 @@
 class Arena
 {
 public:
+
+  void drawArena(std::vector<std::vector<int> > _matrix);
+
   std::vector<Vec3> m_Vertex;
   std::vector<Vec3> m_Normal;
   std::vector<Vec3> m_Texture;
   std::vector<int> m_Index;
   std::vector<GLuint> m_displayList;
+  std::vector <GLuint> m_daList;
 
   Arena(std::vector<std::vector<int> > _matrix)
   {
     ObjLoader("obj/cubeTri.obj",m_Vertex,m_Normal,m_Texture,m_Index);
-    ground(_matrix);
+//    ground(_matrix);
   }
   ~Arena()
   {
@@ -34,16 +38,22 @@ public:
     std::vector<GLuint>().swap (m_displayList);
     m_Index.clear();
     std::vector<int>().swap (m_Index);
+    m_daList.clear();
+    std::vector<GLuint>().swap (m_daList);
   }
+  void ground(std::vector<std::vector<int> > _matrix);
 
 
 
-  void drawArena(std::vector<std::vector<int> > _matrix);
+
 
 
 private:
-  void ground(std::vector<std::vector<int> > _matrix);
+
   void sky();
+
+  void buildGround(int _x, int _y, std::vector<std::vector<int> > _matrix);
+  void drawGround(int _x, int _y, std::vector<std::vector<int> > _matrix);
   GLuint GroundTextID;
 
 

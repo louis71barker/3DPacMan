@@ -14,6 +14,7 @@ SOURCES+=src/main.cpp\
          src/objLoader.cpp \
          src/lighting.cpp \
          src/TextLoader.cpp \
+         src/fileLoader.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp

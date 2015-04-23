@@ -50,8 +50,21 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/stripLight.obj \
               obj/BushWall.obj \
               obj/BushWallHighPoly.obj \
+              obj/Metal_Fence_OBJ.obj \
+              obj/OBJ_Ground.obj \
+              obj/Farmhouse_OBJ.obj \
               textures/Ground.png \
               textures/Hedge.jpg \
+              textures/SkyDome.jpg \
+              textures/BarnTextures/Farmhouse_Diffuse_Map.jpg \
+              textures/BarnTextures/Farmhouse_Specular_Map.jpg \
+              textures/FenceTextures/Metal_Fence_Bump_Map.png \
+              textures/FenceTextures/Metal_Fence_Diffuse_01.png \
+              textures/FenceTextures/Metal_Fence_Diffuse_02.png \
+              textures/FenceTextures/Metal_Fence_Diffuse_03.png \
+              textures/GroundTextures/Bump_Map.jpg \
+              textures/GroundTextures/Diffuse.jpg \
+              textures/GroundTextures/Specular.jpg \
 
 
 

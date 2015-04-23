@@ -96,16 +96,16 @@ void textLoader(const std::string &_fname, GLuint &_tid);
 
 class FileLoad
 {
-public:
-
 
 private:
   typedef boost::tokenizer<boost::char_separator<char> >tokenizer;
-  void fileLoader(const std::string &_fname, std::vector<std::vector<int> > &_gridCoor);
-  void fileParser(tokenizer::iterator &_firstWord, int lineCount, int sortCount);
+  void fileParser(tokenizer::iterator &_firstWord, int lineCount, std::vector<std::vector<int> > &_gridCoor);
+
+public:
+    void fileLoader(const std::string &_fname, std::vector<std::vector<int> > &_gridCoor, const std::string &_typeDef);
+
+
 };
-
-
 
 
 

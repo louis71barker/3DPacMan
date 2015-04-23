@@ -42,7 +42,7 @@ void Arena::ground(std::vector<std::vector<int> > _matrix)
 //          glEnable(GL_TEXTURE_GEN_T);
 //          gluQuadricTexture(id, GL_TRUE);
           glBindTexture(GL_TEXTURE_2D, GroundTextID);
-          glutSolidCube(CUBESIZE);
+//          glutSolidCube(CUBESIZE);
           glBegin(GL_TRIANGLES);
             for (int a = 0; a < (int)m_Index.size(); a++)
             {

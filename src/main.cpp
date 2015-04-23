@@ -58,7 +58,7 @@ int main(int argc, char** argv)
     SDLErrorExit("Problem creating OpenGL Context");
   }
 
-  Walls wa("src/MapCoor.txt");
+  Walls wa;
   Arena a(wa.matrix);
   Camera cam;
   Ghost gho(wa.matrix);

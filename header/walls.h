@@ -16,7 +16,7 @@
 class Walls
 {
 public:
-  Walls(const std::string &_fname);
+  Walls();
 
   void cubeInit(const std::string &_fname);
   void fileReader(const std::string &);

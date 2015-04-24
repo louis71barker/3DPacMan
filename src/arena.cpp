@@ -25,7 +25,7 @@
 void Arena::ground(std::vector<std::vector<int> > _matrix)
 {
 
-//  textLoader("textures/Ground.png", GroundTextID);
+  textLoader("textures/GroundTextures/Diffuse.jpg", GroundTextID);
   GLuint id = glGenLists(1);
   glNewList(id, GL_COMPILE);
 //  for(int i = 0; i < (int)_matrix.size(); ++i)
@@ -46,11 +46,11 @@ void Arena::ground(std::vector<std::vector<int> > _matrix)
 //          glutSolidCube(CUBESIZE);
           glBegin(GL_TRIANGLES);
 
-            for (int a = 0; a < (int)m_Index.size(); a++)
+            for (int a = 2; a < (int)m_Index.size(); a++)
             {
-              m_Normal[m_Index[a+2]-1].normalGL();
-              m_Texture[m_Index[a+1]-1].textureGL();
-              m_Vertex[m_Index[a]-1].vertexGL();
+              m_Normal[m_Index[a]-1].normalGL();
+              m_Texture[m_Index[a-1]-1].textureGL();
+              m_Vertex[m_Index[a-2]-1].vertexGL();
             }
 //            glDisable(GL_TEXTURE_GEN_T);
 //            glDisable(GL_TEXTURE_GEN_S);

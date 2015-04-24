@@ -164,11 +164,11 @@ void Walls::drawCube(std::vector<std::vector<int> > _matrix)
         {
           std::cout<<"spawn bus please\n";
           glTranslatef((i)*4, 0, ((int)_matrix[0].size() * 4) - (j)*4);
-          for (int a = 0; a < (int)m_Index.size(); a ++)
+          for (int a = 2; a < (int)m_Index.size(); a ++)
           {
-            m_Texture[m_Index[a+1]-1].textureGL();
-            m_Normal[m_Index[a+2]-1].normalGL();
-            m_Vertex[m_Index[a]-1].vertexGL();
+            m_Normal[m_Index[a]-1].normalGL();
+            m_Texture[m_Index[a-1]-1].textureGL();
+            m_Vertex[m_Index[a-2]-1].vertexGL();
           }
           std::cout<<"spawned Ghost thank you\n";
         }

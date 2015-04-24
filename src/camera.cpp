@@ -42,7 +42,7 @@ void Camera::enableScene()
 
 
     // Enable lighting
-    glEnable(GL_LIGHTING);
+//    glEnable(GL_LIGHTING);
 
     // Set up and enable light 0
     // Supply a slight ambient light so the objects can be seen

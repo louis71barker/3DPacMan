@@ -35,7 +35,7 @@ void Camera::enableScene()
 
     glEnable(GL_DEPTH_TEST);
     //glFrontFace(GL_CW);       // Counterclockwise polygons face out
-    glEnable(GL_CULL_FACE);    // Do not try to display the back sides
+//    glEnable(GL_CULL_FACE);    // Do not try to display the back sides
 
     glShadeModel(GL_SMOOTH);
     glEnable(GL_COLOR_MATERIAL);

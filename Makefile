@@ -58,7 +58,8 @@ SOURCES       = src/main.cpp \
 		src/objLoader.cpp \
 		src/lighting.cpp \
 		src/TextLoader.cpp \
-		src/fileLoader.cpp 
+		src/fileLoader.cpp \
+		src/skyDome.cpp 
 OBJECTS       = buildFiles/main.o \
 		buildFiles/player.o \
 		buildFiles/ghost.o \
@@ -72,7 +73,8 @@ OBJECTS       = buildFiles/main.o \
 		buildFiles/objLoader.o \
 		buildFiles/lighting.o \
 		buildFiles/TextLoader.o \
-		buildFiles/fileLoader.o
+		buildFiles/fileLoader.o \
+		buildFiles/skyDome.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -295,7 +297,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d buildFiles/PacMan3D1.0.0 || mkdir -p buildFiles/PacMan3D1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h header/lights.h buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp src/lighting.cpp src/TextLoader.cpp src/fileLoader.cpp buildFiles/PacMan3D1.0.0/ && (cd `dirname buildFiles/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname buildFiles/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r buildFiles/PacMan3D1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h header/lights.h header/skyDome.h buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp src/lighting.cpp src/TextLoader.cpp src/fileLoader.cpp src/skyDome.cpp buildFiles/PacMan3D1.0.0/ && (cd `dirname buildFiles/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname buildFiles/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r buildFiles/PacMan3D1.0.0
 
 
 clean:compiler_clean 
@@ -340,7 +342,8 @@ buildFiles/main.o: src/main.cpp header/player.h \
 		header/arena.h \
 		header/window.h \
 		header/camera.h \
-		header/lights.h
+		header/lights.h \
+		header/skyDome.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/main.o src/main.cpp
 
 buildFiles/player.o: src/player.cpp header/player.h \
@@ -399,6 +402,10 @@ buildFiles/TextLoader.o: src/TextLoader.cpp header/scene.h
 
 buildFiles/fileLoader.o: src/fileLoader.cpp header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/fileLoader.o src/fileLoader.cpp
+
+buildFiles/skyDome.o: src/skyDome.cpp header/skyDome.h \
+		header/scene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/skyDome.o src/skyDome.cpp
 
 ####### Install
 

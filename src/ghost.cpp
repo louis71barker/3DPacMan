@@ -24,10 +24,10 @@ void Ghost::drawGhosts(std::vector<std::vector<int> > _matrix)
           if(_matrix[i][j] == 4)
           {
             std::cout<<"spawn Ghost please\n";
-            glTranslatef((i)*4, 0, ((int)_matrix[0].size() * 4) - (j)*4);
+            glTranslatef((i)*4, -4, ((int)_matrix[0].size() * 4) - (j)*4);
             for (int a = 0; a < (int)m_Index.size(); a ++)
             {
-              m_Normal[m_Index[a+2]-1].normalGL();
+//              m_Normal[m_Index[a+2]-1].normalGL();
               m_Vertex[m_Index[a]-1].vertexGL();
             }
             std::cout<<"spawned Ghost thank you\n";

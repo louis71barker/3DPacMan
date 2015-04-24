@@ -15,6 +15,7 @@ SOURCES+=src/main.cpp\
          src/lighting.cpp \
          src/TextLoader.cpp \
          src/fileLoader.cpp \
+         src/skyDome.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
@@ -30,6 +31,7 @@ HEADERS+=header/arena.h\
          header/torch.h\
          header/scene.h\
          header/lights.h\
+         header/skyDome.h \
 #         header/NCCA/Mat4.h\
 #         header/NCCA/Vec4.h\
 #         header/NCCA/GLFunctions.h
@@ -53,9 +55,10 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/Metal_Fence_OBJ.obj \
               obj/OBJ_Ground.obj \
               obj/Farmhouse_OBJ.obj \
+              obj/geoSphere.obj \
               textures/Ground.png \
               textures/Hedge.jpg \
-              textures/SkyDome.jpg \
+              textures/Skydome.jpg \
               textures/BarnTextures/Farmhouse_Diffuse_Map.jpg \
               textures/BarnTextures/Farmhouse_Specular_Map.jpg \
               textures/FenceTextures/Metal_Fence_Bump_Map.png \

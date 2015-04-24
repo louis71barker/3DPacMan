@@ -16,6 +16,7 @@
 #include "header/camera.h"
 #include "header/walls.h"
 #include "header/lights.h"
+#include "header/skyDome.h"
 
 
 #ifdef LINUX
@@ -65,10 +66,12 @@ int main(int argc, char** argv)
   Player p;
   Collecable col(wa.matrix);
   Lights l;
+  skyDome sd;
 
 
   wa.initMaze(wa.matrix);
   a.ground(wa.matrix);
+  sd.sky();
 
 
 
@@ -78,7 +81,7 @@ int main(int argc, char** argv)
   SDL_GL_SetSwapInterval(1);
 
   glMatrixMode(GL_PROJECTION);
-  gluPerspective(45.0f,float(_rect.w)/_rect.h,0.5,100.0);
+  gluPerspective(45.0f,float(_rect.w)/_rect.h,0.5,500.0);
   glMatrixMode(GL_MODELVIEW);
 
   glEnable(GL_NORMALIZE);
@@ -177,6 +180,7 @@ int main(int argc, char** argv)
 //    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     wa.draw();
     a.drawArena(wa.matrix);
+    sd.drawSky();
 
     l.distanceCal(wa.matrix);
 

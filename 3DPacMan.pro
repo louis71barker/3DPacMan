@@ -56,7 +56,8 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/stripLight.obj \
               obj/BushWall.obj \
               obj/BushWallHighPoly.obj \
-              obj/Fence.obj \
+              obj/BushWallHighPolyNew.obj \
+              obj/FenceFrame.obj \
               obj/OBJ_Ground.obj \
               obj/FarmhouseTri.obj \
               obj/geoSphere.obj \

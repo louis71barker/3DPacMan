@@ -44,8 +44,8 @@ private:
   std::vector<int> m_Index;
   std::vector<GLuint> m_displayList;
 
-  void letsDraw(int _x, int _y, std::vector<std::vector<int> > _matrix);
-  void drawCube(std::vector<std::vector<int> > _matrix);
+  void letsDraw(int _x, int _y, const std::vector<std::vector<int> > _matrix);
+  void drawCube(const std::vector<std::vector<int> > _matrix);
   void triangleCubCoor(GLfloat cube_buffer);
 
   int gridCounter;

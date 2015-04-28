@@ -2,7 +2,7 @@
 
 
 
-void Lights::distanceCal(std::vector<std::vector<int> > matrix)
+void Lights::distanceCal(const std::vector<std::vector<int> > matrix)
 {
 
   for (int i = 0; i <(int)matrix.size(); i++)

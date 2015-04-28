@@ -12,7 +12,7 @@ class Arena
 {
 public:
 
-  void drawArena(std::vector<std::vector<int> > _matrix);
+  void drawArena(const std::vector<std::vector<int> > _matrix);
 
   //ground vectors
   std::vector<Vec3> m_Vertex;
@@ -24,7 +24,7 @@ public:
 
 
 
-  Arena(std::vector<std::vector<int> > _matrix)
+  Arena(const std::vector<std::vector<int> > _matrix)
   {
     ObjLoader("obj/OBJ_Ground.obj",m_Vertex,m_Normal,m_Texture,m_Index);
 //    ground(_matrix);
@@ -47,7 +47,7 @@ public:
 
 
   }
-  void ground(std::vector<std::vector<int> > _matrix);
+  void ground(const std::vector<std::vector<int> > _matrix);
 
 
 
@@ -56,11 +56,6 @@ public:
 
 
 private:
-
-
-
-  void buildGround(int _x, int _y, std::vector<std::vector<int> > _matrix);
-  void drawGround(int _x, int _y, std::vector<std::vector<int> > _matrix);
   GLuint GroundTextID;
 
 

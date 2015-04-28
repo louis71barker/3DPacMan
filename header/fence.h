@@ -15,10 +15,12 @@ public:
   std::vector<GLuint> m_displayList;
   std::vector <GLuint> m_daList;
 
-  Fence()
+  Fence(const std::vector<std::vector<int> > _matrix)
   {
-    ObjLoader("obj/geoSphere.obj",m_Vertex,m_Normal,m_Texture,m_Index);
-    drawFence();
+    heightSet = false;
+    height = -2.3;
+    ObjLoader("obj/FenceFrame.obj",m_Vertex,m_Normal,m_Texture,m_Index);
+    buildFence(_matrix);
   }
 
   ~Fence()
@@ -37,14 +39,18 @@ public:
     m_daList.clear();
     std::vector<GLuint>().swap (m_daList);
   }
-  void fence();
+  void buildFence(const std::vector<std::vector<int> > _matrix);
   void drawFence();
 
 
 
 private:
-    GLuint FenceTextID;
-
+  GLuint FenceTextID;
+  bool heightSet;
+  int height;
+  void setFence(const int _a, const int _b);
+  void createFenceNormal();
+  void createFenceRotated();
 };
 
 

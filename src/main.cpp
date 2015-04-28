@@ -69,12 +69,13 @@ int main(int argc, char** argv)
   Collecable col(wa.matrix);
   Lights l;
   skyDome sd;
-  Barn ba;
+  Barn ba(wa.matrix);
+  Fence fe(wa.matrix);
 
 
-  wa.initMaze(wa.matrix);
+//  wa.initMaze(wa.matrix);
   a.ground(wa.matrix);
-  sd.sky();
+//  sd.sky();
 
 
 
@@ -187,6 +188,10 @@ int main(int argc, char** argv)
     wa.draw();
     a.drawArena(wa.matrix);
     sd.drawSky();
+    ba.drawBarn();
+    fe.drawFence();
+
+
 //    ba.buildBarn();
 
     l.distanceCal(wa.matrix);

@@ -5,7 +5,7 @@
 
 
 
-void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _x, float _y)
+void Collecable::drawCollectable(const std::vector<std::vector<int> > &_matrix, float _x, float _y)
 {
   drawCollectiblesLeft();
   normalSetter(_matrix);
@@ -15,7 +15,7 @@ void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _
 
 
 
-void Collecable::normalSetter(std::vector<std::vector<int> > _matrix)
+void Collecable::normalSetter(const std::vector<std::vector<int> > _matrix)
 {
   for(int i = 0; i < (int)_matrix.size(); ++i)
   {
@@ -40,7 +40,7 @@ void Collecable::normalSetter(std::vector<std::vector<int> > _matrix)
 }
 
 
-void Collecable::placeObj(int _x, int _y,std::vector<std::vector<int> > _matrix)
+void Collecable::placeObj(int _x, int _y, const std::vector<std::vector<int> > _matrix)
 {
   glPushMatrix();
 //    glTranslatef(-30 + (_x+0.5)*4, -1, 30 - (_y+0.5)*4);
@@ -50,7 +50,7 @@ void Collecable::placeObj(int _x, int _y,std::vector<std::vector<int> > _matrix)
   glPopMatrix();
 }
 
-void Collecable::placeSpecials(std::vector<std::vector<int> > &_matrix)
+void Collecable::placeSpecials(const std::vector<std::vector<int> > &_matrix)
 {
   //load the texture here and bind inside the list bellow!!!!!! :)
 
@@ -102,7 +102,7 @@ void Collecable::drawBalls()
 
 }
 
-void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, float _x, float _y)
+void Collecable::collisonDetection(const std::vector<std::vector<int> > &_matrix, float _x, float _y)
 {
   for(int i = 0; i < (int)_matrix.size(); ++i)
   {
@@ -121,7 +121,7 @@ void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, floa
 
         if (_x > collecableMinX && _x < collecableMaxX && _y > collecableMinZ && _y < collecableMaxZ)
         {
-          _matrix[i][j] = 2;
+//          _matrix[i][j] = 2;
           collecibleCount--;
         }
       }
@@ -140,7 +140,7 @@ void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, floa
 
         if (_x > collecableMinX && _x < collecableMaxX && _y > collecableMinZ && _y < collecableMaxZ)
         {
-          _matrix[i][j] = 2;
+//          _matrix[i][j] = 2;
           std::cout<<"special collected yeyyeeyeyyey\n";
 
         }

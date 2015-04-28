@@ -16,7 +16,7 @@ void skyDome::sky()
 
           glPushMatrix();
           glTranslatef(20,0,20);
-          glScalef(1000,1000,1000);
+          glScalef(10,10,10);
   //          glTranslatef((i)*CUBESIZE, -4, ((int)_matrix.size() *CUBESIZE) - (j) * CUBESIZE);
   //          glColor3f(1,0,0);
   //          glEnable(GL_TEXTURE_GEN_S);
@@ -39,6 +39,7 @@ void skyDome::sky()
   //      }
   //    }
   //  }
+    std::cout<<"draw Sphere \n";
     glBindTexture(GL_TEXTURE_2D, 0);
     glEndList();
     m_SkydisplayList.push_back(sid);

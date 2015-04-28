@@ -93,9 +93,9 @@ private:
     void WidowSetting();
     void thirdPerson();
     void spotLight();
-    void playerCollisions(std::vector<std::vector<int> > matrix);
+    void playerCollisions(const std::vector<std::vector<int> > matrix);
     void detectingNormals(float cubeXcentre, float cubeZcentre);
-    void setPlayer(std::vector<std::vector<int> > _matrix);
+    void setPlayer(const std::vector<std::vector<int> > _matrix);
 
 };
 

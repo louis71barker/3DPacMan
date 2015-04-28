@@ -19,7 +19,7 @@ public:
   {
     ObjLoader("obj/geoSphere.obj",m_SkyVertex,m_SkyNormal,m_SkyTexture,m_SkyIndex);
     sky();
-    drawSky();
+//    drawSky();
   }
 
   ~skyDome()

@@ -19,7 +19,7 @@ public:
 
   std::vector<std::vector<float> > lights;
   std::vector<float> lightPos;
-  void distanceCal(std::vector<std::vector<int> > matrix);
+  void distanceCal(const std::vector<std::vector<int> > matrix);
 
 
 private:

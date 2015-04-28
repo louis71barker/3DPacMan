@@ -245,7 +245,7 @@ void Camera::mouseMovementCapture(int x, int y)
 }
 
 
-void Camera::setPlayer(std::vector<std::vector<int> > _matrix)
+void Camera::setPlayer(const std::vector<std::vector<int> > _matrix)
 {
   for(int i = 0; i < (int)_matrix.size(); ++i)
   {
@@ -286,7 +286,7 @@ void Camera::thirdPerson()
   glTranslated(0,20,0);
 }
 
-void Camera::playerCollisions(std::vector<std::vector<int> > matrix)
+void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
 {
   for(int i = 0; i < (int)matrix.size(); ++i)
   {

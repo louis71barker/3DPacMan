@@ -44,7 +44,6 @@ void FileLoad::fileParser(tokenizer::iterator &_firstWord, int lineCount, std::v
   int max1 = 28;
   double init_value = 1;
 
-  std::cout<<lineCount<<"ajghksjhdkjhalk\n";
 
   //now we have an empty 2D-matrix of size (0,0). Resizing it with one single command:
   _gridCoor.resize( max1 , std::vector<int>( max1 , init_value ) );
@@ -56,7 +55,6 @@ void FileLoad::fileParser(tokenizer::iterator &_firstWord, int lineCount, std::v
   {
     std::cout<<_gridCoor[lineCount][i];
     _gridCoor[lineCount][i] = boost::lexical_cast<int>(*_firstWord++);
-//    std::cout<<matrix[lineCount][i];
 
   }
 }

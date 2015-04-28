@@ -19,6 +19,7 @@
 #include "header/skyDome.h"
 #include "header/barn.h"
 #include "header/fence.h"
+#include "header/helicopter.h"
 
 
 #ifdef LINUX
@@ -70,7 +71,8 @@ int main(int argc, char** argv)
   Lights l;
   skyDome sd;
   Barn ba(wa.matrix);
-  Fence fe(wa.matrix);
+  Heli he(wa.matrix);
+//  Fence fe(wa.matrix);
 
 
 //  wa.initMaze(wa.matrix);
@@ -189,7 +191,8 @@ int main(int argc, char** argv)
     a.drawArena(wa.matrix);
     sd.drawSky();
     ba.drawBarn();
-    fe.drawFence();
+//    fe.drawFence();
+    he.drawHeli();
 
 
 //    ba.buildBarn();

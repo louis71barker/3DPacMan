@@ -1,16 +1,16 @@
 isEqual(QT_MAJOR_VERSION, 5) {cache() }
 TARGET=PacMan3D
 cache()
-SOURCES+=src/main.cpp\
-         src/player.cpp\
-         src/ghost.cpp\
-         src/arena.cpp\
-         src/collectables.cpp\
-         src/window.cpp\
-         src/camera.cpp\
-         src/walls.cpp\
-         src/torch.cpp\
-         src/Vec.cpp\
+SOURCES+=src/main.cpp \
+         src/player.cpp \
+         src/ghost.cpp \
+         src/arena.cpp \
+         src/collectables.cpp \
+         src/window.cpp \
+         src/camera.cpp \
+         src/walls.cpp \
+         src/torch.cpp \
+         src/Vec.cpp \
          src/objLoader.cpp \
          src/lighting.cpp \
          src/TextLoader.cpp \
@@ -18,24 +18,28 @@ SOURCES+=src/main.cpp\
          src/skyDome.cpp \
          src/barn.cpp \
          src/fence.cpp \
+         src/lightning.cpp \
+         src/helicopter.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
 
 
-HEADERS+=header/arena.h\
-         header/collectables.h\
-         header/player.h\
-         header/ghost.h\
-         header/window.h\
-         header/camera.h\
-         header/walls.h\
-         header/torch.h\
-         header/scene.h\
-         header/lights.h\
+HEADERS+=header/arena.h \
+         header/collectables.h \
+         header/player.h \
+         header/ghost.h \
+         header/window.h \
+         header/camera.h \
+         header/walls.h \
+         header/torch.h \
+         header/scene.h \
+         header/lights.h \
          header/skyDome.h \
          header/barn.h \
          header/fence.h \
+         header/lightning.h \
+         header/helicopter.h \
 #         header/NCCA/Mat4.h\
 #         header/NCCA/Vec4.h\
 #         header/NCCA/GLFunctions.h
@@ -61,6 +65,7 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/OBJ_Ground.obj \
               obj/FarmhouseTri.obj \
               obj/geoSphere.obj \
+              obj/Helicopter_crashed.obj \
               textures/Ground.png \
               textures/Tree_Text.png \
               textures/Skydome.jpg \
@@ -73,6 +78,9 @@ OTHER_FILES+= src/MapCoor.txt\
               textures/GroundTextures/Bump_Map.jpg \
               textures/GroundTextures/Diffuse.jpg \
               textures/GroundTextures/Specular.jpg \
+              textures/HelicopterTextures/Helicopter_Crash_D.tga \
+              textures/HelicopterTextures/Helicopter_Crash_N.tga \
+              textures/HelicopterTextures/Helicopter_Crash_S.tga \
 
 
 

@@ -66,7 +66,6 @@ void Walls::initMaze(std::vector<std::vector<int> > _matrix)
 void Walls::letsDraw(int _x, int _y, const std::vector<std::vector<int> > _matrix)
 {
     glPushMatrix();
-//      glTranslatef(-30 + (_x+0.5)*4, 0, 30 - (_y+0.5)*4);
       glTranslatef((_x)*CUBESIZE, 0, ((int)matrix[0].size() * CUBESIZE) - (_y)*CUBESIZE);
 
       drawCube(_matrix);

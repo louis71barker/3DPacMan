@@ -1,13 +1,13 @@
-#ifndef FENCE_H__
-#define FENCE_H__
+#ifndef HELI_H__
+#define HELI_H__
 
 #include <vector>
 #include "scene.h"
 
-class Fence
+class Heli
 {
 public:
-  //Fence vectors
+  //Helicopter vectors
   std::vector<Vec3> m_Vertex;
   std::vector<Vec3> m_Normal;
   std::vector<Vec3> m_Texture;
@@ -15,17 +15,16 @@ public:
   std::vector<GLuint> m_displayList;
   std::vector <GLuint> m_daList;
 
-  Fence(const std::vector<std::vector<int> > _matrix)
+  Heli(const std::vector<std::vector<int> > _matrix)
   {
-    heightSet = false;
-    height = -2.3;
-    ObjLoader("obj/FenceFrame.obj",m_Vertex,m_Normal,m_Texture,m_Index);
-    buildFence(_matrix);
+    ObjLoader("obj/Helicopter_crashed.obj",m_Vertex,m_Normal,m_Texture,m_Index);
+    buildHeli(_matrix);
+
   }
 
-  ~Fence()
+  ~Heli()
   {
-    //skydome vectors
+    //destroy Helicopter vectors
     m_Vertex.clear();
     std::vector<Vec3>().swap (m_Vertex);
     m_Normal.clear();
@@ -39,18 +38,14 @@ public:
     m_daList.clear();
     std::vector<GLuint>().swap (m_daList);
   }
-  void buildFence(const std::vector<std::vector<int> > _matrix);
-  void drawFence();
+  void buildHeli(const std::vector<std::vector<int> > _matrix);
+  void drawHeli();
 
 
 
 private:
-  GLuint FenceTextID;
-  bool heightSet;
-  int height;
-  void setFence(const int _a, const int _b, const std::vector<std::vector<int> > _matrix);
-  void createFenceNormal(const std::vector<std::vector<int> > _matrix);
-  void createFenceRotated(const std::vector<std::vector<int> > _matrix);
+    GLuint HeliTextID;
+
 };
 
 

@@ -44,9 +44,11 @@ void Arena::ground(std::vector<std::vector<int> > _matrix)
 //          gluQuadricTexture(id, GL_TRUE);
           glBindTexture(GL_TEXTURE_2D, GroundTextID);
 //          glutSolidCube(CUBESIZE);
+          glScalef(0.5,0.5,0.5);
           glBegin(GL_TRIANGLES);
 
-            for (int a = 2; a < (int)m_Index.size(); a++)
+
+            for (int a = 2; a < (int)m_Index.size(); a += 3)
             {
               m_Normal[m_Index[a]-1].normalGL();
               m_Texture[m_Index[a-1]-1].textureGL();

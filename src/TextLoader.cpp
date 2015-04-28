@@ -27,11 +27,11 @@ void textLoader(const std::string &_fname, GLuint &_tid)
   glBindTexture(GL_TEXTURE_2D, _tid);
   glTexImage2D(GL_TEXTURE_2D,
                0,
-               GL_RGB,
+               (text->format->BytesPerPixel == 4 ? GL_RGBA : GL_RGB),
                text->w,
                text->h,
-               0,
-               GL_RGB,
+               0,        
+               (text->format->BytesPerPixel == 4 ? GL_RGBA : GL_RGB),
                GL_UNSIGNED_BYTE,
                text->pixels);
 

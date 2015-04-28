@@ -16,6 +16,8 @@ SOURCES+=src/main.cpp\
          src/TextLoader.cpp \
          src/fileLoader.cpp \
          src/skyDome.cpp \
+         src/barn.cpp \
+         src/fence.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
@@ -32,6 +34,8 @@ HEADERS+=header/arena.h\
          header/scene.h\
          header/lights.h\
          header/skyDome.h \
+         header/barn.h \
+         header/fence.h \
 #         header/NCCA/Mat4.h\
 #         header/NCCA/Vec4.h\
 #         header/NCCA/GLFunctions.h
@@ -52,12 +56,12 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/stripLight.obj \
               obj/BushWall.obj \
               obj/BushWallHighPoly.obj \
-              obj/Metal_Fence_OBJ.obj \
+              obj/Fence.obj \
               obj/OBJ_Ground.obj \
-              obj/Farmhouse_OBJ.obj \
+              obj/FarmhouseTri.obj \
               obj/geoSphere.obj \
               textures/Ground.png \
-              textures/Hedge.jpg \
+              textures/Tree_Text.png \
               textures/Skydome.jpg \
               textures/BarnTextures/Farmhouse_Diffuse_Map.jpg \
               textures/BarnTextures/Farmhouse_Specular_Map.jpg \

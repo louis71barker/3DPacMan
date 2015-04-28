@@ -70,10 +70,11 @@ void Collecable::placeSpecials(std::vector<std::vector<int> > &_matrix)
           glBegin(GL_TRIANGLES);
 
 
-            for (int i = 0; i < (int)m_Index.size(); i ++)
+            for (int i = 2; i < (int)m_Index.size(); i += 3)
             {
-//              m_Normal[m_Index[i+2]-1].normalGL();
-              m_Vertex[m_Index[i]-1].vertexGL();
+              m_Normal[m_Index[i]-1].normalGL();
+              m_Texture[m_Index[i-1]-1].textureGL();
+              m_Vertex[m_Index[i-2]-1].vertexGL();
             }
 
 

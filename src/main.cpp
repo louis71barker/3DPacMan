@@ -17,6 +17,8 @@
 #include "header/walls.h"
 #include "header/lights.h"
 #include "header/skyDome.h"
+#include "header/barn.h"
+#include "header/fence.h"
 
 
 #ifdef LINUX
@@ -67,11 +69,15 @@ int main(int argc, char** argv)
   Collecable col(wa.matrix);
   Lights l;
   skyDome sd;
+  Barn ba;
 
 
   wa.initMaze(wa.matrix);
   a.ground(wa.matrix);
   sd.sky();
+
+
+
 
 
 
@@ -181,6 +187,7 @@ int main(int argc, char** argv)
     wa.draw();
     a.drawArena(wa.matrix);
     sd.drawSky();
+//    ba.buildBarn();
 
     l.distanceCal(wa.matrix);
 

@@ -41,7 +41,7 @@ void FileLoad::fileLoader(const std::string &_fname, std::vector<std::vector<int
 
 void FileLoad::fileParser(tokenizer::iterator &_firstWord, int lineCount, std::vector<std::vector<int> > &_gridCoor)
 {
-  int max1 = 17;
+  int max1 = 28;
   double init_value = 1;
 
   std::cout<<lineCount<<"ajghksjhdkjhalk\n";
@@ -54,6 +54,7 @@ void FileLoad::fileParser(tokenizer::iterator &_firstWord, int lineCount, std::v
   //adds the coor data from the text file into the 2d vector
   for (int i=0; i<max1; i++)
   {
+    std::cout<<_gridCoor[lineCount][i];
     _gridCoor[lineCount][i] = boost::lexical_cast<int>(*_firstWord++);
 //    std::cout<<matrix[lineCount][i];
 

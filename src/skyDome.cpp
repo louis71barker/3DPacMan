@@ -26,7 +26,7 @@ void skyDome::sky()
   //          glutSolidCube(CUBESIZE);
             glBegin(GL_TRIANGLES);
 
-              for (int a = 2; a < (int)m_SkyIndex.size(); a++)
+              for (int a = 2; a < (int)m_SkyIndex.size(); a += 3)
               {
                 m_SkyNormal[m_SkyIndex[a]-1].normalGL();
                 m_SkyTexture[m_SkyIndex[a-1]-1].textureGL();

@@ -25,7 +25,7 @@ void Ghost::drawGhosts(std::vector<std::vector<int> > _matrix)
           {
             std::cout<<"spawn Ghost please\n";
             glTranslatef((i)*4, -4, ((int)_matrix[0].size() * 4) - (j)*4);
-            for (int a = 0; a < (int)m_Index.size(); a ++)
+            for (int a = 0; a < (int)m_Index.size(); a += 3)
             {
 //              m_Normal[m_Index[a+2]-1].normalGL();
               m_Vertex[m_Index[a]-1].vertexGL();

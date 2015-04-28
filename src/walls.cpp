@@ -94,7 +94,7 @@ void Walls::draw()
 void Walls::initMaze(std::vector<std::vector<int> > _matrix)
 {
   //loads in the wall texure
-  textLoader("textures/Hedge.jpg", WallTextID);
+  textLoader("textures/Tree_Text.png", WallTextID);
 
   GLuint id = glGenLists(1);
   glNewList(id, GL_COMPILE);
@@ -164,7 +164,7 @@ void Walls::drawCube(std::vector<std::vector<int> > _matrix)
         {
           std::cout<<"spawn bus please\n";
           glTranslatef((i)*4, 0, ((int)_matrix[0].size() * 4) - (j)*4);
-          for (int a = 2; a < (int)m_Index.size(); a ++)
+          for (int a = 2; a < (int)m_Index.size(); a += 3)
           {
             m_Normal[m_Index[a]-1].normalGL();
             m_Texture[m_Index[a-1]-1].textureGL();

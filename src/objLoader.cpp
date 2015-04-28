@@ -54,11 +54,17 @@ void ObjLoader(const std::string &_objName,
       else if (*firstWord == "f")
       {
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
-          ++(++firstWord);
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
-          ++(++firstWord);
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
-          ++(++firstWord);
+
+          _index.push_back(boost::lexical_cast<int>(*++firstWord));
+          _index.push_back(boost::lexical_cast<int>(*++firstWord));
+          _index.push_back(boost::lexical_cast<int>(*++firstWord));
+
+          _index.push_back(boost::lexical_cast<int>(*++firstWord));
+          _index.push_back(boost::lexical_cast<int>(*++firstWord));
+          _index.push_back(boost::lexical_cast<int>(*++firstWord));
+
       }
     }
   }

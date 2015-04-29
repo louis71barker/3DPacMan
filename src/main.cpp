@@ -20,6 +20,8 @@
 #include "header/barn.h"
 #include "header/fence.h"
 #include "header/helicopter.h"
+#include "header/FPSCounter.h"
+#include "header/lightning.h"
 
 
 #ifdef LINUX
@@ -30,6 +32,13 @@
 #endif
 
 
+Lightning li;
+Uint32 timerCallback(Uint32 interval, void *) {
+
+    li.drawLightning();
+    return interval;
+}
+
 int main(int argc, char** argv)
 {
   if(SDL_Init(SDL_INIT_VIDEO)<0)
@@ -39,6 +48,7 @@ int main(int argc, char** argv)
 
   glutInit(&argc, argv);
   SDL_Init(SDL_INIT_VIDEO);
+  SDL_Init(SDL_INIT_TIMER);
 
   //this grabs the screen size's
   SDL_Rect _rect;
@@ -62,16 +72,21 @@ int main(int argc, char** argv)
     SDLErrorExit("Problem creating OpenGL Context");
   }
 
+
+  SDL_TimerID timerID = SDL_AddTimer(10000, /*elapsed time in milliseconds*/
+                                   timerCallback, /*callback function*/
+                                   (void*) NULL /*parameters (none)*/);
+
   Walls wa;
   Arena a(wa.matrix);
   Camera cam;
-  Ghost gho(wa.matrix);
+//  Ghost gho(wa.matrix);
   Player p;
   Collecable col(wa.matrix);
   Lights l;
-  skyDome sd;
-  Barn ba(wa.matrix);
-  Heli he(wa.matrix);
+//  skyDome sd;
+//  Barn ba(wa.matrix);
+//  Heli he(wa.matrix);
 //  Fence fe(wa.matrix);
 
 
@@ -183,28 +198,33 @@ int main(int argc, char** argv)
        }
     }
 
+    frameStart();
+
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
-    gho.updater();
+//    gho.updater();
 //    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     wa.draw();
     a.drawArena(wa.matrix);
-    sd.drawSky();
-    ba.drawBarn();
+//    sd.drawSky();
+//    ba.drawBarn();
 //    fe.drawFence();
-    he.drawHeli();
+//    he.drawHeli();
 
 
 //    ba.buildBarn();
 
     l.distanceCal(wa.matrix);
 
+    frameEnd(GLUT_BITMAP_HELVETICA_10, 1.0 , 0.0 , 0.0 , 0.85 , 0.95);
 
     SDL_GL_SwapWindow(win);
 
   }
 
 
+  // Disable our timer
+  SDL_RemoveTimer(timerID);
 
   SDL_DestroyWindow(win);
 

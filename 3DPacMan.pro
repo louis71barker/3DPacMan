@@ -20,6 +20,7 @@ SOURCES+=src/main.cpp \
          src/fence.cpp \
          src/lightning.cpp \
          src/helicopter.cpp \
+         src/FPSCounter.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
@@ -40,6 +41,7 @@ HEADERS+=header/arena.h \
          header/fence.h \
          header/lightning.h \
          header/helicopter.h \
+         header/FPSCounter.h \
 #         header/NCCA/Mat4.h\
 #         header/NCCA/Vec4.h\
 #         header/NCCA/GLFunctions.h
@@ -66,6 +68,7 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/FarmhouseTri.obj \
               obj/geoSphere.obj \
               obj/Helicopter_crashed.obj \
+              obj/OldFence.obj \
               textures/Ground.png \
               textures/Tree_Text.png \
               textures/Skydome.jpg \
@@ -81,6 +84,7 @@ OTHER_FILES+= src/MapCoor.txt\
               textures/HelicopterTextures/Helicopter_Crash_D.tga \
               textures/HelicopterTextures/Helicopter_Crash_N.tga \
               textures/HelicopterTextures/Helicopter_Crash_S.tga \
+              textures/oldFence_texture.jpg \
 
 
 

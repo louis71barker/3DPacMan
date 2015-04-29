@@ -19,7 +19,7 @@ public:
   {
     heightSet = false;
     height = -2.3;
-    ObjLoader("obj/FenceFrame.obj",m_Vertex,m_Normal,m_Texture,m_Index);
+    ObjLoader("obj/OldFence.obj",m_Vertex,m_Normal,m_Texture,m_Index);
     buildFence(_matrix);
   }
 
@@ -48,9 +48,9 @@ private:
   GLuint FenceTextID;
   bool heightSet;
   int height;
-  void setFence(const int _a, const int _b, const std::vector<std::vector<int> > _matrix);
-  void createFenceNormal(const std::vector<std::vector<int> > _matrix);
-  void createFenceRotated(const std::vector<std::vector<int> > _matrix);
+  void setFence(const int _a, const int _b, const std::vector<std::vector<int> > &_matrix);
+  void createFenceNormal(const std::vector<std::vector<int> > &_matrix);
+  void createFenceRotated(const std::vector<std::vector<int> > &_matrix);
 };
 
 

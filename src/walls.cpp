@@ -76,8 +76,7 @@ void Walls::drawCube(const std::vector<std::vector<int> > _matrix)
 {
 
 
-  GLuint id = glGenLists(1);
-  glNewList(id, GL_COMPILE);
+
   glPushMatrix();
     glScalef(0.2,0.2,0.2);
     glBegin(GL_TRIANGLES);
@@ -98,7 +97,6 @@ void Walls::drawCube(const std::vector<std::vector<int> > _matrix)
     }
     glEnd();
   glPopMatrix();
-  m_displayList.push_back(id);
 
 
 }

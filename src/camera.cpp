@@ -29,23 +29,12 @@ void Camera::enableScene()
   GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
   GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
   GLfloat  ambientLight[] = { 0.5f, 0.5f, 0.5f, 1.0f};
-//  GLfloat  spotDir[] = { 1, yRot, -1};
-
-//  std::cout<<xRot<<"      "<<yRot<<"\n";
 
     glEnable(GL_DEPTH_TEST);
-    //glFrontFace(GL_CW);       // Counterclockwise polygons face out
-//    glEnable(GL_CULL_FACE);    // Do not try to display the back sides
 
     glShadeModel(GL_SMOOTH);
     glEnable(GL_COLOR_MATERIAL);
 
-
-    // Enable lighting
-//    glEnable(GL_LIGHTING);
-
-    // Set up and enable light 0
-    // Supply a slight ambient light so the objects can be seen
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
 
     // The light is composed of just diffuse and specular components
@@ -127,39 +116,12 @@ void Camera::enableScene()
 
 void Camera::CameraSet()
 {
-//  float xRVal = 0.0f, yRVal = 0.0f, playerPosx = 0.0f, playerPosy = 0.0f, height = 0.0f, rotVal = 0.0f;
-//  if (firstPersonCam == true)
-//  {
-//    xRVal = 0.0f;
-//    yRVal = 1.0f;
-//    playerPosx = -playerXpos;
-//    playerPosy = -playerZpos;
-//    height = -0.0f;
-//    rotVal = yRot;
 
-//    rotationNum = 0;
-//  }
-//  if (thirdPersonCam == true && rotationNum <= 0.5)
-//  {
-//    xRVal = 1.0f;
-//    yRVal = 0.0f;
-//    playerPosx = 0;
-//    playerPosy = 0;
-//    height = 20.0f;
-//    rotVal = 45.0f;
-
-//    rotationNum++;
-
-
-//  }
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-//  glRotatef(rotVal,xRVal,yRVal,0.0);
-//  glTranslated(playerPosx,height,playerPosy);
 
   glRotatef(yRot,0.0,1.0,0.0);
   glTranslated(-playerXpos,0,-playerZpos);
-//  gluLookAt();
 }
 
 void Camera::displayCamera()

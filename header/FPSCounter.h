@@ -51,6 +51,7 @@
 
 #include <sys/time.h>
 #include <stdio.h>
+#include "header/scene.h"
 
 struct timeval frameStartTime, frameEndTime;
 

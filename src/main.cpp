@@ -32,10 +32,9 @@
 #endif
 
 
-Lightning li;
 Uint32 timerCallback(Uint32 interval, void *) {
 
-    li.drawLightning();
+//    Lightning->drawLightning();
     return interval;
 }
 
@@ -80,14 +79,14 @@ int main(int argc, char** argv)
   Walls wa;
   Arena a(wa.matrix);
   Camera cam;
-//  Ghost gho(wa.matrix);
+  Ghost gho(wa.matrix);
   Player p;
   Collecable col(wa.matrix);
   Lights l;
-//  skyDome sd;
-//  Barn ba(wa.matrix);
-//  Heli he(wa.matrix);
-//  Fence fe(wa.matrix);
+  skyDome sd;
+  Barn ba(wa.matrix);
+  Heli he(wa.matrix);
+  Fence fe(wa.matrix);
 
 
 //  wa.initMaze(wa.matrix);
@@ -202,17 +201,15 @@ int main(int argc, char** argv)
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
-//    gho.updater();
+    gho.updater();
 //    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     wa.draw();
     a.drawArena(wa.matrix);
-//    sd.drawSky();
-//    ba.drawBarn();
-//    fe.drawFence();
-//    he.drawHeli();
+    sd.drawSky();
+    ba.drawBarn();
+    fe.drawFence();
+    he.drawHeli();
 
-
-//    ba.buildBarn();
 
     l.distanceCal(wa.matrix);
 

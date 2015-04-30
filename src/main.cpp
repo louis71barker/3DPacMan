@@ -31,10 +31,15 @@
   #include <OpenGL/gl.h>
 #endif
 
-
+Lightning li;
 Uint32 timerCallback(Uint32 interval, void *) {
 
-//    Lightning->drawLightning();
+    if(li.lightningTrig == false)
+    {
+      li.lightningTrig = true;
+      SDL_Delay(100);
+      li.lightningTrig = false;
+    }
     return interval;
 }
 
@@ -72,7 +77,7 @@ int main(int argc, char** argv)
   }
 
 
-  SDL_TimerID timerID = SDL_AddTimer(10000, /*elapsed time in milliseconds*/
+  SDL_TimerID timerID = SDL_AddTimer(15000, /*elapsed time in milliseconds*/
                                    timerCallback, /*callback function*/
                                    (void*) NULL /*parameters (none)*/);
 
@@ -201,14 +206,16 @@ int main(int argc, char** argv)
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
+
+
+    sd.drawSky();
     gho.updater();
-//    p.update(wa.matrix,cam.playerXpos,cam.playerZpos);
     wa.draw();
     a.drawArena(wa.matrix);
-    sd.drawSky();
     ba.drawBarn();
     fe.drawFence();
     he.drawHeli();
+    li.drawLightning();
 
 
     l.distanceCal(wa.matrix);

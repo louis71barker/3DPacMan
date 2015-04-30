@@ -37,7 +37,7 @@ void Window::Lighting() const
   glEnable(GL_POINT_SPRITE);
   glEnable(GL_BLEND);
   glShadeModel(GL_SMOOTH);
-//  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_DEPTH_TEST);

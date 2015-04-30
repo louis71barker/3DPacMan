@@ -70,8 +70,8 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/Helicopter_crashed.obj \
               obj/OldFence.obj \
               textures/Ground.png \
-              textures/Tree_Text.png \
-              textures/Skydome.jpg \
+              textures/NewTreesTextureMap.png \
+              textures/Skydome.png \
               textures/BarnTextures/Farmhouse_Diffuse_Map.jpg \
               textures/BarnTextures/Farmhouse_Specular_Map.jpg \
               textures/FenceTextures/Metal_Fence_Bump_Map.png \
@@ -81,7 +81,7 @@ OTHER_FILES+= src/MapCoor.txt\
               textures/GroundTextures/Bump_Map.jpg \
               textures/GroundTextures/Diffuse.jpg \
               textures/GroundTextures/Specular.jpg \
-              textures/HelicopterTextures/Helicopter_Crash_D.tga \
+              textures/HelicopterTextures/Helicopter_Crash_D.png \
               textures/HelicopterTextures/Helicopter_Crash_N.tga \
               textures/HelicopterTextures/Helicopter_Crash_S.tga \
               textures/oldFence_texture.jpg \

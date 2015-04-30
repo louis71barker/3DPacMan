@@ -15,7 +15,7 @@ public:
   std::vector<GLuint> m_displayList;
   std::vector <GLuint> m_daList;
 
-  Barn(const std::vector<std::vector<int> > _matrix)
+  Barn(const std::vector<std::vector<int> > &_matrix)
   {
     ObjLoader("obj/FarmhouseTri.obj",m_Vertex,m_Normal,m_Texture,m_Index);
     buildBarn(_matrix);
@@ -38,7 +38,7 @@ public:
     m_daList.clear();
     std::vector<GLuint>().swap (m_daList);
   }
-  void buildBarn(const std::vector<std::vector<int> > _matrix);
+  void buildBarn(const std::vector<std::vector<int> > &_matrix);
   void drawBarn();
 
 

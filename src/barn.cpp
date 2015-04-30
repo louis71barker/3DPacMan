@@ -2,7 +2,7 @@
 
 
 
-void Barn::buildBarn(const std::vector<std::vector<int> > _matrix)
+void Barn::buildBarn(const std::vector<std::vector<int> > &_matrix)
 {
   textLoader("textures/BarnTextures/Farmhouse_Diffuse_Map.jpg", BarnTextID);
   GLuint bid = glGenLists(1);

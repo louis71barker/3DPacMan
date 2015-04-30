@@ -35,7 +35,7 @@ void Walls::draw()
 void Walls::initMaze(std::vector<std::vector<int> > _matrix)
 {
   //loads in the wall texure
-  textLoader("textures/Tree_Text.png", WallTextID);
+  textLoader("textures/NewTreesTextMap.png", WallTextID);
 
   GLuint id = glGenLists(1);
   glNewList(id, GL_COMPILE);

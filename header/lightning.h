@@ -9,10 +9,12 @@ class Lightning
 public:
   Lightning()
   {
+    lightningTrig = false;
 
   }
 
   void drawLightning();
+  bool lightningTrig;
 
 
 

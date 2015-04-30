@@ -34,7 +34,7 @@ void Arena::ground(const std::vector<std::vector<int> > _matrix)
 
           glBindTexture(GL_TEXTURE_2D, GroundTextID);
 
-          glScalef(0.5,0.5,0.5);
+          glScalef(0.4,0.4,0.4);
           glBegin(GL_TRIANGLES);
 
 

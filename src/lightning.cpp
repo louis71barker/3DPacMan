@@ -13,26 +13,25 @@
 
 void Lightning::drawLightning()
 {
-  GLfloat lightningPos[] = { 40, 20, 10 , 1.0f };
-  GLfloat lightningCol[] = {1.0f,1.0f,1.0f,1.0f};
+  GLfloat lightningPos[] = { 10, 0, 10 , 1.0f };
+  GLfloat lightningCol[] = {5.0f,5.0f,5.0f,1.0f};
+  GLfloat  ambientLight[] = { 0.5f, 0.5f, 0.5f, 1.0f};
+  GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
+
+  if (lightningTrig == true)
+  {
+    std::cout<<"lightning trigger \n";
+
+//          glEnable(GL_LIGHTING);
+          glEnable(GL_LIGHT3);
+          glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+          glLightfv(GL_LIGHT3, GL_DIFFUSE, lightningCol);
+          glLightfv(GL_LIGHT3,GL_SPECULAR,specular);
+          glLightfv(GL_LIGHT3, GL_POSITION, lightningPos);
+   }
+  else
+   glDisable(GL_LIGHT3);
 
 
-//  for (int i = 0; i<=100; i++)
-//  {
-//    for (int j = 0; j<=100; j++)
-//    {
-//      if (i <= 50)
-//      {
-//        glEnable(GL_LIGHTING);
-//        glEnable(GL_LIGHT7);
-//        glLightfv(GL_LIGHT7, GL_DIFFUSE, lightningCol);
-//        glLightfv(GL_LIGHT7, GL_POSITION, lightningPos);
-//      }
-//      else
-//      {
-//        glDisable(GL_LIGHT7);
-//      }
-//    }
-//  }
-  std::cout<<"lightning trigger \n";
+
 }

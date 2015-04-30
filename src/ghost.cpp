@@ -25,10 +25,11 @@ void Ghost::drawGhosts(const std::vector<std::vector<int> > _matrix)
           {
 //            std::cout<<"spawn Ghost please\n";
             glTranslatef((i)*4, -4, ((int)_matrix[0].size() * 4) - (j)*4);
-            for (int a = 0; a < (int)m_Index.size(); a += 3)
+            for (int a = 2; a < (int)m_Index.size(); a += 3)
             {
-//              m_Normal[m_Index[a+2]-1].normalGL();
-              m_Vertex[m_Index[a]-1].vertexGL();
+              m_Normal[m_Index[a]-1].normalGL();
+              m_Texture[m_Index[a-1]-1].textureGL();
+              m_Vertex[m_Index[a-2]-1].vertexGL();
             }
 //            std::cout<<"spawned Ghost thank you\n";
           }
@@ -38,6 +39,7 @@ void Ghost::drawGhosts(const std::vector<std::vector<int> > _matrix)
 
       glEnd();
     glPopMatrix();
+    glEndList();
     m_displayList.push_back(id);
 }
 

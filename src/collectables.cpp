@@ -96,7 +96,7 @@ void Collecable::drawBalls()
             glColor3f(1.0, 0.0, 0.0);
             glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
             glEnable(GL_BLEND_COLOR);
-            glutSolidSphere(0.4,50,50);
+            glutSolidSphere(0.4,25,25);
             glColor3f(1.0, 1.0, 1.0);
           glPopMatrix();
 

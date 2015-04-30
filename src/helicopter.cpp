@@ -4,7 +4,7 @@
 
 void Heli::buildHeli(const std::vector<std::vector<int> > _matrix)
 {
-  textLoader("textures/HelicopterTextures/Helicopter_Crash_D.tga", HeliTextID);
+  textLoader("textures/HelicopterTextures/Helicopter_Crash_D.png", HeliTextID);
   GLuint hid = glGenLists(1);
   glNewList(hid, GL_COMPILE);
 

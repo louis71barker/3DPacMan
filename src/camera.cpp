@@ -87,7 +87,7 @@ void Camera::enableScene()
             glPushAttrib(GL_LIGHTING_BIT);
 
                     // Turn off lighting and specify a bright yellow sphere
-                    glDisable(GL_LIGHTING);
+//                    glDisable(GL_LIGHTING);
 //                    glRGB(255,255,0);
 //                    auxSolidSphere(3.0f);
 
@@ -242,11 +242,6 @@ void Camera::cameraUpdate(std::vector<std::vector<int> > matrix,int x, int y)
 
 }
 
-void Camera::thirdPerson()
-{
-  glRotatef(90,1.0,0.0,0.0);
-  glTranslated(0,20,0);
-}
 
 void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
 {
@@ -272,36 +267,36 @@ void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
 //          detectingNormals(cubeCentreX, cubeCentreZ);
           if (playerXpos > playerZpos)
           {
-            if(playerXpos - (cubeCentreX + (CUBESIZE /2 )) < 0)
+            if(playerXpos - (cubeCentreX + (CUBESIZE /2 )) < 0.6f)
             {
               normalx = 1.0f;
               normalz = 0.0f;
-              playerXpos = oldxPos+0.01;
+              playerXpos = oldxPos-0.1;
               std::cout<<"Front Side \n";
             }
-            else
+            else if (playerXpos - (cubeCentreX + (CUBESIZE /2 )) > 0.6f)
             {
               normalx = -1.0f;
               normalz = 0.0f;
-              playerXpos = oldxPos-0.01;
+              playerXpos = oldxPos+0.1;
               std::cout<<"back Side \n";
             }
           }
-          else
+          else if (playerXpos < playerZpos)
             {
-              if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) < 0.0f)
+              if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) < 0.4f)
               {
                 normalx = 0.0f;
                 normalz = 1.0f;
-                playerZpos = oldzPos+0.01;
+                playerZpos = oldzPos+0.1;
                 std::cout<<"right Side \n";
               }
-              else
+              else if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) > 0.4f)
               {
                 normalx = 0.0f;
                 normalz = -1.0f;
 //                if (playerZpos > 0)
-                playerZpos = oldzPos-0.01;
+                playerZpos = oldzPos-0.1;
                 std::cout<<"left Side \n";
               }
             }

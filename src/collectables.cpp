@@ -5,7 +5,8 @@
 
 
 
-void Collecable::drawCollectable(const std::vector<std::vector<int> > &_matrix, float _x, float _y)
+
+void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _x, float _y)
 {
   drawCollectiblesLeft();
   normalSetter(_matrix);
@@ -15,7 +16,7 @@ void Collecable::drawCollectable(const std::vector<std::vector<int> > &_matrix, 
 
 
 
-void Collecable::normalSetter(const std::vector<std::vector<int> > _matrix)
+void Collecable::normalSetter(std::vector<std::vector<int> > _matrix)
 {
   for(int i = 0; i < (int)_matrix.size(); ++i)
   {
@@ -40,7 +41,7 @@ void Collecable::normalSetter(const std::vector<std::vector<int> > _matrix)
 }
 
 
-void Collecable::placeObj(int _x, int _y, const std::vector<std::vector<int> > _matrix)
+void Collecable::placeObj(int _x, int _y,std::vector<std::vector<int> > _matrix)
 {
   glPushMatrix();
 //    glTranslatef(-30 + (_x+0.5)*4, -1, 30 - (_y+0.5)*4);
@@ -50,7 +51,7 @@ void Collecable::placeObj(int _x, int _y, const std::vector<std::vector<int> > _
   glPopMatrix();
 }
 
-void Collecable::placeSpecials(const std::vector<std::vector<int> > &_matrix)
+void Collecable::placeSpecials(std::vector<std::vector<int> > _matrix)
 {
   //load the texture here and bind inside the list bellow!!!!!! :)
 
@@ -70,12 +71,12 @@ void Collecable::placeSpecials(const std::vector<std::vector<int> > &_matrix)
           glBegin(GL_TRIANGLES);
 
 
-            for (int i = 2; i < (int)m_Index.size(); i += 3)
-            {
-              m_Normal[m_Index[i]-1].normalGL();
-              m_Texture[m_Index[i-1]-1].textureGL();
-              m_Vertex[m_Index[i-2]-1].vertexGL();
-            }
+          for (int a = 2; a < (int)m_Index.size(); a += 3)
+          {
+            m_Normal[m_Index[a]-1].normalGL();
+            m_Texture[m_Index[a-1]-1].textureGL();
+            m_Vertex[m_Index[a-2]-1].vertexGL();
+          }
 
 
           glEnd();
@@ -93,16 +94,17 @@ void Collecable::drawBalls()
           GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
 
           glPushMatrix();
-            glColor3f(1.0, 0.0, 0.0);
+          glColor3f(1.0, 0.0, 0.0);
             glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
             glEnable(GL_BLEND_COLOR);
-            glutSolidSphere(0.4,25,25);
-            glColor3f(1.0, 1.0, 1.0);
+            glutSolidSphere(0.4,50,50);
+//          glColor3f(0.0f ,0.0f ,0.0f);
+          glColor3f(1.0, 1.0, 1.0f);
           glPopMatrix();
 
 }
 
-void Collecable::collisonDetection(const std::vector<std::vector<int> > &_matrix, float _x, float _y)
+void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, float _x, float _y)
 {
   for(int i = 0; i < (int)_matrix.size(); ++i)
   {
@@ -121,7 +123,7 @@ void Collecable::collisonDetection(const std::vector<std::vector<int> > &_matrix
 
         if (_x > collecableMinX && _x < collecableMaxX && _y > collecableMinZ && _y < collecableMaxZ)
         {
-//          _matrix[i][j] = 2;
+          _matrix[i][j] = 2;
           collecibleCount--;
         }
       }
@@ -140,7 +142,7 @@ void Collecable::collisonDetection(const std::vector<std::vector<int> > &_matrix
 
         if (_x > collecableMinX && _x < collecableMaxX && _y > collecableMinZ && _y < collecableMaxZ)
         {
-//          _matrix[i][j] = 2;
+          _matrix[i][j] = 2;
           std::cout<<"special collected yeyyeeyeyyey\n";
 
         }
@@ -179,5 +181,4 @@ void Collecable::drawCollectiblesLeft()
   glPopMatrix();
   glMatrixMode(matrix);
 }
-
 

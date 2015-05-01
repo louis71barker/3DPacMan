@@ -24,6 +24,8 @@
 void Camera::enableScene()
 {
 
+  //add two more lights for the spot light to give a better look to the edges of the torch
+
   // Light values and coordinates
   GLfloat  lightPos[] = { playerXpos, -1.0f, playerZpos , 1.0f };
   GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
@@ -267,14 +269,14 @@ void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
 //          detectingNormals(cubeCentreX, cubeCentreZ);
           if (playerXpos > playerZpos)
           {
-            if(playerXpos - (cubeCentreX + (CUBESIZE /2 )) < 0.6f)
+            if(playerXpos - (cubeCentreX + (CUBESIZE /2 )) < 0.0f)
             {
               normalx = 1.0f;
               normalz = 0.0f;
               playerXpos = oldxPos-0.1;
               std::cout<<"Front Side \n";
             }
-            else if (playerXpos - (cubeCentreX + (CUBESIZE /2 )) > 0.6f)
+            else if (playerXpos - (cubeCentreX + (CUBESIZE /2 )) > 0.0f)
             {
               normalx = -1.0f;
               normalz = 0.0f;
@@ -284,14 +286,14 @@ void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
           }
           else if (playerXpos < playerZpos)
             {
-              if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) < 0.4f)
+              if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) < 0.0f)
               {
                 normalx = 0.0f;
                 normalz = 1.0f;
                 playerZpos = oldzPos+0.1;
                 std::cout<<"right Side \n";
               }
-              else if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) > 0.4f)
+              else if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) > 0.0f)
               {
                 normalx = 0.0f;
                 normalz = -1.0f;

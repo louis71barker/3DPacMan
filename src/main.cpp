@@ -37,6 +37,10 @@ Uint32 timerCallback(Uint32 interval, void *) {
     if(li.lightningTrig == false)
     {
       li.lightningTrig = true;
+      SDL_Delay(70);
+      li.lightningTrig = false;
+      SDL_Delay(100);
+      li.lightningTrig = true;
       SDL_Delay(100);
       li.lightningTrig = false;
     }
@@ -85,7 +89,6 @@ int main(int argc, char** argv)
   Arena a(wa.matrix);
   Camera cam;
   Ghost gho(wa.matrix);
-  Player p;
   Collecable col(wa.matrix);
   Lights l;
   skyDome sd;
@@ -127,8 +130,8 @@ int main(int argc, char** argv)
   while(!quit)
   {
 
-    SDL_ShowCursor(SDL_DISABLE);
-    SDL_SetWindowGrab(win, SDL_TRUE);
+//    SDL_ShowCursor(SDL_DISABLE);
+//    SDL_SetWindowGrab(win, SDL_TRUE);
     int mouseX,mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;

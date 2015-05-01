@@ -12,7 +12,7 @@
 class Collecable
 {
 public:
-  Collecable(std::vector<std::vector<int> > &_matrix)
+  Collecable(std::vector<std::vector<int> > _matrix)
   {
 
     collecibleCount = 0;
@@ -36,21 +36,21 @@ public:
     std::vector<int>().swap (m_Index);
   }
 
-  void drawCollectable(const std::vector<std::vector<int> > &_matrix, float _x, float _y);
+  void drawCollectable(std::vector<std::vector<int> > &_matrix, float _x, float _y);
   int collecibleCount;
 
 
 
 
 private:
-  void placeSpecials(const std::vector<std::vector<int> > &_matrix);
-  void normalSetter(const std::vector<std::vector<int> > matrix);
+  void placeSpecials(std::vector<std::vector<int> > _matrix);
+  void normalSetter( std::vector<std::vector<int> > matrix);
   void specialSetter(int _x, int _y);
-  void placeObj(int _x, int _y, const std::vector<std::vector<int> > _matrix);
+  void placeObj(int _x, int _y, std::vector<std::vector<int> > _matrix);
   void drawBalls();
   void drawSpecials();
-  void collisonDetection(const std::vector<std::vector<int> > &_matrix, float _x, float _y);
-  void countSetter(const std::vector<std::vector<int> > &_matrix);
+  void collisonDetection(std::vector<std::vector<int> > &_matrix, float _x, float _y);
+  void countSetter(std::vector<std::vector<int> > _matrix);
   void drawCollectiblesLeft();
   bool countSet;
 

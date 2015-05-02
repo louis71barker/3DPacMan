@@ -66,7 +66,7 @@ void Walls::initMaze(std::vector<std::vector<int> > _matrix)
 void Walls::letsDraw(int _x, int _y, const std::vector<std::vector<int> > _matrix)
 {
     glPushMatrix();
-      glTranslatef((_x)*CUBESIZE, -1.5, ((int)matrix[0].size() * CUBESIZE) - (_y)*CUBESIZE);
+      glTranslatef((_x)*CUBESIZE, -1.5, ((int)matrix[0].size() * CUBESIZE) - (_y)*CUBESIZE+0.5);
 
       drawCube(_matrix);
     glPopMatrix();
@@ -78,7 +78,7 @@ void Walls::drawCube(const std::vector<std::vector<int> > _matrix)
 
 
   glPushMatrix();
-    glScalef(0.02,0.02,0.016);
+    glScalef(0.022,0.02,0.02);
     glBegin(GL_TRIANGLES);
     for(int i = 0; i < (int)_matrix.size(); ++i)
     {

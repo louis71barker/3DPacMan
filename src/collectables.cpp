@@ -86,6 +86,7 @@ void Collecable::placeSpecials(std::vector<std::vector<int> > _matrix)
 
           glEnd();
         glPopMatrix();
+        glEndList();
         m_displayList.push_back(id);
 
        }

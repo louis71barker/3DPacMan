@@ -61,6 +61,15 @@ void Ghost::drawGhosts(const std::vector<std::vector<int> > _matrix)
   glPopMatrix();
 }
 
+double Ghost::random(void)
+{
+  static boost::mt19937 rng(43);
+  boost::uniform_01<boost::mt19937&> num(rng);
+  return num;
+
+
+}
+
 void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
 {
   for(int i = 0; i < (int)_matrix.size(); ++i)
@@ -139,6 +148,28 @@ void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
       }
     }
   }
+}
+
+
+void Ghost::dirValSetter()
+{
+  if (North)
+  {
+    ghostZ++;
+  }
+  if (South)
+  {
+    ghostZ--;
+  }
+  if (East)
+  {
+    ghostX++;
+  }
+  if (West)
+  {
+    ghostX--;
+  }
+
 }
 
 void Ghost::updater()

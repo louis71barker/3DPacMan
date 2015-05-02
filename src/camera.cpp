@@ -163,8 +163,8 @@ void Camera::setPlayer(const std::vector<std::vector<int> > _matrix)
     {
       if(_matrix[i][j] == 3)
       {
-        float spawnCentreX = (i * 4);
-        float spawnCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
+        float spawnCentreX = (i * CUBESIZE);
+        float spawnCentreZ = (((int)_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
           playerXpos = spawnCentreX;
           playerZpos = spawnCentreZ;
         std::cout<<" player Spawn "<<"\n";
@@ -209,13 +209,14 @@ void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
                   cubeMaxZ = cubeCentreZ + 2.8f;
         if (playerXpos > cubeMinX && playerXpos < cubeMaxX && playerZpos > cubeMinZ && playerZpos < cubeMaxZ)
         {
+          /// use nested if's to get the collisions to work
 //          std::cout<<"boom boom bang bang \n";
           if ((playerXpos - (cubeCentreX)) < (playerZpos - cubeCentreZ))
           {
             playerXpos = oldxPos;
             std::cout<<"Xhit \n";
           }
-          else if ((playerXpos - (cubeCentreX)) > (playerZpos - cubeCentreZ))
+          if ((playerXpos - (cubeCentreX)) > (playerZpos - cubeCentreZ))
           {
             playerZpos  = oldzPos;
             std::cout<<"Zhit \n";

@@ -216,13 +216,15 @@ int main(int argc, char** argv)
 
 //    sd.drawSky();
     gho.updater();
-//    wa.draw();
-//    a.drawArena(wa.matrix);
-//    ba.drawBarn();
+    wa.draw();
+    a.drawArena(wa.matrix);
+    ba.drawBarn();
     fe.drawFence();
-//    he.drawHeli();
-//    li.drawLightning();
-//    gd.drawdome();
+    he.drawHeli();
+    li.drawLightning();
+    gd.drawdome();
+    gho.random();
+    std::cout<<gho.zeroone<<"\n";
 
 
     l.distanceCal(wa.matrix);

@@ -2,9 +2,7 @@
 #define GHOST_H__
 
 
-#include <boost/lexical_cast.hpp>
-#include <boost/format.hpp>
-#include <boost/tokenizer.hpp>
+#include <boost/random.hpp>
 #include <fstream>
 #include "scene.h"
 #include <vector>
@@ -30,6 +28,8 @@ class Ghost
 public:
   void updater();
   void drawGhosts(const std::vector<std::vector<int> > _matrix);
+    double random(void);
+  float zeroone;
 
   std::vector<Vec3> m_Vertex;
   std::vector<Vec3> m_Normal;
@@ -44,6 +44,7 @@ public:
     buildGhost(_matrix);
     ghostX = 0;
     ghostZ = 0;
+    zeroone = 0;
     North = false;
     South = false;
     East = false;
@@ -70,8 +71,11 @@ private:
   void ghoAi(const std::vector<std::vector<int> > &_matrix);
   void buildGhost(const std::vector<std::vector<int> > &_matrix);
   void setGhost(const int _a, const int _b,const std::vector<std::vector<int> > &_matrix);
+  void dirValSetter();
+
   int ghostX, ghostZ;
   bool North, South, East, West;
+
 
 
 

@@ -36,11 +36,18 @@ public:
   std::vector<Vec3> m_Texture;
   std::vector<int> m_Index;
   std::vector<GLuint> m_displayList;
+  std::vector<Vec2> m_GhostPos;
 
   Ghost(const std::vector<std::vector<int> > _matrix)
   {
     ObjLoader("obj/GhostObj.obj",m_Vertex,m_Normal,m_Texture,m_Index);
-    drawGhosts(_matrix);
+    buildGhost(_matrix);
+    ghostX = 0;
+    ghostZ = 0;
+    North = false;
+    South = false;
+    East = false;
+    West = false;
   }
   ~Ghost()
   {
@@ -54,14 +61,17 @@ public:
     std::vector<GLuint>().swap (m_displayList);
     m_Index.clear();
     std::vector<int>().swap (m_Index);
+    m_GhostPos.clear();
+    std::vector<Vec2>().swap (m_GhostPos);
   }
 
 
 private:
-  typedef boost::tokenizer<boost::char_separator<char> >tokenizer;
-  void objFileParser(const std::string &);
-  void vectorBuilder();
-
+  void ghoAi(const std::vector<std::vector<int> > &_matrix);
+  void buildGhost(const std::vector<std::vector<int> > &_matrix);
+  void setGhost(const int _a, const int _b,const std::vector<std::vector<int> > &_matrix);
+  int ghostX, ghostZ;
+  bool North, South, East, West;
 
 
 

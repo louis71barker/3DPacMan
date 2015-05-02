@@ -48,71 +48,11 @@ void Camera::enableScene()
     // Cut off angle is 60 degrees
     glLightf(GL_LIGHT0,GL_SPOT_CUTOFF,5.0f);
 
-    // Fairly shiny spot
-//    glLightf(GL_LIGHT0,GL_SPOT_EXPONENT,1000.0f);
-
-    // Enable this light in particular
-//    glEnable(GL_LIGHT0);
-
-    // Enable color tracking
-//    glEnable(GL_COLOR_MATERIAL);
-
-    // Set Material properties to follow glColor values
-//    glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
 
     // All materials hereafter have full specular reflectivity
     // with a high shine
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,specref);
     glMateriali(GL_FRONT_AND_BACK, GL_SHININESS,128);
-
-    glPushMatrix();
-
-//            glRotatef(-yRot, 0.0f, 1.0f, 0.0f);
-            //glRotatef(0, 0.0f, 1.0f, 0.0f);
-//            spotDir[0] = asinf(-yRot / 180 * M_PI);
-//            spotDir[2] = acosf(-yRot / 180 * M_PI);
-
-            // Specify new position and direction in rotated coords.
-//            glLightfv(GL_LIGHT0,GL_POSITION,lightPos);
-//            glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION,spotDir);
-
-//             Draw a red cone to enclose the light source
-//            glRGB(255,0,0);
-
-            // Translate origin to move the cone out to where the light
-            // is positioned.
-            //glTranslatef(lightPos[0],0,lightPos[2]);
-//            auxSolidCone(4.0f,6.0f);
-
-            // Draw a smaller displaced sphere to denote the light bulb
-            // Save the lighting state variables
-            glPushAttrib(GL_LIGHTING_BIT);
-
-                    // Turn off lighting and specify a bright yellow sphere
-//                    glDisable(GL_LIGHTING);
-//                    glRGB(255,255,0);
-//                    auxSolidSphere(3.0f);
-
-            // Restore lighting state variables
-            glPopAttrib();
-        glPopMatrix();
-
-  glPushMatrix();
-  glLoadIdentity();
-  glPointSize(10);
-//  glColor3f(1,0,0);
-  glBegin(GL_POINTS);
-//    glColor3f(1,0,0);
-    glVertex3f(playerXpos + 5, -1.0f, playerZpos );
-    glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-//    std::cout<<yRot<<"\n";
-    glRotatef(0, 0.0f, 1.0f, 0.0f);
-  glEnd();
-  glPopMatrix();
-
-
-//  std::cout<<xRot<<"\n";
-
 
 }
 
@@ -120,10 +60,11 @@ void Camera::CameraSet()
 {
 
   glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
+    glLoadIdentity();
 
-  glRotatef(yRot,0.0,1.0,0.0);
+    glRotatef(yRot,0.0,1.0,0.0);
   glTranslated(-playerXpos,0,-playerZpos);
+
 }
 
 void Camera::displayCamera()
@@ -133,7 +74,8 @@ void Camera::displayCamera()
   //glLoadIdentity();
   CameraSet();
   enableScene();
-  angle++;
+
+
   if (yRot > 360)
   {
     yRot=0;
@@ -147,7 +89,7 @@ void Camera::displayCamera()
 }
 
 
-void Camera::cameraStrafe()
+void Camera::cameraStrafe(const std::vector<std::vector<int> > _matrix)
 {
   if (strafeLeft == true  && playerMoveing == true)
   {
@@ -157,6 +99,7 @@ void Camera::cameraStrafe()
     yRotRad = (yRot / 180 * M_PI);
     playerXpos -= float(cos(yRotRad)) * 0.2;
     playerZpos -= float(sin(yRotRad)) * 0.2;
+    playerCollisions(_matrix);
 
   }
   if (strafeRight == true  && playerMoveing == true)
@@ -167,6 +110,7 @@ void Camera::cameraStrafe()
     yRotRad = (yRot / 180 * M_PI);
     playerXpos += float(cos(yRotRad)) * 0.2;
     playerZpos += float(sin(yRotRad)) * 0.2;
+    playerCollisions(_matrix);
   }
   if (moveBackward == true && playerMoveing == true)
   {
@@ -177,6 +121,7 @@ void Camera::cameraStrafe()
     xRotRad = (xRot / 180 * M_PI);
     playerXpos -= float(sin(yRotRad)/5);
     playerZpos += float(cos(yRotRad)/5);
+    playerCollisions(_matrix);
   }
   if (moveForward == true && playerMoveing == true)
   {
@@ -187,6 +132,7 @@ void Camera::cameraStrafe()
     xRotRad = (xRot / 180 * M_PI);
     playerXpos += float(sin(yRotRad)/5);
     playerZpos -= float(cos(yRotRad)/5);
+    playerCollisions(_matrix);
 
   }
 
@@ -231,9 +177,9 @@ void Camera::setPlayer(const std::vector<std::vector<int> > _matrix)
 void Camera::cameraUpdate(std::vector<std::vector<int> > matrix,int x, int y)
 {
   mouseMovementCapture(x,y);
-  cameraStrafe();
+  cameraStrafe(matrix);
   displayCamera();
-  playerCollisions(matrix);
+//  playerCollisions(matrix);
   if (playerSet == false)
   {
     setPlayer(matrix);
@@ -251,121 +197,78 @@ void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
   {
     for(int j = 0; j < (int)matrix[0].size(); ++j)
     {
-      if(matrix[i][j] == 1)
+//      if(matrix[i][j] != 0 || matrix[i][j] !=3 || matrix[i][j] !=13)
+      if(matrix[i][j] == 1 || matrix[i][j] == 9 || matrix[i][j] == 10)
       {
-//                  glTranslatef((_x)*4, -1, ((int)_matrix[0].size() * 4) - (_y)*4);
-//                  float cubeCentreX = (-30 + (i+0.5)*4);
-//                  float cubeCentreZ = (30 - (j+0.5)*4);
                   float cubeCentreX = (i * 4);
                   float cubeCentreZ = (((int)matrix[0].size() * 4) - (j * 4));
-                  float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ, normalx, normalz;
+                  float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
                   cubeMinX = cubeCentreX - 2.8f;
                   cubeMaxX = cubeCentreX + 2.8f;
                   cubeMinZ = cubeCentreZ - 2.8f;
                   cubeMaxZ = cubeCentreZ + 2.8f;
         if (playerXpos > cubeMinX && playerXpos < cubeMaxX && playerZpos > cubeMinZ && playerZpos < cubeMaxZ)
         {
-          std::cout<<"boom boom bang bang \n";
-//          detectingNormals(cubeCentreX, cubeCentreZ);
-          if (playerXpos > playerZpos)
+//          std::cout<<"boom boom bang bang \n";
+          if ((playerXpos - (cubeCentreX)) < (playerZpos - cubeCentreZ))
           {
-            if(playerXpos - (cubeCentreX + (CUBESIZE /2 )) < 0.0f)
-            {
-              normalx = 1.0f;
-              normalz = 0.0f;
-              playerXpos = oldxPos-0.1;
-              std::cout<<"Front Side \n";
-            }
-            else if (playerXpos - (cubeCentreX + (CUBESIZE /2 )) > 0.0f)
-            {
-              normalx = -1.0f;
-              normalz = 0.0f;
-              playerXpos = oldxPos+0.1;
-              std::cout<<"back Side \n";
-            }
+            playerXpos = oldxPos;
+            std::cout<<"Xhit \n";
           }
-          else if (playerXpos < playerZpos)
-            {
-              if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) < 0.0f)
-              {
-                normalx = 0.0f;
-                normalz = 1.0f;
-                playerZpos = oldzPos+0.1;
-                std::cout<<"right Side \n";
-              }
-              else if (playerZpos - (cubeCentreZ + (CUBESIZE /2 )) > 0.0f)
-              {
-                normalx = 0.0f;
-                normalz = -1.0f;
-//                if (playerZpos > 0)
-                playerZpos = oldzPos-0.1;
-                std::cout<<"left Side \n";
-              }
-            }
+          else if ((playerXpos - (cubeCentreX)) > (playerZpos - cubeCentreZ))
+          {
+            playerZpos  = oldzPos;
+            std::cout<<"Zhit \n";
+          }
+//          bool Xcol = (playerXpos > cubeMinX && playerXpos < cubeMaxX);
+//          if (Xcol)
+//          {
 
+//            playerXpos = oldxPos;
+//          }
+//          else
+//          {
+//            std::cout<<"Zhit\n";
+//            playerZpos  = oldzPos;
+//          }
 
         }
-        else
+      }
+
+      ///Collision setting for the exterior fencing around the playable area
+      /// matrix vales 7 and 8 are the values of the fence depending on their rotation value
+      if (matrix[i][j] == 7 || matrix[i][j] == 8)
+      {
+        //this is the centre of the current collision grid position for the x value
+        float cubeCentreX = (i * CUBESIZE);
+        //this is the centre of the current collision grid position for the z value
+        float cubeCentreZ = (((int)matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
+        //Here are a set of local values that are needed to work about the AABB around the grid position to define the box
+        float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
+        //this values are used to create the bounding box
+        cubeMinX = cubeCentreX - 2.8f;
+        cubeMaxX = cubeCentreX + 2.8f;
+        cubeMinZ = cubeCentreZ - 2.8f;
+        cubeMaxZ = cubeCentreZ + 2.8f;
+        //this is the AABB formula to detect if the player position has collided with and of the fences within the scene
+        if (playerXpos > cubeMinX && playerXpos < cubeMaxX && playerZpos > cubeMinZ && playerZpos < cubeMaxZ)
         {
-          normalx = 0.0f;
-          normalz = 0.0f;
-        }
-//        std::cout<< playerZpos - (cubeCentreZ + (CUBESIZE /2 )) << "\n";
-
+          //if there is a collision, this is tested to see what value has to be freezed so that the player is unable to pass through the fence
+          if (matrix[i][j] == 7)
+          {
+            //this holds the player from being able to move through the fence but not allowing the X value to change in the direction of the collison box
+            playerXpos = oldxPos;
+          }
+          //if the collision wasnt with the fence type 7 then it must be type 8
+          else
+          {
+            //this holds the player from being able to move through the fence but not allowing the Z value to change in the direction of the collison box
+            playerZpos = oldzPos;
+          }
         }
       }
     }
   }
-//}
-
-
-void Camera::collisionDistance(float cubeX, float cubeZ)
-{
-  if (diffx > 0.0f)
-  {
-    xInvEntry =  cubeX - (playerXpos + 0.5);
-    xInvExit = (cubeX + (CUBESIZE /2)) - cubeX;
-  }
-  else
-  {
-    xInvEntry =  (cubeX + (CUBESIZE/2)) - playerXpos;
-    xInvExit = cubeX - (playerXpos + 0.5);
-  }
-  if (diffy > 0.0f)
-  {
-    yInvEntry = cubeZ - (playerZpos + 0.5);
-    yInvExit = (cubeZ - (CUBESIZE/2) - playerZpos);
-  }
-  else
-  {
-    yInvEntry = (cubeZ + (CUBESIZE/2) ) - 0.5;
-    yInvExit = cubeZ - (playerZpos + 0.5);
-  }
-
-  //finding the time of each collision and time of leaving the collision
-
-  if (diffx == 0.0f)
-  {
-    xEntry = -std::numeric_limits<float>::infinity();
-    xExit = std::numeric_limits<float>::infinity();
-  }
-  else
-  {
-    xEntry = xInvEntry / diffx;
-    xExit = xInvExit / diffx;
-  }
-  if (diffy == 0.0f)
-  {
-    yEntry = -std::numeric_limits<float>::infinity();
-    yExit = std::numeric_limits<float>::infinity();
-  }
-  else
-  {
-    yEntry = yInvEntry / diffy;
-    yExit = yInvExit / diffy;
-  }
-
-  //finding the earliest and latest time of collisions
-  entryTime = std::max(xEntry,yEntry);
-  exitTime = std::min(xExit,yExit);
 }
+
+

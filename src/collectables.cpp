@@ -11,7 +11,12 @@ void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _
   drawCollectiblesLeft();
   normalSetter(_matrix);
   collisonDetection(_matrix, _x, _y);
-
+  glPushMatrix();
+    static int rotVal = 0;
+    rotVal++;
+//    glRotatef(rotVal,1,0,0);
+    glCallLists(m_displayList.size(), GL_UNSIGNED_INT, &m_displayList[0]);
+  glPopMatrix();
 }
 
 
@@ -97,7 +102,7 @@ void Collecable::drawBalls()
           glColor3f(1.0, 0.0, 0.0);
             glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
             glEnable(GL_BLEND_COLOR);
-            glutSolidSphere(0.4,50,50);
+            glutSolidSphere(0.4,20,20);
 //          glColor3f(0.0f ,0.0f ,0.0f);
           glColor3f(1.0, 1.0, 1.0f);
           glPopMatrix();

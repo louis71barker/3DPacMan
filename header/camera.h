@@ -85,7 +85,7 @@ public:
 
 private:
     void collisionDistance(float cubeX, float cubeZ);
-    void cameraStrafe();
+    void cameraStrafe(const std::vector<std::vector<int> > _matrix);
     void enableScene();
     void displayCamera();
     void CameraSet();

@@ -21,6 +21,7 @@ SOURCES+=src/main.cpp \
          src/lightning.cpp \
          src/helicopter.cpp \
          src/FPSCounter.cpp \
+         src/geoDome.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
@@ -42,6 +43,7 @@ HEADERS+=header/arena.h \
          header/lightning.h \
          header/helicopter.h \
          header/FPSCounter.h \
+         header/geoDome.h \
 #         header/NCCA/Mat4.h\
 #         header/NCCA/Vec4.h\
 #         header/NCCA/GLFunctions.h
@@ -69,6 +71,7 @@ OTHER_FILES+= src/MapCoor.txt\
               obj/geoSphere.obj \
               obj/Helicopter_crashed.obj \
               obj/OldFence.obj \
+              obj/NewTriBush.obj \
               textures/Ground.png \
               textures/NewTreesTextureMap.png \
               textures/Skydome.png \

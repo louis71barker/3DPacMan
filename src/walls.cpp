@@ -22,7 +22,7 @@ Walls::Walls()
   gridXPos = -15;
   gridZPos = 15;
   fl.fileLoader("src/MapCoor.txt",matrix,"MAP1");
-  ObjLoader("obj/BushWallHighPolyNew.obj",m_Vertex,m_Normal,m_Texture,m_Index);
+  ObjLoader("obj/NewTriBush.obj",m_Vertex,m_Normal,m_Texture,m_Index);
   initMaze(matrix);
 //  draw();
 }
@@ -35,7 +35,7 @@ void Walls::draw()
 void Walls::initMaze(std::vector<std::vector<int> > _matrix)
 {
   //loads in the wall texure
-  textLoader("textures/NewTreesTextMap.png", WallTextID);
+  textLoader("textures/Hedge.jpg", WallTextID);
 
   GLuint id = glGenLists(1);
   glNewList(id, GL_COMPILE);
@@ -66,7 +66,7 @@ void Walls::initMaze(std::vector<std::vector<int> > _matrix)
 void Walls::letsDraw(int _x, int _y, const std::vector<std::vector<int> > _matrix)
 {
     glPushMatrix();
-      glTranslatef((_x)*CUBESIZE, 0, ((int)matrix[0].size() * CUBESIZE) - (_y)*CUBESIZE);
+      glTranslatef((_x)*CUBESIZE, -1.5, ((int)matrix[0].size() * CUBESIZE) - (_y)*CUBESIZE);
 
       drawCube(_matrix);
     glPopMatrix();
@@ -78,7 +78,7 @@ void Walls::drawCube(const std::vector<std::vector<int> > _matrix)
 
 
   glPushMatrix();
-    glScalef(0.2,0.2,0.2);
+    glScalef(0.02,0.02,0.016);
     glBegin(GL_TRIANGLES);
     for(int i = 0; i < (int)_matrix.size(); ++i)
     {

@@ -1,12 +1,12 @@
-#include "header/skyDome.h"
+#include "header/geoDome.h"
 
 
 
-void skyDome::sky()
+void geoDome::dome()
 {
-    textLoader("textures/Skydome.jpg", SkydomeTextID);
-    GLuint sid = glGenLists(1);
-    glNewList(sid, GL_COMPILE);
+    textLoader("textures/Skydome.png", geodomeTextID);
+    GLuint gid = glGenLists(1);
+    glNewList(gid, GL_COMPILE);
   //  for(int i = 0; i < (int)_matrix.size(); ++i)
   //  {
   //    for(int j = 0; j < (int)_matrix[0].size(); ++j)
@@ -22,15 +22,15 @@ void skyDome::sky()
   //          glEnable(GL_TEXTURE_GEN_S);
   //          glEnable(GL_TEXTURE_GEN_T);
   //          gluQuadricTexture(id, GL_TRUE);
-            glBindTexture(GL_TEXTURE_2D, SkydomeTextID);
+            glBindTexture(GL_TEXTURE_2D, geodomeTextID);
   //          glutSolidCube(CUBESIZE);
             glBegin(GL_TRIANGLES);
 
-              for (int a = 2; a < (int)m_SkyIndex.size(); a += 3)
+              for (int a = 2; a < (int)m_Index.size(); a += 3)
               {
-                m_SkyNormal[m_SkyIndex[a]-1].normalGL();
-                m_SkyTexture[m_SkyIndex[a-1]-1].textureGL();
-                m_SkyVertex[m_SkyIndex[a-2]-1].vertexGL();
+                m_Normal[m_Index[a]-1].normalGL();
+                m_Texture[m_Index[a-1]-1].textureGL();
+                m_Vertex[m_Index[a-2]-1].vertexGL();
               }
   //            glDisable(GL_TEXTURE_GEN_T);
   //            glDisable(GL_TEXTURE_GEN_S);
@@ -39,13 +39,13 @@ void skyDome::sky()
   //      }
   //    }
   //  }
-    std::cout<<"draw Sphere \n";
+    std::cout<<"draw Dome \n";
     glBindTexture(GL_TEXTURE_2D, 0);
     glEndList();
-    m_SkydisplayList.push_back(sid);
+    m_displayList.push_back(gid);
 }
 
-void skyDome::drawSky()
+void geoDome::drawdome()
 {
-  glCallLists(m_SkydisplayList.size(), GL_UNSIGNED_INT, &m_SkydisplayList[0]);
+  glCallLists(m_displayList.size(), GL_UNSIGNED_INT, &m_displayList[0]);
 }

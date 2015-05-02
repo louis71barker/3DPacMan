@@ -27,7 +27,12 @@
 #endif
 
 
+typedef struct {
+  GLfloat x;
+  GLfloat y;
+}Vector2;
 
+Vector2 NormalizeVec3(Vector2 Vector);
 
 
 typedef struct {
@@ -46,6 +51,25 @@ typedef struct {
 }Vector4;
 
 Vector4 NormalizeVec4(Vector4 Vector);
+
+
+//vector 2 class
+class Vec2
+{
+public:
+  Vec2(float _x=0.0f,float _y=0.0f) :
+    m_x(_x), m_y(_y){}
+  void normalGL();
+  void vertexGL();
+  void textureGL();
+
+  struct
+  {
+    float m_x;
+    float m_y;
+  };
+
+};
 
 
 //vector 3 class

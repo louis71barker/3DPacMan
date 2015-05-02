@@ -22,6 +22,7 @@
 #include "header/helicopter.h"
 #include "header/FPSCounter.h"
 #include "header/lightning.h"
+#include "header/geoDome.h"
 
 
 #ifdef LINUX
@@ -91,10 +92,12 @@ int main(int argc, char** argv)
   Ghost gho(wa.matrix);
   Collecable col(wa.matrix);
   Lights l;
-  skyDome sd;
+//  skyDome sd;
   Barn ba(wa.matrix);
   Heli he(wa.matrix);
   Fence fe(wa.matrix);
+  geoDome gd;
+
 
 
 //  wa.initMaze(wa.matrix);
@@ -211,14 +214,15 @@ int main(int argc, char** argv)
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
 
 
-    sd.drawSky();
+//    sd.drawSky();
     gho.updater();
-    wa.draw();
-    a.drawArena(wa.matrix);
-    ba.drawBarn();
+//    wa.draw();
+//    a.drawArena(wa.matrix);
+//    ba.drawBarn();
     fe.drawFence();
-    he.drawHeli();
-    li.drawLightning();
+//    he.drawHeli();
+//    li.drawLightning();
+//    gd.drawdome();
 
 
     l.distanceCal(wa.matrix);

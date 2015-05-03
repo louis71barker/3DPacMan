@@ -2,16 +2,11 @@
 #include <iostream>
 #include "header/camera.h"
 #include <SDL.h>
-//#include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <vector>
-
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
 #include <math.h>
-
 
 
 #ifdef LINUX
@@ -202,25 +197,44 @@ void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
       {
                   float cubeCentreX = (i * 4);
                   float cubeCentreZ = (((int)matrix[0].size() * 4) - (j * 4));
-                  float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
+                  float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ, distX;
                   cubeMinX = cubeCentreX - 2.8f;
                   cubeMaxX = cubeCentreX + 2.8f;
                   cubeMinZ = cubeCentreZ - 2.8f;
                   cubeMaxZ = cubeCentreZ + 2.8f;
+                  distX = playerXpos - cubeCentreX;
         if (playerXpos > cubeMinX && playerXpos < cubeMaxX && playerZpos > cubeMinZ && playerZpos < cubeMaxZ)
         {
           /// use nested if's to get the collisions to work
 //          std::cout<<"boom boom bang bang \n";
-          if ((playerXpos - (cubeCentreX)) < (playerZpos - cubeCentreZ))
-          {
-            playerXpos = oldxPos;
-            std::cout<<"Xhit \n";
-          }
-          if ((playerXpos - (cubeCentreX)) > (playerZpos - cubeCentreZ))
-          {
-            playerZpos  = oldzPos;
-            std::cout<<"Zhit \n";
-          }
+
+          std::cout << playerXpos << ", 0 ," << playerZpos << std::endl;
+
+//          if ((playerXpos - (cubeCentreX)) > (playerZpos - cubeCentreZ) ||
+//              (playerXpos - (cubeCentreX)) < (playerZpos - cubeCentreZ))
+//          {
+//            playerZpos = oldzPos;
+//            playerXpos = oldxPos;
+//            std::cout<<"Zhit \n";
+//          }
+            if (distX >= CUBESIZE/2 || distX <= CUBESIZE/2)
+            {
+              playerZpos  = oldzPos;
+              std::cout<<"Xhit \n";
+            }
+            else
+            {
+              playerXpos = oldxPos;
+
+               std::cout<<"Zhit \n";
+            }
+
+//          if ()
+//          {
+//            playerXpos = oldxPos;
+//            std::cout<<"Xhit \n";
+//          }
+
 //          bool Xcol = (playerXpos > cubeMinX && playerXpos < cubeMaxX);
 //          if (Xcol)
 //          {

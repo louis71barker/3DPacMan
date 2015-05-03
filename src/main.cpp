@@ -215,8 +215,8 @@ int main(int argc, char** argv)
 
 
 //    sd.drawSky();
-    gho.updater();
-    wa.draw();
+    gho.updater(wa.matrix);
+//    wa.draw();
     a.drawArena(wa.matrix);
     ba.drawBarn();
     fe.drawFence();

@@ -18,15 +18,29 @@
   #include <OpenGL/gl.h>
 #endif
 
-class Ghost
+class Mesh
+{
+  std::vector<Vec3> m_Vertex;
+  std::vector<Vec3> m_Normal;
+  std::vector<Vec3> m_Texture;
+  std::vector<int> m_Index;
+  std::vector<GLuint> m_displayList;
+
+  Mesh( std::string _path );
+
+  void draw();
+  void update();
+};
+
+class AnimatedMesh : public Mesh
 {
 
+};
 
-
-
-
+class Ghost
+{
 public:
-  void updater();
+  void updater(const std::vector<std::vector<int> > &_matrix);
   void drawGhosts(const std::vector<std::vector<int> > _matrix);
     double random(void);
   float zeroone;
@@ -45,7 +59,7 @@ public:
     ghostX = 0;
     ghostZ = 0;
     zeroone = 0;
-    North = false;
+    North = true;
     South = false;
     East = false;
     West = false;
@@ -73,7 +87,7 @@ private:
   void setGhost(const int _a, const int _b,const std::vector<std::vector<int> > &_matrix);
   void dirValSetter();
 
-  int ghostX, ghostZ;
+  float ghostX, ghostZ;
   bool North, South, East, West;
 
 

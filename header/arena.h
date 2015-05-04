@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "walls.h"
+#include "audio.h"
 
 
 
@@ -22,12 +23,19 @@ public:
   std::vector<GLuint> m_displayList;
   std::vector <GLuint> m_daList;
 
+  Mix_Chunk *a_ambMusic;
+
 
 
   Arena(const std::vector<std::vector<int> > _matrix)
   {
+    Audio au;
     ObjLoader("obj/OBJ_Ground.obj",m_Vertex,m_Normal,m_Texture,m_Index);
-//    ground(_matrix);
+    au.loadSoundChunk("sounds/ambMusic.wav", &a_ambMusic);
+
+    Mix_VolumeChunk(a_ambMusic, MIX_MAX_VOLUME * 0.6);
+
+    Mix_PlayChannel(-1, a_ambMusic, -1);
   }
   ~Arena()
   {
@@ -44,6 +52,10 @@ public:
     std::vector<int>().swap (m_Index);
     m_daList.clear();
     std::vector<GLuint>().swap (m_daList);
+
+    Mix_FreeChunk(a_ambMusic);
+    a_ambMusic = NULL;
+    Mix_Quit();
 
 
   }

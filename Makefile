@@ -18,7 +18,7 @@ CXXFLAGS      = -pipe -msse -msse2 -msse3 -I/usr/local/include/SDL2 -D_REENTRANT
 INCPATH       = -I/opt/Qt/5.3/gcc_64/mkspecs/linux-clang -I. -Iheader -Iheader/NCCA -Iusr/local/lib -I/opt/Qt/5.3/gcc_64/include -I/opt/Qt/5.3/gcc_64/include/QtGui -I/opt/Qt/5.3/gcc_64/include/QtCore -I.
 LINK          = clang++
 LFLAGS        = -ccc-gcc-name g++ -Wl,-rpath,/opt/Qt/5.3/gcc_64 -Wl,-rpath,/opt/Qt/5.3/gcc_64/lib
-LIBS          = $(SUBLIBS) -lglut -lGLU -lSDL2_image -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lSDL2 -lGLEW -L/opt/Qt/5.3/gcc_64/lib -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lglut -lGLU -lSDL2_image -lSDL2_mixer -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lSDL2 -lGLEW -L/opt/Qt/5.3/gcc_64/lib -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /opt/Qt/5.3/gcc_64/bin/qmake
@@ -65,7 +65,8 @@ SOURCES       = src/main.cpp \
 		src/lightning.cpp \
 		src/helicopter.cpp \
 		src/FPSCounter.cpp \
-		src/geoDome.cpp 
+		src/geoDome.cpp \
+		src/audio.cpp 
 OBJECTS       = buildFiles/main.o \
 		buildFiles/player.o \
 		buildFiles/ghost.o \
@@ -86,7 +87,8 @@ OBJECTS       = buildFiles/main.o \
 		buildFiles/lightning.o \
 		buildFiles/helicopter.o \
 		buildFiles/FPSCounter.o \
-		buildFiles/geoDome.o
+		buildFiles/geoDome.o \
+		buildFiles/audio.o
 DIST          = ../.qmake.cache \
 		3DPacMan.pro src/main.cpp \
 		src/player.cpp \
@@ -108,7 +110,8 @@ DIST          = ../.qmake.cache \
 		src/lightning.cpp \
 		src/helicopter.cpp \
 		src/FPSCounter.cpp \
-		src/geoDome.cpp
+		src/geoDome.cpp \
+		src/audio.cpp
 QMAKE_TARGET  = PacMan3D
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = PacMan3D
@@ -367,7 +370,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d buildFiles/PacMan3D1.0.0 || mkdir -p buildFiles/PacMan3D1.0.0
-	$(COPY_FILE) --parents $(DIST) buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h header/lights.h header/skyDome.h header/barn.h header/fence.h header/lightning.h header/helicopter.h header/FPSCounter.h header/geoDome.h buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp src/lighting.cpp src/TextLoader.cpp src/fileLoader.cpp src/skyDome.cpp src/barn.cpp src/fence.cpp src/lightning.cpp src/helicopter.cpp src/FPSCounter.cpp src/geoDome.cpp buildFiles/PacMan3D1.0.0/ && (cd `dirname buildFiles/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname buildFiles/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r buildFiles/PacMan3D1.0.0
+	$(COPY_FILE) --parents $(DIST) buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents header/arena.h header/collectables.h header/player.h header/ghost.h header/window.h header/camera.h header/walls.h header/torch.h header/scene.h header/lights.h header/skyDome.h header/barn.h header/fence.h header/lightning.h header/helicopter.h header/FPSCounter.h header/geoDome.h header/audio.h buildFiles/PacMan3D1.0.0/ && $(COPY_FILE) --parents src/main.cpp src/player.cpp src/ghost.cpp src/arena.cpp src/collectables.cpp src/window.cpp src/camera.cpp src/walls.cpp src/torch.cpp src/Vec.cpp src/objLoader.cpp src/lighting.cpp src/TextLoader.cpp src/fileLoader.cpp src/skyDome.cpp src/barn.cpp src/fence.cpp src/lightning.cpp src/helicopter.cpp src/FPSCounter.cpp src/geoDome.cpp src/audio.cpp buildFiles/PacMan3D1.0.0/ && (cd `dirname buildFiles/PacMan3D1.0.0` && $(TAR) PacMan3D1.0.0.tar PacMan3D1.0.0 && $(COMPRESS) PacMan3D1.0.0.tar) && $(MOVE) `dirname buildFiles/PacMan3D1.0.0`/PacMan3D1.0.0.tar.gz . && $(DEL_FILE) -r buildFiles/PacMan3D1.0.0
 
 
 clean:compiler_clean 
@@ -419,7 +422,8 @@ buildFiles/main.o: src/main.cpp header/player.h \
 		header/helicopter.h \
 		header/FPSCounter.h \
 		header/lightning.h \
-		header/geoDome.h
+		header/geoDome.h \
+		header/audio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/main.o src/main.cpp
 
 buildFiles/player.o: src/player.cpp header/player.h \
@@ -505,6 +509,9 @@ buildFiles/FPSCounter.o: src/FPSCounter.cpp
 buildFiles/geoDome.o: src/geoDome.cpp header/geoDome.h \
 		header/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/geoDome.o src/geoDome.cpp
+
+buildFiles/audio.o: src/audio.cpp header/audio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buildFiles/audio.o src/audio.cpp
 
 ####### Install
 

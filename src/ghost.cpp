@@ -78,66 +78,65 @@ void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
   {
     for(int j = 0; j < (int)_matrix[0].size(); ++j)
     {
-      int northVal = j+1;
-      int southVal = j-1;
-      int eastVal = i+1;
-      int westVal = i-1;
-
-      if (northVal > (int)_matrix.size())
-        northVal = (int)_matrix.size();
-      if (southVal < 0)
-        southVal = 0;
-      if (eastVal > (int)_matrix.size())
-        eastVal = (int)_matrix.size();
-      if (westVal < 0)
-        westVal = 0;
 //      if(matrix[i][j] != 0 || matrix[i][j] !=3 || matrix[i][j] !=13)
       if (North)
       {
-        if(_matrix[i][northVal] == 0 || _matrix[i][northVal] == 2)
+        if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
         {
                     float cubeCentreX = (i * 4);
                     float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
                     float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                    cubeMinX = cubeCentreX - 1.0;
-                    cubeMaxX = cubeCentreX + 1.0;
-                    cubeMinZ = cubeCentreZ - 1.0f;
-                    cubeMaxZ = cubeCentreZ + 1.0f;
+                    cubeMinX = cubeCentreX - 0.5f;
+                    cubeMaxX = cubeCentreX + 0.5f;
+                    cubeMinZ = cubeCentreZ - 0.5f;
+                    cubeMaxZ = cubeCentreZ + 0.5f;
           if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
           {
-            if (East == true && (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ))
+            if (_matrix[i-1][j] == 1)
             {
-              East = false;
-              West = true;
-
+              if (_matrix[i][j+1] == 1)
+              {
+                West = true;
+                North = false;
+              }
+              else
+              {
+                East = true;
+                North = false;
+              }
+              North = false;
             }
-            North = false;
-            East = true;
 
           }
         }
       }
       else if (South)
         {
-          if(_matrix[i][southVal] == 0 || _matrix[i][southVal] == 2)
+          if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
           {
                       float cubeCentreX = (i * 4);
                       float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
                       float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                      cubeMinX = cubeCentreX - 1.0f;
-                      cubeMaxX = cubeCentreX + 1.0f;
-                      cubeMinZ = cubeCentreZ - 1.0f;
-                      cubeMaxZ = cubeCentreZ + 1.0f;
+                      cubeMinX = cubeCentreX - 0.5f;
+                      cubeMaxX = cubeCentreX + 0.5f;
+                      cubeMinZ = cubeCentreZ - 0.5f;
+                      cubeMaxZ = cubeCentreZ + 0.5f;
             if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
             {
-              if ((East == true ) && (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ))
+              if(_matrix[i+1][j] == 1)
               {
-                East = false;
-                West = true;
-
+                if(_matrix[i][j-1] == 1)
+                {
+                  East = true;
+                  South = false;
+                }
+                else
+                {
+                  West = true;
+                  South = false;
+                }
+                South = false;
               }
-              South = false;
-              East = true;
 
 
             }
@@ -146,48 +145,64 @@ void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
 
       else if (East)
         {
-          if(_matrix[eastVal][j] == 0 || _matrix[eastVal][j] == 2)
+          if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
           {
                       float cubeCentreX = (i * 4);
                       float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
                       float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                      cubeMinX = cubeCentreX - 1.0f;
-                      cubeMaxX = cubeCentreX + 1.0f;
-                      cubeMinZ = cubeCentreZ - 1.0f;
-                      cubeMaxZ = cubeCentreZ + 1.0f;
+                      cubeMinX = cubeCentreX - 0.5f;
+                      cubeMaxX = cubeCentreX + 0.5f;
+                      cubeMinZ = cubeCentreZ - 0.5f;
+                      cubeMaxZ = cubeCentreZ + 0.5f;
             if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
             {
-              if ((North == true ) && (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ))
+              if(_matrix[i][j-1] == 1)
               {
-                North = false;
-                South = true;
-
+                if (_matrix[i+1][j] == 1)
+                {
+                  North = true;
+                  East = false;
+                }
+                else
+                {
+                  South = true;
+                  East = false;
+                }
+                East = false;
               }
-              East = false;
-              West = true;
+
+
+
             }
           }
       }
       else if (West)
         {
-          if(_matrix[westVal][j] == 0 || _matrix[westVal][j] == 2)
+          if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
           {
                       float cubeCentreX = (i * 4);
                       float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
                       float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                      cubeMinX = cubeCentreX - 1.0;
-                      cubeMaxX = cubeCentreX + 1.0;
-                      cubeMinZ = cubeCentreZ - 1.0f;
-                      cubeMaxZ = cubeCentreZ + 1.0f;
+                      cubeMinX = cubeCentreX - 0.5f;
+                      cubeMaxX = cubeCentreX + 0.5f;
+                      cubeMinZ = cubeCentreZ - 0.5f;
+                      cubeMaxZ = cubeCentreZ + 0.5f;
             if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
             {
-              if ((North == true ) && (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ))
+              if(_matrix[i][j-1] == 1)
               {
-                North = false;
-                South = true;
+                if(_matrix[i-1][j] == 1)
+                {
+                  South = true;
+                  West = false;
+                }
+                else
+                {
+                  North = true;
+                  West = false;
+                }
+                West = false;
               }
-              East = false;
-              West = true;
             }
           }
       }
@@ -198,35 +213,39 @@ void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
 
 void Ghost::dirValSetter()
 {
+// ghostZ+=0.5;
   if (North)
   {
-    ghostZ+=0.005f;
+    ghostZ+=0.5f;
     std::cout<<"North is true \n";
   }
   if (South)
   {
-    ghostZ-=0.005f;
+    ghostZ-=0.5f;
     std::cout<<"South is true \n";
   }
   if (East)
   {
-    ghostX+=0.005f;
+    ghostX-=0.5f;
     std::cout<<"East is true \n";
   }
   if (West)
   {
-    ghostX-+0.005f;
+    ghostX+=0.5f;
     std::cout<<"West is true \n";
   }
 }
 
 void Ghost::updater(const std::vector<std::vector<int> > &_matrix)
 {
-//  wghoAi(_matrix);
+  ghoAi(_matrix);
+  static int i = 0;
   glPushMatrix();
-//  glLoadIdentity();
-    glTranslatef(ghostX,0,ghostZ);
-//    glRotatef(180,0.0,1.0,0.0);
+  //glLoadIdentity();
+    glTranslatef(ghostX,1,ghostZ);
+    glRotatef(5,0.0,1.0,0.0);
+    glTranslatef(-ghostX,-1,-ghostZ);
+
     glCallList(m_displayList[0]);
   glPopMatrix();
 }

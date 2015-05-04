@@ -23,6 +23,8 @@
 #include "header/FPSCounter.h"
 #include "header/lightning.h"
 #include "header/geoDome.h"
+#include "header/audio.h"
+
 
 
 #ifdef LINUX
@@ -50,14 +52,24 @@ Uint32 timerCallback(Uint32 interval, void *) {
 
 int main(int argc, char** argv)
 {
-  if(SDL_Init(SDL_INIT_VIDEO)<0)
+  Audio au;
+  if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO)<0)
   {
     SDLErrorExit("Unable to init SDL");
   }
 
+  int audio_rate = 22050;
+  Uint16 audio_format = AUDIO_S16SYS;
+  int audio_channels = 2;
+  int audio_buffers = 4096;
+
+  if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) != 0) {
+    std::cerr<< "Unable to initialize audio: \n" << Mix_GetError();
+    exit(1);
+  }
+
   glutInit(&argc, argv);
-  SDL_Init(SDL_INIT_VIDEO);
-  SDL_Init(SDL_INIT_TIMER);
+
 
   //this grabs the screen size's
   SDL_Rect _rect;
@@ -79,6 +91,13 @@ int main(int argc, char** argv)
   if(!gl)
   {
     SDLErrorExit("Problem creating OpenGL Context");
+  }
+
+   //Initialize SDL_mixer
+  if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+  {
+    std::cout<< "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << "\n";
+    au.audioSuccess = false;
   }
 
 

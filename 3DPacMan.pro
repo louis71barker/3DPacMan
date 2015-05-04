@@ -22,6 +22,7 @@ SOURCES+=src/main.cpp \
          src/helicopter.cpp \
          src/FPSCounter.cpp \
          src/geoDome.cpp \
+         src/audio.cpp \
 #         src/NCCA/Mat4.cpp\
 #         src/NCCA/Vec4.cpp\
 #         src/NCCA/GLFunctions.cpp
@@ -44,6 +45,7 @@ HEADERS+=header/arena.h \
          header/helicopter.h \
          header/FPSCounter.h \
          header/geoDome.h \
+         header/audio.h \
 #         header/NCCA/Mat4.h\
 #         header/NCCA/Vec4.h\
 #         header/NCCA/GLFunctions.h
@@ -109,7 +111,7 @@ linux-g++-64:QMAKE_CXXFLAGS +=  -march=native
 QMAKE_CXXFLAGS+=$$system(sdl2-config  --cflags)
 message(output from sdl2-config --cflags added to CXXFLAGS= $$QMAKE_CXXFLAGS)
 
-LIBS += -lglut -lGLU -lSDL2_image
+LIBS += -lglut -lGLU -lSDL2_image -lSDL2_mixer
 
 LIBS+=$$system(sdl2-config  --libs)
 message(output from sdl2-config --libs added to LIB=$$LIBS)

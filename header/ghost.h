@@ -52,17 +52,15 @@ public:
   std::vector<GLuint> m_displayList;
   std::vector<Vec2> m_GhostPos;
 
-  Ghost(const std::vector<std::vector<int> > _matrix)
+  Ghost(const std::vector<std::vector<int> > _matrix) : ghostX(0), ghostZ(0)
   {
     ObjLoader("obj/GhostObj.obj",m_Vertex,m_Normal,m_Texture,m_Index);
     buildGhost(_matrix);
-    ghostX = 0;
-    ghostZ = 0;
     zeroone = 0;
-    North = true;
+    North = false;
     South = false;
     East = false;
-    West = false;
+    West = true;
   }
   ~Ghost()
   {

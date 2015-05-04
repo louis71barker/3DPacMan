@@ -1,6 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef LIGHTS_H__
 #define LIGHTS_H__
 
+///Here are all the includes that are needed
 #include "camera.h"
 #include "walls.h"
 #include <vector>

@@ -1,6 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef GEODOME_H__
 #define GEODOME_H__
 
+///Here are all the includes that are needed
 #include <vector>
 #include "scene.h"
 

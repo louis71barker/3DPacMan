@@ -217,22 +217,22 @@ void Ghost::dirValSetter()
   if (North)
   {
     ghostZ+=0.5f;
-    std::cout<<"North is true \n";
+//    std::cout<<"North is true \n";
   }
   if (South)
   {
     ghostZ-=0.5f;
-    std::cout<<"South is true \n";
+//    std::cout<<"South is true \n";
   }
   if (East)
   {
     ghostX-=0.5f;
-    std::cout<<"East is true \n";
+//    std::cout<<"East is true \n";
   }
   if (West)
   {
     ghostX+=0.5f;
-    std::cout<<"West is true \n";
+//    std::cout<<"West is true \n";
   }
 }
 

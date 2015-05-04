@@ -1,5 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef COLLECTABLE_H__
 #define COLLECTABLE_H__
+
+///Here are all the includes that are needed
 #include <vector>
 #include <GL/gl.h>
 #include <stdlib.h>

@@ -1,6 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef SCENE_H__
 #define SCENE_H__
 
+///Here are all the includes that are needed
 #include <SDL.h>
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>

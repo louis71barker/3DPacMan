@@ -180,6 +180,7 @@ void Collecable::drawCollectiblesLeft()
           glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *it);
         }
         glPopAttrib();
+        glColor3f(1.0,1.0,1.0);
      glPopMatrix();
 
    glMatrixMode(GL_PROJECTION);

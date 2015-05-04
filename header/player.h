@@ -1,7 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef PLAYER_H__
 #define PLAYER_H__
 
-
+///Here are all the includes that are needed
 #include <vector>
 #include <stdlib.h>
 #include <iostream>

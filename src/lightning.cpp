@@ -28,6 +28,10 @@ void Lightning::drawLightning()
           glLightfv(GL_LIGHT3, GL_DIFFUSE, lightningCol);
           glLightfv(GL_LIGHT3,GL_SPECULAR,specular);
           glLightfv(GL_LIGHT3, GL_POSITION, lightningPos);
+
+          Mix_VolumeChunk(a_Thunder, MIX_MAX_VOLUME * 0.9);
+
+          Mix_PlayChannel(-1, a_Thunder, 0);
    }
   else
    glDisable(GL_LIGHT3);

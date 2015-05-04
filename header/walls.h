@@ -1,6 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef WALLS_H__
 #define WALLS_H__
 
+///Here are all the includes that are needed
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 #include <boost/tokenizer.hpp>

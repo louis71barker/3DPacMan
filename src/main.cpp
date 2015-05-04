@@ -35,6 +35,7 @@
 #endif
 
 Lightning li;
+
 Uint32 timerCallback(Uint32 interval, void *) {
 
     if(li.lightningTrig == false)
@@ -58,8 +59,15 @@ int main(int argc, char** argv)
     SDLErrorExit("Unable to init SDL");
   }
 
-  glutInit(&argc, argv);
+  //Initialize SDL_mixer
+  if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+  {
+   std::cout<< "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << "\n";
+   au.m_audioSuccess = false;
+  }
 
+  glutInit(&argc, argv);
+  li.lightningAudio();
 
   //this grabs the screen size's
   SDL_Rect _rect;
@@ -83,20 +91,13 @@ int main(int argc, char** argv)
     SDLErrorExit("Problem creating OpenGL Context");
   }
 
-   //Initialize SDL_mixer
-  if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
-  {
-    std::cout<< "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << "\n";
-    au.audioSuccess = false;
-  }
-
 
   SDL_TimerID timerID = SDL_AddTimer(15000, /*elapsed time in milliseconds*/
                                    timerCallback, /*callback function*/
                                    (void*) NULL /*parameters (none)*/);
 
   Walls wa;
-  Arena a(wa.matrix);
+  Arena a;
   Camera cam;
   Ghost gho(wa.matrix);
   Collecable col(wa.matrix);
@@ -109,9 +110,6 @@ int main(int argc, char** argv)
 
 
 
-//  wa.initMaze(wa.matrix);
-  a.ground(wa.matrix);
-//  sd.sky();
 
 
 
@@ -147,15 +145,8 @@ int main(int argc, char** argv)
     int mouseX,mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event e;
-
-
-
-
     while(SDL_PollEvent(&e))
     {
-
-
-
        switch(e.type)
        {
         case SDL_WINDOWEVENT : {int w,h;
@@ -176,8 +167,6 @@ int main(int argc, char** argv)
                             case SDLK_a : cam.strafeLeft=true; break;
                             case SDLK_d : cam.strafeRight=true; break;
                             case SDLK_p : cam.mouseInScreen=false; SDL_ShowCursor(SDL_ENABLE); break;
-                            case SDLK_1 : if (cam.thirdPersonCam == true) {cam.firstPersonCam = true; cam.thirdPersonCam = false;} break;
-                            case SDLK_2 : if (cam.firstPersonCam == true) {cam.firstPersonCam = false; cam.thirdPersonCam = true;} break;
 
                             }
                           }break;
@@ -221,12 +210,9 @@ int main(int argc, char** argv)
 
     cam.cameraUpdate(wa.matrix,mouseX,mouseY);
     col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
-
-
-//    sd.drawSky();
     gho.updater(wa.matrix);
-//    wa.draw();
-    a.drawArena(wa.matrix);
+    wa.draw();
+    a.drawArena();
     ba.drawBarn();
     fe.drawFence();
     he.drawHeli();
@@ -234,8 +220,6 @@ int main(int argc, char** argv)
     gd.drawdome();
     gho.random();
     std::cout<<gho.zeroone<<"\n";
-
-
     l.distanceCal(wa.matrix);
 
     frameEnd(GLUT_BITMAP_HELVETICA_10, 1.0 , 0.0 , 0.0 , 0.85 , 0.95);
@@ -251,6 +235,8 @@ int main(int argc, char** argv)
   SDL_DestroyWindow(win);
 
   SDL_Quit();
+
+  Mix_Quit();
   return 0;
 }
 

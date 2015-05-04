@@ -9,13 +9,11 @@ SOURCES+=src/main.cpp \
          src/window.cpp \
          src/camera.cpp \
          src/walls.cpp \
-         src/torch.cpp \
          src/Vec.cpp \
          src/objLoader.cpp \
          src/lighting.cpp \
          src/TextLoader.cpp \
          src/fileLoader.cpp \
-         src/skyDome.cpp \
          src/barn.cpp \
          src/fence.cpp \
          src/lightning.cpp \
@@ -23,9 +21,7 @@ SOURCES+=src/main.cpp \
          src/FPSCounter.cpp \
          src/geoDome.cpp \
          src/audio.cpp \
-#         src/NCCA/Mat4.cpp\
-#         src/NCCA/Vec4.cpp\
-#         src/NCCA/GLFunctions.cpp
+         src/trees.cpp \
 
 
 HEADERS+=header/arena.h \
@@ -35,10 +31,8 @@ HEADERS+=header/arena.h \
          header/window.h \
          header/camera.h \
          header/walls.h \
-         header/torch.h \
          header/scene.h \
          header/lights.h \
-         header/skyDome.h \
          header/barn.h \
          header/fence.h \
          header/lightning.h \
@@ -46,9 +40,7 @@ HEADERS+=header/arena.h \
          header/FPSCounter.h \
          header/geoDome.h \
          header/audio.h \
-#         header/NCCA/Mat4.h\
-#         header/NCCA/Vec4.h\
-#         header/NCCA/GLFunctions.h
+         header/trees.h \
 
 OTHER_FILES+= src/MapCoor.txt\
               obj/GhostObj.obj\

@@ -1,6 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef WINDOW_H__
 #define WINDOW_H__
 
+///Here are all the includes that are needed
 #include <SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>

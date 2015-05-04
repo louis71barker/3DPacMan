@@ -1,7 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef GHOST_H__
 #define GHOST_H__
 
-
+///Here are all the includes that are needed
 #include <boost/random.hpp>
 #include <fstream>
 #include "scene.h"

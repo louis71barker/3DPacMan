@@ -26,6 +26,8 @@ void Camera::enableScene()
   GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
   GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
   GLfloat  ambientLight[] = { 0.5f, 0.5f, 0.5f, 1.0f};
+  GLfloat  ambientLight2[] = { 0.3f, 0.3f, 0.3f, 1.0f};
+  GLfloat  ambientLight3[] = { 0.1f, 0.1f, 0.1f, 1.0f};
 
     glEnable(GL_DEPTH_TEST);
 
@@ -33,7 +35,10 @@ void Camera::enableScene()
     glEnable(GL_COLOR_MATERIAL);
 
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight2);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight3);
 
+    //Centre of the spot light
     // The light is composed of just diffuse and specular components
     glLightfv(GL_LIGHT0,GL_DIFFUSE,ambientLight);
     glLightfv(GL_LIGHT0,GL_SPECULAR,specular);
@@ -41,13 +46,35 @@ void Camera::enableScene()
 
     // Specific spot effects
     // Cut off angle is 60 degrees
-    glLightf(GL_LIGHT0,GL_SPOT_CUTOFF,5.0f);
+    glLightf(GL_LIGHT0,GL_SPOT_CUTOFF,2.0f);
+
+    //middle spot light
+    // The light is composed of just diffuse and specular components
+    glEnable(GL_LIGHT1);
+    glLightfv(GL_LIGHT1,GL_DIFFUSE,ambientLight2);
+    glLightfv(GL_LIGHT1,GL_SPECULAR,specular);
+    glLightfv(GL_LIGHT1,GL_POSITION,lightPos);
+
+    // Specific spot effects
+    // Cut off angle is 60 degrees
+    glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,4.0f);
+
+    //outer light
+    // The light is composed of just diffuse and specular components
+    glEnable(GL_LIGHT2);
+    glLightfv(GL_LIGHT2,GL_DIFFUSE,ambientLight3);
+    glLightfv(GL_LIGHT2,GL_SPECULAR,specular);
+    glLightfv(GL_LIGHT2,GL_POSITION,lightPos);
+
+    // Specific spot effects
+    // Cut off angle is 60 degrees
+    glLightf(GL_LIGHT2,GL_SPOT_CUTOFF,6.0f);
 
 
     // All materials hereafter have full specular reflectivity
     // with a high shine
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,specref);
-    glMateriali(GL_FRONT_AND_BACK, GL_SHININESS,128);
+    glMateriali(GL_FRONT_AND_BACK, GL_SHININESS,120);
 
 }
 
@@ -84,9 +111,9 @@ void Camera::displayCamera()
 }
 
 
-void Camera::cameraStrafe(const std::vector<std::vector<int> > _matrix)
+void Camera::cameraStrafe(const std::vector<std::vector<int> > &m_matrix)
 {
-  if (strafeLeft == true  && playerMoveing == true)
+  if (strafeLeft == true)
   {
     float yRotRad;
     oldxPos = playerXpos;
@@ -94,10 +121,10 @@ void Camera::cameraStrafe(const std::vector<std::vector<int> > _matrix)
     yRotRad = (yRot / 180 * M_PI);
     playerXpos -= float(cos(yRotRad)) * 0.2;
     playerZpos -= float(sin(yRotRad)) * 0.2;
-    playerCollisions(_matrix);
+    playerCollisions(m_matrix);
 
   }
-  if (strafeRight == true  && playerMoveing == true)
+  if (strafeRight == true)
   {
     float yRotRad;
     oldxPos = playerXpos;
@@ -105,9 +132,9 @@ void Camera::cameraStrafe(const std::vector<std::vector<int> > _matrix)
     yRotRad = (yRot / 180 * M_PI);
     playerXpos += float(cos(yRotRad)) * 0.2;
     playerZpos += float(sin(yRotRad)) * 0.2;
-    playerCollisions(_matrix);
+    playerCollisions(m_matrix);
   }
-  if (moveBackward == true && playerMoveing == true)
+  if (moveBackward == true)
   {
     float xRotRad,yRotRad;
     oldxPos = playerXpos;
@@ -116,9 +143,9 @@ void Camera::cameraStrafe(const std::vector<std::vector<int> > _matrix)
     xRotRad = (xRot / 180 * M_PI);
     playerXpos -= float(sin(yRotRad)/5);
     playerZpos += float(cos(yRotRad)/5);
-    playerCollisions(_matrix);
+    playerCollisions(m_matrix);
   }
-  if (moveForward == true && playerMoveing == true)
+  if (moveForward == true)
   {
     float xRotRad,yRotRad;
     oldxPos = playerXpos;
@@ -127,7 +154,7 @@ void Camera::cameraStrafe(const std::vector<std::vector<int> > _matrix)
     xRotRad = (xRot / 180 * M_PI);
     playerXpos += float(sin(yRotRad)/5);
     playerZpos -= float(cos(yRotRad)/5);
-    playerCollisions(_matrix);
+    playerCollisions(m_matrix);
 
   }
 
@@ -150,16 +177,16 @@ void Camera::mouseMovementCapture(int x, int y)
 }
 
 
-void Camera::setPlayer(const std::vector<std::vector<int> > _matrix)
+void Camera::setPlayer(const std::vector<std::vector<int> > &m_matrix)
 {
-  for(int i = 0; i < (int)_matrix.size(); ++i)
+  for(int i = 0; i < (int)m_matrix.size(); ++i)
   {
-    for(int j = 0; j < (int)_matrix[0].size(); ++j)
+    for(int j = 0; j < (int)m_matrix[0].size(); ++j)
     {
-      if(_matrix[i][j] == 3)
+      if(m_matrix[i][j] == 3)
       {
         float spawnCentreX = (i * CUBESIZE);
-        float spawnCentreZ = (((int)_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
+        float spawnCentreZ = (((int)m_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
           playerXpos = spawnCentreX;
           playerZpos = spawnCentreZ;
         std::cout<<" player Spawn "<<"\n";
@@ -186,78 +213,57 @@ void Camera::cameraUpdate(std::vector<std::vector<int> > matrix,int x, int y)
 }
 
 
-void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
+void Camera::playerCollisions(const std::vector<std::vector<int> > &m_matrix)
 {
-  for(int i = 0; i < (int)matrix.size(); ++i)
+  for(int i = 0; i < (int)m_matrix.size(); ++i)
   {
-    for(int j = 0; j < (int)matrix[0].size(); ++j)
+    for(int j = 0; j < (int)m_matrix[0].size(); ++j)
     {
-//      if(matrix[i][j] != 0 || matrix[i][j] !=3 || matrix[i][j] !=13)
-      if(matrix[i][j] == 1 || matrix[i][j] == 9 || matrix[i][j] == 10)
+      if(m_matrix[i][j] == 1 || m_matrix[i][j] == 9 || m_matrix[i][j] == 10 || m_matrix[i][j] == 15 || m_matrix[i][j] == 10 || m_matrix[i][j] == 9)
       {
                   float cubeCentreX = (i * 4);
-                  float cubeCentreZ = (((int)matrix[0].size() * 4) - (j * 4));
+                  float cubeCentreZ = (((int)m_matrix[0].size() * 4) - (j * 4));
                   float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ, distX;
                   cubeMinX = cubeCentreX - 2.8f;
                   cubeMaxX = cubeCentreX + 2.8f;
                   cubeMinZ = cubeCentreZ - 2.8f;
                   cubeMaxZ = cubeCentreZ + 2.8f;
                   distX = playerXpos - cubeCentreX;
+                  static int distZ = playerZpos - cubeCentreZ;
         if (playerXpos > cubeMinX && playerXpos < cubeMaxX && playerZpos > cubeMinZ && playerZpos < cubeMaxZ)
         {
-          /// use nested if's to get the collisions to work
-//          std::cout<<"boom boom bang bang \n";
 
           std::cout << playerXpos << ", 0 ," << playerZpos << std::endl;
 
-//          if ((playerXpos - (cubeCentreX)) > (playerZpos - cubeCentreZ) ||
-//              (playerXpos - (cubeCentreX)) < (playerZpos - cubeCentreZ))
-//          {
-//            playerZpos = oldzPos;
-//            playerXpos = oldxPos;
-//            std::cout<<"Zhit \n";
-//          }
-            if (distX >= CUBESIZE/2 || distX <= CUBESIZE/2)
+            if (distX >= CUBESIZE/2 && distX <= -CUBESIZE/2)
             {
+              playerXpos  = oldxPos;
+              std::cout<<"Xhit \n";
+            }
+            else{
               playerZpos  = oldzPos;
               std::cout<<"Xhit \n";
             }
-            else
+            if (distZ >= CUBESIZE/2 && distZ <= -CUBESIZE/2)
             {
-              playerXpos = oldxPos;
-
+              playerZpos = oldzPos;
                std::cout<<"Zhit \n";
             }
-
-//          if ()
-//          {
-//            playerXpos = oldxPos;
-//            std::cout<<"Xhit \n";
-//          }
-
-//          bool Xcol = (playerXpos > cubeMinX && playerXpos < cubeMaxX);
-//          if (Xcol)
-//          {
-
-//            playerXpos = oldxPos;
-//          }
-//          else
-//          {
-//            std::cout<<"Zhit\n";
-//            playerZpos  = oldzPos;
-//          }
-
+            else{
+              playerXpos  = oldxPos;
+              std::cout<<"Xhit \n";
+            }
         }
       }
 
       ///Collision setting for the exterior fencing around the playable area
       /// matrix vales 7 and 8 are the values of the fence depending on their rotation value
-      if (matrix[i][j] == 7 || matrix[i][j] == 8)
+      if (m_matrix[i][j] == 7 || m_matrix[i][j] == 8)
       {
         //this is the centre of the current collision grid position for the x value
         float cubeCentreX = (i * CUBESIZE);
         //this is the centre of the current collision grid position for the z value
-        float cubeCentreZ = (((int)matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
+        float cubeCentreZ = (((int)m_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
         //Here are a set of local values that are needed to work about the AABB around the grid position to define the box
         float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
         //this values are used to create the bounding box
@@ -269,7 +275,7 @@ void Camera::playerCollisions(const std::vector<std::vector<int> > matrix)
         if (playerXpos > cubeMinX && playerXpos < cubeMaxX && playerZpos > cubeMinZ && playerZpos < cubeMaxZ)
         {
           //if there is a collision, this is tested to see what value has to be freezed so that the player is unable to pass through the fence
-          if (matrix[i][j] == 7)
+          if (m_matrix[i][j] == 7)
           {
             //this holds the player from being able to move through the fence but not allowing the X value to change in the direction of the collison box
             playerXpos = oldxPos;

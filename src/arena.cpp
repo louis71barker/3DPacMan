@@ -22,7 +22,7 @@
 
 
 
-void Arena::ground(const std::vector<std::vector<int> > _matrix)
+void Arena::ground()
 {
 
 
@@ -53,11 +53,8 @@ void Arena::ground(const std::vector<std::vector<int> > _matrix)
 }
 
 
-void Arena::drawArena(std::vector<std::vector<int> > _matrix)
+void Arena::drawArena()
 {
   glCallLists(m_displayList.size(), GL_UNSIGNED_INT, &m_displayList[0]);
-
-
-//  sky();
 
 }

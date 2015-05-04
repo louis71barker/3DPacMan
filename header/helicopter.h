@@ -1,6 +1,8 @@
+/// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
 #ifndef HELI_H__
 #define HELI_H__
 
+///Here are all the includes that are needed
 #include <vector>
 #include "scene.h"
 

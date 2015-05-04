@@ -5,7 +5,9 @@ void Audio::loadSoundChunk(const std::string &_fname,
 {
   *_sound = Mix_LoadWAV(_fname.c_str());
   if(*_sound == NULL)
+  {
     std::cerr << "Not able to load audio file:  " << Mix_GetError() << "\n";
+  }
 }
 
 

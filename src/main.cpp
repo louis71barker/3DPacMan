@@ -58,16 +58,6 @@ int main(int argc, char** argv)
     SDLErrorExit("Unable to init SDL");
   }
 
-  int audio_rate = 22050;
-  Uint16 audio_format = AUDIO_S16SYS;
-  int audio_channels = 2;
-  int audio_buffers = 4096;
-
-  if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) != 0) {
-    std::cerr<< "Unable to initialize audio: \n" << Mix_GetError();
-    exit(1);
-  }
-
   glutInit(&argc, argv);
 
 

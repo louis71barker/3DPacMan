@@ -8,6 +8,8 @@
 1.0.1
 
 
+
+
 ### Installation
 
 You need SDL, Boost, GLU installed globally aswell as the basic C++ libaries:
@@ -41,7 +43,11 @@ D = Strafe Right
 To rotate the camera, use the mouse to rotate around the player.
 
 ###Warning
-This game is still in development so there maybe bugs within this game. There are a few areas to watch out for currently. When you collide with tree, the helicopter or the barn, you with stick the the edge slightly. As long as you dont aim at these object, you will not experience this issue. If you do, simple move away from the wall and you will be able to move
+This game is still in development so there maybe bugs within this game. There are a few areas to watch out for currently. When you collide with the trees, the helicopter or the barn, you with stick the the edge slightly. As long as you dont aim at these object, you will not experience this issue. If you do, simple move away from the wall and you will be able to move
+
+###Important information
+The ghost AI is currently disabled as it doesnt currently work as it should.
+
 ### Todo's
 
  - Improve AI

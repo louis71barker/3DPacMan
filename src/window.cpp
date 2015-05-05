@@ -22,17 +22,9 @@ SDL_GLContext createOpenGLContext(SDL_Window *_win)
   return SDL_GL_CreateContext(_win);
 }
 
-void Window::ReshapeScreen()
-{
-  glViewport(0, 0, (GLsizei)screenW, (GLsizei)screenH);
-  glMatrixMode( GL_PROJECTION);
-  glLoadIdentity();
-  gluPerspective(60, (GLfloat)screenW / (GLfloat)screenH, 1.0, 500.0);
-  glMatrixMode( GL_MODELVIEW) ;
-}
-
 void Window::Lighting() const
 {
+  //enables the all lighing elements needs throughout the game
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_POINT_SPRITE);
   glEnable(GL_BLEND);

@@ -4,82 +4,76 @@
 #include <GL/glu.h>
 
 
-
-
-void Collecable::drawCollectable(std::vector<std::vector<int> > &_matrix,float _x, float _y)
+void Collectable::drawCollectable(std::vector<std::vector<int> > &m_matrix, const float _playerx, const float _playery)
 {
   drawCollectiblesLeft();
-  normalSetter(_matrix);
-  collisonDetection(_matrix, _x, _y);
+  normalSetter(m_matrix);
+  collisonDetection(m_matrix, _playerx, _playery);
   glPushMatrix();
-    static int rotVal = 0;
-    rotVal++;
-//    glRotatef(rotVal,1,0,0);
+    //call the display list to draw the collectable
     glCallLists(m_displayList.size(), GL_UNSIGNED_INT, &m_displayList[0]);
   glPopMatrix();
 }
 
 
 
-void Collecable::normalSetter(std::vector<std::vector<int> > _matrix)
+void Collectable::normalSetter(std::vector<std::vector<int> > &m_matrix)
 {
-  for(int i = 0; i < (int)_matrix.size(); ++i)
+  for(int i = 0; i < (int)m_matrix.size(); ++i)
   {
-    for(int j = 0; j < (int)_matrix[0].size(); ++j)
+    for(int j = 0; j < (int)m_matrix[0].size(); ++j)
     {
-      if(_matrix[i][j] == 0)
+      if(m_matrix[i][j] == 0)
       {
-        placeObj(i, j, _matrix);
-
-        if (countSet == false)
+        placeObj(i, j, m_matrix);
+        //if the collectable setter is false then the incrementor is counting up until all collectables are drawn
+        if (m_countSet == false)
         {
-          collecibleCount++;
-//          std::cout<<collecibleCount<<"\n";
+          m_collecibleCount++;
         }
       }
     }
-    if(i == (int)_matrix.size()-1 )
+    if(i == (int)m_matrix.size()-1 )
     {
-      countSet = true;
+      m_countSet = true;
     }
   }
 }
 
 
-void Collecable::placeObj(int _x, int _y,std::vector<std::vector<int> > _matrix)
+void Collectable::placeObj(const int _x, const int _y, const std::vector<std::vector<int> > &m_matrix)
 {
   glPushMatrix();
-//    glTranslatef(-30 + (_x+0.5)*4, -1, 30 - (_y+0.5)*4);
-      glTranslatef((_x)*4, -1, ((int)_matrix[0].size() * 4) - (_y)*4);
-
+    //move the collectable to the relivent locations
+    glTranslatef((_x)*4, -1, ((int)m_matrix[0].size() * 4) - (_y)*4);
     drawBalls();
   glPopMatrix();
 }
 
-void Collecable::placeSpecials(std::vector<std::vector<int> > _matrix)
+void Collectable::placeSpecials(std::vector<std::vector<int> > &m_matrix)
 {
   //load the texture here and bind inside the list bellow!!!!!! :)
 
-  for(int i = 0; i < (int)_matrix.size(); ++i)
+  for(int i = 0; i < (int)m_matrix.size(); ++i)
   {
-    for(int j = 0; j < (int)_matrix[0].size(); ++j)
+    for(int j = 0; j < (int)m_matrix[0].size(); ++j)
     {
-      if(_matrix[i][j] == 5)
+      if(m_matrix[i][j] == 5)
       {
         GLuint id = glGenLists(1);
         glNewList(id, GL_COMPILE);
         glPushMatrix();
-//          glTranslatef(-30 + (i+0.5)*4, 0 , 30 - (j+0.5)*4);
-          glTranslatef((i)*4, -0.5, ((int)_matrix[0].size() * 4) - (j)*4);
+          glTranslatef((i)*4, -0.5, ((int)m_matrix[0].size() * 4) - (j)*4);
           glScalef(0.1,0.1,0.1);
           glTranslatef(0,-6,0);
           glBegin(GL_TRIANGLES);
-
-
           for (int a = 2; a < (int)m_Index.size(); a += 3)
           {
+            //set the normals for the obj
             m_Normal[m_Index[a]-1].normalGL();
+            //set the texture coor for the obj
             m_Texture[m_Index[a-1]-1].textureGL();
+            //set the vertex for the obj
             m_Vertex[m_Index[a-2]-1].vertexGL();
           }
 
@@ -87,6 +81,7 @@ void Collecable::placeSpecials(std::vector<std::vector<int> > _matrix)
           glEnd();
         glPopMatrix();
         glEndList();
+        //add the collectable to the display list
         m_displayList.push_back(id);
 
        }
@@ -94,74 +89,68 @@ void Collecable::placeSpecials(std::vector<std::vector<int> > _matrix)
   }
 }
 
-void Collecable::drawBalls()
+void Collectable::drawBalls()
 {
-
-          GLfloat lmodel_ambient[] = { 0.1, 0.1, 0.1, 1.0 };
-
-          glPushMatrix();
-          glColor3f(1.0, 0.0, 0.0);
-            glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
-            glEnable(GL_BLEND_COLOR);
-            glutSolidSphere(0.4,20,20);
-//          glColor3f(0.0f ,0.0f ,0.0f);
-          glColor3f(1.0, 1.0, 1.0f);
-          glPopMatrix();
+  glPushMatrix();
+    glColor3f(1.0, 0.0, 0.0);
+    glutSolidSphere(0.4,20,20);
+    glColor3f(1.0, 1.0, 1.0f);
+  glPopMatrix();
 
 }
 
-void Collecable::collisonDetection(std::vector<std::vector<int> > &_matrix, float _x, float _y)
+void Collectable::collisonDetection(std::vector<std::vector<int> > &m_matrix, float _playerx, float _playery)
 {
-  for(int i = 0; i < (int)_matrix.size(); ++i)
+  for(int i = 0; i < (int)m_matrix.size(); ++i)
   {
-    for(int j = 0; j < (int)_matrix[0].size(); ++j)
+    for(int j = 0; j < (int)m_matrix[0].size(); ++j)
     {
-      if(_matrix[i][j] == 0)
+      //collision detections for the normal collectables
+      if(m_matrix[i][j] == 0)
       {
-
-        float collecableCentreX = (i * CUBESIZE);
-        float collecableCentreZ = (((int)_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
-        float collecableMinX, collecableMaxX, collecableMinZ, collecableMaxZ;
-        collecableMinX = collecableCentreX - 1.0f;
-        collecableMaxX = collecableCentreX + 1.0f;
-        collecableMinZ = collecableCentreZ - 1.0f;
-        collecableMaxZ = collecableCentreZ + 1.0f;
-
-        if (_x > collecableMinX && _x < collecableMaxX && _y > collecableMinZ && _y < collecableMaxZ)
+        float CollectableCentreX = (i * CUBESIZE);
+        float CollectableCentreZ = (((int)m_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
+        float CollectableMinX, CollectableMaxX, CollectableMinZ, CollectableMaxZ;
+        CollectableMinX = CollectableCentreX - 1.0f;
+        CollectableMaxX = CollectableCentreX + 1.0f;
+        CollectableMinZ = CollectableCentreZ - 1.0f;
+        CollectableMaxZ = CollectableCentreZ + 1.0f;
+        //simple AABB collision box around collectables
+        if (_playerx > CollectableMinX && _playerx < CollectableMaxX && _playery > CollectableMinZ && _playery < CollectableMaxZ)
         {
-          _matrix[i][j] = 2;
-          collecibleCount--;
+          //changes the value in the matrix so they arnt displayed any longer
+          m_matrix[i][j] = 2;
+          //takes one off the total colletables left so counter going down accordingly
+          m_collecibleCount--;
         }
       }
 
       //specials collision detection
-      if(_matrix[i][j] == 5)
+      if(m_matrix[i][j] == 5)
       {
+        float CollectableCentreX = (i * CUBESIZE);
+        float CollectableCentreZ = (((int)m_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
+        float CollectableMinX, CollectableMaxX, CollectableMinZ, CollectableMaxZ;
+        CollectableMinX = CollectableCentreX - 1.0f;
+        CollectableMaxX = CollectableCentreX + 1.0f;
+        CollectableMinZ = CollectableCentreZ - 1.0f;
+        CollectableMaxZ = CollectableCentreZ + 1.0f;
 
-        float collecableCentreX = (i * CUBESIZE);
-        float collecableCentreZ = (((int)_matrix[0].size() * CUBESIZE) - (j * CUBESIZE));
-        float collecableMinX, collecableMaxX, collecableMinZ, collecableMaxZ;
-        collecableMinX = collecableCentreX - 1.0f;
-        collecableMaxX = collecableCentreX + 1.0f;
-        collecableMinZ = collecableCentreZ - 1.0f;
-        collecableMaxZ = collecableCentreZ + 1.0f;
-
-        if (_x > collecableMinX && _x < collecableMaxX && _y > collecableMinZ && _y < collecableMaxZ)
+        if (_playerx > CollectableMinX && _playerx < CollectableMaxX && _playery > CollectableMinZ && _playery < CollectableMaxZ)
         {
-          _matrix[i][j] = 2;
-          std::cout<<"special collected yeyyeeyeyyey\n";
-
+          m_matrix[i][j] = 2;
         }
       }
     }
   }
 }
 
-void Collecable::drawCollectiblesLeft()
+void Collectable::drawCollectiblesLeft()
 {
+  //draws text to the screen to display the remaining amount of collectables left to be collected
+  glDisable(GL_LIGHTING);
   GLint matrix;
   glGetIntegerv(GL_MATRIX_MODE, &matrix);
-
   glMatrixMode(GL_PROJECTION);
   glPushMatrix();
     glLoadIdentity();
@@ -173,19 +162,17 @@ void Collecable::drawCollectiblesLeft()
         glColor3f(0,1.0f,0);
         glRasterPos3f(0.05, 0.95, 0);
         std::stringstream strm;
-        strm << "Collectibles Left = " << collecibleCount;
+        strm << "Collectibles Left = " << m_collecibleCount;
         std::string text = strm.str();
         for(std::string::iterator it = text.begin(); it != text.end(); ++it)
         {
           glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *it);
         }
         glPopAttrib();
-        glColor3f(1.0,1.0,1.0);
      glPopMatrix();
-
    glMatrixMode(GL_PROJECTION);
-
   glPopMatrix();
   glMatrixMode(matrix);
+  glEnable(GL_LIGHTING);
 }
 

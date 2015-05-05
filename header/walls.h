@@ -1,8 +1,12 @@
+//------------------------------------------------------------------------------------------------------------------
 /// INCLUDE GUARD CHANGE TO NAME OF FILE BELOW
+//------------------------------------------------------------------------------------------------------------------
 #ifndef WALLS_H__
 #define WALLS_H__
 
+//------------------------------------------------------------------------------------------------------------------
 ///Here are all the includes that are needed
+//------------------------------------------------------------------------------------------------------------------
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 #include <boost/tokenizer.hpp>
@@ -14,18 +18,61 @@
 #include "scene.h"
 
 
+//------------------------------------------------------------------------------------------------------------------
+/// Louis Barker
+/// Version 1.0
+/// 04/05/2015
+//------------------------------------------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------------------------------------------
+/// @brief
+/// The Walls class
+/// This class is where all the walls or the maze are built and drawn depending on where they are defined in the map
+/// matrix
+//------------------------------------------------------------------------------------------------------------------
 class Walls
 {
 public:
   Walls();
+  ~Walls()
+  {
+    //------------------------------------------------------------------------------------------------------------------
+    /// \Here are all the functions to clean and clear all the Vectors used through the .clear function
+    //------------------------------------------------------------------------------------------------------------------
+    m_Vertex.clear();
+    std::vector<Vec3>().swap (m_Vertex);
+    m_Normal.clear();
+    std::vector<Vec3>().swap (m_Normal);
+    m_Texture.clear();
+    std::vector<Vec3>().swap (m_Texture);
+    m_dList.clear();
+    std::vector<GLuint>().swap (m_dList);
+    m_Index.clear();
+    std::vector<int>().swap (m_Index);
+  }
 
-  void cubeInit(const std::string &_fname);
-  void fileReader(const std::string &);
+  //------------------------------------------------------------------------------------------------------------------
+  /// @brief
+  /// initMaze - This function textures the object
+  /// Once the obj had been built and assained correctly from the obj file, it is passed into the displayList to
+  /// be drawn.
+  /// @param
+  /// m_matrix - This it the map matrix which is passed in so that the barn can be placed in the correct location
+  //------------------------------------------------------------------------------------------------------------------
+  void initMaze(std::vector<std::vector<int> > &m_matrix);
+
+  //------------------------------------------------------------------------------------------------------------------
+  /// @brief
+  /// draw - This function is a simple function that just has the call to the display list to display everything in
+  /// the walls display list
+  //------------------------------------------------------------------------------------------------------------------
   void draw();
-  void initMaze(std::vector<std::vector<int> > _matrix);
-  void propChanger(std::vector<std::vector<int> > matrix, int w, int h);
-  std::vector< std::vector<int> > matrix;
+
+  //------------------------------------------------------------------------------------------------------------------
+  /// @brief
+  /// m_matrix - This is the matrix that all the the map data is stored into
+  //------------------------------------------------------------------------------------------------------------------
+  std::vector< std::vector<int> > m_matrix;
 
 
 
@@ -35,63 +82,48 @@ public:
 
 
 private:
-  typedef boost::tokenizer<boost::char_separator<char> >tokenizer;
-  void parseVector(tokenizer::iterator &, int lineCount, int sortCount);
-  void cubeSetter() const;
-  void mapBuilder(std::vector<std::vector<int> > matrix, int sortCount);
 
+  //------------------------------------------------------------------------------------------------------------------
+  /// \These are used to store the coordinate information of the objects that will be drawn in the game
+  /// \These are before the constuctor and destructor as they are used in both.
+  /// @m_Vertex is used to store the vertex coordinates of the Object file.
+  /// @m_Normal is used to store the normal values from the object file.
+  /// @m_Texture is used to store the texture coordinates of the object.
+  /// @m_Index is used to store the list in which to join the vertex, normals and textures coordinates together.
+  /// @m_dList is the list which is used to actually draw the object onto the screen
+  //------------------------------------------------------------------------------------------------------------------
   std::vector<Vec3> m_Vertex;
   std::vector<Vec3> m_Normal;
   std::vector<Vec3> m_Texture;
   std::vector<int> m_Index;
-  std::vector<GLuint> m_displayList;
+  std::vector <GLuint> m_dList;
 
-  void letsDraw(int _x, int _y, const std::vector<std::vector<int> > _matrix);
-  void drawCube(const std::vector<std::vector<int> > _matrix);
-  void triangleCubCoor(GLfloat cube_buffer);
+  //------------------------------------------------------------------------------------------------------------------
+  /// @brief
+  /// letsDraw - This function is used to move the walls around the map to the allocated places in the matrix
+  /// @param
+  /// _x - This is the value of 'i' in the buildGhost function so save having to have another two for loops
+  /// @param
+  /// _y - This is the value of 'j' in the buildGhost function so save having to have another two for loops
+  /// @param
+  /// m_matrix - This is passed in to allow for the location of the walls to be found and then moved.
+  //------------------------------------------------------------------------------------------------------------------
+  void letsDraw(const int _x, const int _y, const std::vector<std::vector<int> > &m_matrix);
 
-  int gridCounter;
-  float gridXPos, gridZPos;
-//  std::vector< std::vector<int> > matrix;
-  std::vector <GLuint> dList;
-  GLuint WallTextID;
+  //------------------------------------------------------------------------------------------------------------------
+  /// @brief
+  /// drawCube - This is the function that is used to build the obj file so that it is able to be drawn
+  /// @param
+  /// m_matrix - This is passed in to allow for value to be found in the matrix so it is drawn in the relevent
+  /// location
+  //------------------------------------------------------------------------------------------------------------------
+  void drawCube();
 
-  // A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-
-
-
-
-
-  //Map Coor
-
-/*
-  1,0,0,5,0,0,0,0,0,0,0,0,0,0,0
-  1,0,1,1,1,0,1,1,0,1,1,1,1,1,0
-  1,0,0,1,0,0,0,1,0,1,0,0,5,1,0
-  1,1,0,0,0,1,0,0,0,0,0,1,0,1,0
-  0,0,0,1,1,1,0,1,1,1,0,1,0,0,0
-  0,1,0,5,1,0,0,0,0,0,0,1,0,1,0
-  0,1,1,0,1,0,1,6,1,1,0,1,0,1,0
-  0,0,0,0,0,0,1,0,0,1,0,0,0,1,0
-  1,0,1,0,1,0,1,4,0,1,0,1,0,0,0
-  1,0,1,0,1,0,1,1,1,1,0,1,1,1,0
-  0,0,5,0,0,0,0,0,0,0,0,1,5,0,0
-  0,1,1,1,1,1,0,1,1,0,1,1,0,1,0
-  0,1,0,0,0,0,0,5,1,0,0,0,0,1,0
-  0,1,0,1,1,0,1,0,1,0,1,1,0,1,0
-  3,0,0,0,0,0,1,0,0,0,0,0,0,0,0
-
-
-  0 = path and collectable
-  1 = wall
-  2 = collectable collected
-  3 = player start
-  4 = ghost spawn
-  5 = specials
-  6 = 1 direction wall for ghosts
-  */
-
-
+  //------------------------------------------------------------------------------------------------------------------
+  /// @brief
+  /// This is the texture id that is used for the texturing of the object
+  //------------------------------------------------------------------------------------------------------------------
+  GLuint m_WallTextID;
 };
 
 

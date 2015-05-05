@@ -26,33 +26,39 @@ void ObjLoader(const std::string &_objName,
     {
       tokenizer tokens(lineBuffer,sep);
       tokenizer::iterator firstWord = tokens.begin();
+      //checks for the vertex identifier in the OBJ file
       if (*firstWord=="v")
       {
-//        std::cout<<"aslkdjlkasjd"<<"\n";
+        //this adds the vertex's to the vertex vector
         Vec3 vert(boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord));
 
         _vec.push_back(vert);
       }
+      //checks for the vertex texture identifier in the OBJ file
       else if (*firstWord == "vt")
       {
-//        std::cout<<"aslkdjlkasjdalkhsdkashdkh"<<"\n";
+        //add the vertex textures coor to the texture vector
         Vec3 text(boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord));
 
         _text.push_back(text);
       }
+      //checks for the vertex normals identifier in the OBJ file
       else if (*firstWord == "vn")
       {
+        //add the vertec normals to the normals vector
         Vec3 norm(boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord),
                   boost::lexical_cast<float>(*++firstWord));
 
         _norm.push_back(norm);
       }
+      //checks for the index identifier in the OBJ file
       else if (*firstWord == "f")
       {
+        //adds all the identifiers to build the model into a index vector
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
@@ -64,9 +70,9 @@ void ObjLoader(const std::string &_objName,
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
           _index.push_back(boost::lexical_cast<int>(*++firstWord));
-
       }
     }
   }
+  //close the file once read is completed
   fileIn.close();
 }

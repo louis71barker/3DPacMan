@@ -3,7 +3,7 @@
 
 
 
-void Ghost::buildGhost(const std::vector<std::vector<int> > &_matrix)
+void Ghost::buildGhost(const std::vector<std::vector<int> > &m_matrix)
 {
 
   //load the texture here and bind inside the list bellow!!!!!! :)
@@ -11,13 +11,14 @@ void Ghost::buildGhost(const std::vector<std::vector<int> > &_matrix)
     GLuint gid = glGenLists(1);
     glNewList(gid, GL_COMPILE);
     glPushMatrix();
-      for(int i = 0; i < (int)_matrix.size(); ++i)
+      for(int i = 0; i < (int)m_matrix.size(); ++i)
       {
-        for(int j = 0; j < (int)_matrix[0].size(); ++j)
+        for(int j = 0; j < (int)m_matrix[0].size(); ++j)
         {
-          if(_matrix[i][j] == 4)
+          //test to see where the ghost spawn locations are
+          if(m_matrix[i][j] == 4)
           {
-            setGhost(i, j, _matrix);
+            setGhost(i, j, m_matrix);
           }
         }
       }
@@ -27,32 +28,37 @@ void Ghost::buildGhost(const std::vector<std::vector<int> > &_matrix)
 }
 
 
-void Ghost::setGhost(const int _a, const int _b, const std::vector<std::vector<int> > &_matrix)
+void Ghost::setGhost(const int _a, const int _b, const std::vector<std::vector<int> > &m_matrix)
 {
-  ghoAi(_matrix);
+  ghoAi(m_matrix);
   glPushMatrix();
-    glTranslatef((_a)*4, 1, ((int)_matrix[0].size() * 4) - (_b)*4);
+    //moves and scales to needed size
+    glTranslatef((_a)*4, 1, ((int)m_matrix[0].size() * 4) - (_b)*4);
     glScalef(0.18,0.18,0.18);
-    drawGhosts(_matrix);
-    ghostX = (_a)*4;
-    ghostZ = ((int)_matrix[0].size() * 4) - (_b)*4;
+    drawGhosts(m_matrix);
+    //sets start pos for the first ghost
+    m_ghostX = (_a)*4;
+    m_ghostZ = ((int)m_matrix[0].size() * 4) - (_b)*4;
   glPopMatrix();
 }
 
-void Ghost::drawGhosts(const std::vector<std::vector<int> > _matrix)
+void Ghost::drawGhosts(const std::vector<std::vector<int> > &m_matrix)
 {
   glPushMatrix();
     glBegin(GL_TRIANGLES);
-    for(int i = 0; i < (int)_matrix.size(); ++i)
+    for(int i = 0; i < (int)m_matrix.size(); ++i)
     {
-      for(int j = 0; j < (int)_matrix[0].size(); ++j)
+      for(int j = 0; j < (int)m_matrix[0].size(); ++j)
       {
-        if(_matrix[i][j] == 3)
+        if(m_matrix[i][j] == 3)
         {
           for (int a = 2; a < (int)m_Index.size(); a += 3)
           {
+            //set the normals for the obj
             m_Normal[m_Index[a]-1].normalGL();
+            //set the texture coor for the obj
             m_Texture[m_Index[a-1]-1].textureGL();
+            //set the vertex for the obj
             m_Vertex[m_Index[a-2]-1].vertexGL();
           }
         }
@@ -62,80 +68,86 @@ void Ghost::drawGhosts(const std::vector<std::vector<int> > _matrix)
   glPopMatrix();
 }
 
-double Ghost::random(void)
+
+void Ghost::ghoAi(const std::vector<std::vector<int> > &m_matrix)
 {
-  static boost::mt19937 rng(43);
-  boost::uniform_01<boost::mt19937&> num(rng);
-//  return num;
 
-
-}
-
-void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
-{
-  dirValSetter();
-  for(int i = 0; i < (int)_matrix.size(); ++i)
+  for(int i = 0; i < (int)m_matrix.size(); ++i)
   {
-    for(int j = 0; j < (int)_matrix[0].size(); ++j)
+    for(int j = 0; j < (int)m_matrix[0].size(); ++j)
     {
-//      if(matrix[i][j] != 0 || matrix[i][j] !=3 || matrix[i][j] !=13)
-      if (North)
+      //check to see which direction the ghost is going
+      if (m_North)
       {
-        if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
+        //check to make sure ghost is inside moveable areas
+        if(m_matrix[i][j] == 0 || m_matrix[i][j] == 2 || m_matrix[i][j] == 6 || m_matrix[i][j] == 4)
         {
-                    float cubeCentreX = (i * 4);
-                    float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
-                    float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                    cubeMinX = cubeCentreX - 0.5f;
-                    cubeMaxX = cubeCentreX + 0.5f;
-                    cubeMinZ = cubeCentreZ - 0.5f;
-                    cubeMaxZ = cubeCentreZ + 0.5f;
-          if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
+          //find the centre of the cube currently in
+          float cubeCentreX = (i * 4);
+          float cubeCentreZ = (((int)m_matrix[0].size() * 4) - (j * 4));
+          float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
+          cubeMinX = cubeCentreX - 0.5f;
+          cubeMaxX = cubeCentreX + 0.5f;
+          cubeMinZ = cubeCentreZ - 0.5f;
+          cubeMaxZ = cubeCentreZ + 0.5f;
+          //simple AABB collsion box
+          if (m_ghostX > cubeMinX && m_ghostX < cubeMaxX && m_ghostZ > cubeMinZ && m_ghostZ < cubeMaxZ)
           {
-            if (_matrix[i-1][j] == 1)
+            //checks to see if the chunk ahead is free
+            if (m_matrix[i-1][j] == 1)
             {
-              if (_matrix[i][j+1] == 1)
+             //checks to see if chunk on the right is free or not
+              if (m_matrix[i][j+1] == 1)
               {
-                West = true;
-                North = false;
+                m_West = true;
+                m_North = false;
               }
+              //right has to be free so makes sets ghost to go right
               else
               {
-                East = true;
-                North = false;
+                m_East = true;
+                m_North = false;
               }
-              North = false;
+              //makes it so the ghost can not continue if collision
+              m_North = false;
             }
 
           }
         }
       }
-      else if (South)
+      else if (m_South)
         {
-          if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
+          //check to see which direction the ghost is going
+          if(m_matrix[i][j] == 0 || m_matrix[i][j] == 2 || m_matrix[i][j] == 6 || m_matrix[i][j] == 4)
           {
-                      float cubeCentreX = (i * 4);
-                      float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
-                      float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                      cubeMinX = cubeCentreX - 0.5f;
-                      cubeMaxX = cubeCentreX + 0.5f;
-                      cubeMinZ = cubeCentreZ - 0.5f;
-                      cubeMaxZ = cubeCentreZ + 0.5f;
-            if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
+            //find the centre of the cube currently in
+            float cubeCentreX = (i * 4);
+            float cubeCentreZ = (((int)m_matrix[0].size() * 4) - (j * 4));
+            float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
+            cubeMinX = cubeCentreX - 0.5f;
+            cubeMaxX = cubeCentreX + 0.5f;
+            cubeMinZ = cubeCentreZ - 0.5f;
+            cubeMaxZ = cubeCentreZ + 0.5f;
+            //simple AABB collsion box
+            if (m_ghostX > cubeMinX && m_ghostX < cubeMaxX && m_ghostZ > cubeMinZ && m_ghostZ < cubeMaxZ)
             {
-              if(_matrix[i+1][j] == 1)
+              //checks to see if the chunk ahead is free
+              if(m_matrix[i+1][j] == 1)
               {
-                if(_matrix[i][j-1] == 1)
+                //checks to see if chunk on the right is free or not
+                if(m_matrix[i][j-1] == 1)
                 {
-                  East = true;
-                  South = false;
+                  m_East = true;
+                  m_South = false;
                 }
                 else
+                //right has to be free so makes sets ghost to go right
                 {
-                  West = true;
-                  South = false;
+                  m_West = true;
+                  m_South = false;
                 }
-                South = false;
+                //makes it so the ghost can not continue if collision
+                m_South = false;
               }
 
 
@@ -143,32 +155,39 @@ void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
           }
       }
 
-      else if (East)
+      else if (m_East)
         {
-          if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
+          //check to see which direction the ghost is going
+          if(m_matrix[i][j] == 0 || m_matrix[i][j] == 2 || m_matrix[i][j] == 6 || m_matrix[i][j] == 4)
           {
-                      float cubeCentreX = (i * 4);
-                      float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
-                      float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                      cubeMinX = cubeCentreX - 0.5f;
-                      cubeMaxX = cubeCentreX + 0.5f;
-                      cubeMinZ = cubeCentreZ - 0.5f;
-                      cubeMaxZ = cubeCentreZ + 0.5f;
-            if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
+            //find the centre of the cube currently in
+            float cubeCentreX = (i * 4);
+            float cubeCentreZ = (((int)m_matrix[0].size() * 4) - (j * 4));
+            float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
+            cubeMinX = cubeCentreX - 0.5f;
+            cubeMaxX = cubeCentreX + 0.5f;
+            cubeMinZ = cubeCentreZ - 0.5f;
+            cubeMaxZ = cubeCentreZ + 0.5f;
+            //simple AABB collsion box
+            if (m_ghostX > cubeMinX && m_ghostX < cubeMaxX && m_ghostZ > cubeMinZ && m_ghostZ < cubeMaxZ)
             {
-              if(_matrix[i][j-1] == 1)
+              //checks to see if the chunk ahead is free
+              if(m_matrix[i][j-1] == 1)
               {
-                if (_matrix[i+1][j] == 1)
+                //checks to see if chunk on the right is free or not
+                if (m_matrix[i+1][j] == 1)
                 {
-                  North = true;
-                  East = false;
+                  m_North = true;
+                  m_East = false;
                 }
                 else
+                  //right has to be free so makes sets ghost to go right
                 {
-                  South = true;
-                  East = false;
+                  m_South = true;
+                  m_East = false;
                 }
-                East = false;
+                //makes it so the ghost can not continue if collision
+                m_East = false;
               }
 
 
@@ -176,76 +195,82 @@ void Ghost::ghoAi(const std::vector<std::vector<int> > &_matrix)
             }
           }
       }
-      else if (West)
+      else if (m_West)
         {
-          if(_matrix[i][j] == 0 || _matrix[i][j] == 2 || _matrix[i][j] == 6 || _matrix[i][j] == 4)
+          //check to see which direction the ghost is going
+          if(m_matrix[i][j] == 0 || m_matrix[i][j] == 2 || m_matrix[i][j] == 6 || m_matrix[i][j] == 4)
           {
-                      float cubeCentreX = (i * 4);
-                      float cubeCentreZ = (((int)_matrix[0].size() * 4) - (j * 4));
-                      float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
-                      cubeMinX = cubeCentreX - 0.5f;
-                      cubeMaxX = cubeCentreX + 0.5f;
-                      cubeMinZ = cubeCentreZ - 0.5f;
-                      cubeMaxZ = cubeCentreZ + 0.5f;
-            if (ghostX > cubeMinX && ghostX < cubeMaxX && ghostZ > cubeMinZ && ghostZ < cubeMaxZ)
+            //find the centre of the cube currently in
+            float cubeCentreX = (i * 4);
+            float cubeCentreZ = (((int)m_matrix[0].size() * 4) - (j * 4));
+            float cubeMinX, cubeMaxX, cubeMinZ, cubeMaxZ;
+            cubeMinX = cubeCentreX - 0.5f;
+            cubeMaxX = cubeCentreX + 0.5f;
+            cubeMinZ = cubeCentreZ - 0.5f;
+            cubeMaxZ = cubeCentreZ + 0.5f;
+            //simple AABB collsion box
+            if (m_ghostX > cubeMinX && m_ghostX < cubeMaxX && m_ghostZ > cubeMinZ && m_ghostZ < cubeMaxZ)
             {
-              if(_matrix[i][j-1] == 1)
+              //checks to see if the chunk ahead is free
+              if(m_matrix[i][j-1] == 1)
               {
-                if(_matrix[i-1][j] == 1)
+                //checks to see if chunk on the right is free or not
+                if(m_matrix[i-1][j] == 1)
                 {
-                  South = true;
-                  West = false;
+                  m_South = true;
+                  m_West = false;
                 }
                 else
+                //right has to be free so makes sets ghost to go right
                 {
-                  North = true;
-                  West = false;
+                  m_North = true;
+                  m_West = false;
                 }
-                West = false;
+                //makes it so the ghost can not continue if collision
+                m_West = false;
               }
             }
           }
       }
     }
   }
+  // set the direction
+  dirValSetter();
 }
 
 
 void Ghost::dirValSetter()
 {
-// ghostZ+=0.5;
-  if (North)
+  //if the ghost is going up the map
+  if (m_North)
   {
-    ghostZ+=0.5f;
-//    std::cout<<"North is true \n";
+    m_ghostZ+=0.5f;
   }
-  if (South)
+  //if the ghost is going down the map
+  if (m_South)
   {
-    ghostZ-=0.5f;
-//    std::cout<<"South is true \n";
+    m_ghostZ-=0.5f;
   }
-  if (East)
+  //if the ghost is going left
+  if (m_East)
   {
-    ghostX-=0.5f;
-//    std::cout<<"East is true \n";
+    m_ghostX-=0.5f;
   }
-  if (West)
+  //if the ghost is going right
+  if (m_West)
   {
-    ghostX+=0.5f;
-//    std::cout<<"West is true \n";
+    m_ghostX+=0.5f;
   }
 }
 
-void Ghost::updater(const std::vector<std::vector<int> > &_matrix)
+void Ghost::updater(const std::vector<std::vector<int> > &m_matrix)
 {
-  ghoAi(_matrix);
-  static int i = 0;
+  //calls the ghost AI
+  ghoAi(m_matrix);
   glPushMatrix();
-  //glLoadIdentity();
-    glTranslatef(ghostX,1,ghostZ);
+    glTranslatef(m_ghostX,1,m_ghostZ);
     glRotatef(5,0.0,1.0,0.0);
-    glTranslatef(-ghostX,-1,-ghostZ);
-
+    glTranslatef(-m_ghostX,-1,-m_ghostZ);
     glCallList(m_displayList[0]);
   glPopMatrix();
 }

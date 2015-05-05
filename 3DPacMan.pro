@@ -2,7 +2,6 @@ isEqual(QT_MAJOR_VERSION, 5) {cache() }
 TARGET=PacMan3D
 cache()
 SOURCES+=src/main.cpp \
-         src/player.cpp \
          src/ghost.cpp \
          src/arena.cpp \
          src/collectables.cpp \
@@ -11,28 +10,23 @@ SOURCES+=src/main.cpp \
          src/walls.cpp \
          src/Vec.cpp \
          src/objLoader.cpp \
-         src/lighting.cpp \
          src/TextLoader.cpp \
          src/fileLoader.cpp \
          src/barn.cpp \
          src/fence.cpp \
          src/lightning.cpp \
          src/helicopter.cpp \
-         src/FPSCounter.cpp \
          src/geoDome.cpp \
          src/audio.cpp \
-         src/trees.cpp \
 
 
 HEADERS+=header/arena.h \
          header/collectables.h \
-         header/player.h \
          header/ghost.h \
          header/window.h \
          header/camera.h \
          header/walls.h \
          header/scene.h \
-         header/lights.h \
          header/barn.h \
          header/fence.h \
          header/lightning.h \
@@ -40,47 +34,21 @@ HEADERS+=header/arena.h \
          header/FPSCounter.h \
          header/geoDome.h \
          header/audio.h \
-         header/trees.h \
 
 OTHER_FILES+= src/MapCoor.txt\
               obj/GhostObj.obj\
               obj/CherryObj.obj \
-              obj/cubeTri.obj \
-              obj/cubeSquared.obj \
-              obj/01_Wall_Crack.obj \
-              obj/02_Wall_Shelf.obj \
-              obj/03_Wall_Hypnotic.obj \
-              obj/04_Wall_Boiler.obj \
-              obj/crackedWall.obj \
-              obj/cubeBoiler.obj \
-              obj/cubeHypno.obj \
-              obj/cubeWindow.obj \
-              obj/stripLight.obj \
-              obj/BushWall.obj \
-              obj/BushWallHighPoly.obj \
-              obj/BushWallHighPolyNew.obj \
-              obj/FenceFrame.obj \
               obj/OBJ_Ground.obj \
-              obj/FarmhouseTri.obj \
               obj/geoSphere.obj \
               obj/Helicopter_crashed.obj \
-              obj/OldFence.obj \
               obj/NewTriBush.obj \
+              obj/FarmhouseTriMedHighpoly.obj \
               textures/Ground.png \
               textures/NewTreesTextureMap.png \
               textures/Skydome.png \
               textures/BarnTextures/Farmhouse_Diffuse_Map.jpg \
-              textures/BarnTextures/Farmhouse_Specular_Map.jpg \
-              textures/FenceTextures/Metal_Fence_Bump_Map.png \
-              textures/FenceTextures/Metal_Fence_Diffuse_01.png \
-              textures/FenceTextures/Metal_Fence_Diffuse_02.png \
-              textures/FenceTextures/Metal_Fence_Diffuse_03.png \
-              textures/GroundTextures/Bump_Map.jpg \
               textures/GroundTextures/Diffuse.jpg \
-              textures/GroundTextures/Specular.jpg \
               textures/HelicopterTextures/Helicopter_Crash_D.png \
-              textures/HelicopterTextures/Helicopter_Crash_N.tga \
-              textures/HelicopterTextures/Helicopter_Crash_S.tga \
               textures/oldFence_texture.jpg \
 
 

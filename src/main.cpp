@@ -8,15 +8,12 @@
 #include <GL/glut.h>
 #include <vector>
 #include <time.h>
-#include "header/player.h"
 #include "header/collectables.h"
 #include "header/ghost.h"
 #include "header/arena.h"
 #include "header/window.h"
 #include "header/camera.h"
 #include "header/walls.h"
-#include "header/lights.h"
-#include "header/skyDome.h"
 #include "header/barn.h"
 #include "header/fence.h"
 #include "header/helicopter.h"
@@ -34,39 +31,44 @@
   #include <OpenGL/gl.h>
 #endif
 
+//call the lighting class so it is able to start with the timer on a seperate thread
 Lightning li;
-
-Uint32 timerCallback(Uint32 interval, void *) {
-
-    if(li.lightningTrig == false)
+//when the timer triggers
+Uint32 timerCallback(Uint32 timer, void *)
+{
+    if(li.m_lightningTrig == false)
     {
-      li.lightningTrig = true;
+      li.m_lightningTrig = true;
       SDL_Delay(70);
-      li.lightningTrig = false;
+      li.m_lightningTrig = false;
       SDL_Delay(100);
-      li.lightningTrig = true;
+      li.m_lightningTrig = true;
       SDL_Delay(100);
-      li.lightningTrig = false;
+      li.m_lightningTrig = false;
     }
-    return interval;
+    return timer;
 }
 
+//start of the main
 int main(int argc, char** argv)
 {
+  //init all the SDL required and the Audio class
   Audio au;
   if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO)<0)
   {
     SDLErrorExit("Unable to init SDL");
   }
 
-  //Initialize SDL_mixer
+  //initialize SDL_mixer
   if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
   {
    std::cout<< "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << "\n";
    au.m_audioSuccess = false;
   }
 
+  //initialize glut
   glutInit(&argc, argv);
+  //bind the thunder sound file now mixer is initialized
   li.lightningAudio();
 
   //this grabs the screen size's
@@ -76,47 +78,38 @@ int main(int argc, char** argv)
 
   SDL_Window *win;
   Window w;
-  w.screenH = _rect.w;
-  w.screenH = _rect.h;
+  //set screen width and height
+  w.m_screenH = _rect.w;
+  w.m_screenH = _rect.h;
+  //create the window
   win=SDL_CreateWindow("Pacnesia", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _rect.w, _rect.h, SDL_WINDOW_OPENGL);
 
+  //error check to make sure window is open
   if (!win)
   {
     SDLErrorExit("Unable to create a window");
   }
 
   SDL_GLContext gl=createOpenGLContext(win);
+  //error check for SDL
   if(!gl)
   {
     SDLErrorExit("Problem creating OpenGL Context");
   }
 
+  //start the time with 15 secs
+  SDL_TimerID timerID = SDL_AddTimer(15000, timerCallback, (void*) NULL);
 
-  SDL_TimerID timerID = SDL_AddTimer(15000, /*elapsed time in milliseconds*/
-                                   timerCallback, /*callback function*/
-                                   (void*) NULL /*parameters (none)*/);
-
+  //construct all the remaining classes
   Walls wa;
   Arena a;
   Camera cam;
-  Ghost gho(wa.matrix);
-  Collecable col(wa.matrix);
-  Lights l;
-//  skyDome sd;
-  Barn ba(wa.matrix);
-  Heli he(wa.matrix);
-  Fence fe(wa.matrix);
+  Ghost gho(wa.m_matrix);
+  Collectable col(wa.m_matrix);
+  Barn ba(wa.m_matrix);
+  Heli he(wa.m_matrix);
+  Fence fe(wa.m_matrix);
   geoDome gd;
-
-
-
-
-
-
-
-
-
-
 
   SDL_GL_MakeCurrent(win,gl);
   SDL_GL_SetSwapInterval(1);
@@ -129,21 +122,18 @@ int main(int argc, char** argv)
 
   glClearColor(0,0,0,1);
 
-
-
-
+  //set the lighting for the scene
   w.Lighting();
-
-
 
   int quit = 0;
   while(!quit)
   {
-
+//    grabs the mouse to keep inside window, not the best method atm as no mouse border detection working
 //    SDL_ShowCursor(SDL_DISABLE);
 //    SDL_SetWindowGrab(win, SDL_TRUE);
-    int mouseX,mouseY;
-    SDL_GetMouseState(&mouseX, &mouseY);
+    int _mouseX, _mouseY;
+    //get the mouse pos
+    SDL_GetMouseState(&_mouseX, &_mouseY);
     SDL_Event e;
     while(SDL_PollEvent(&e))
     {
@@ -162,55 +152,44 @@ int main(int argc, char** argv)
                             case SDLK_ESCAPE : quit = 1; break;
                             case SDLK_i : glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); break;
                             case SDLK_k : glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); break;
-                            case SDLK_w : cam.moveForward=true; break;
-                            case SDLK_s : cam.moveBackward=true; break;
-                            case SDLK_a : cam.strafeLeft=true; break;
-                            case SDLK_d : cam.strafeRight=true; break;
-                            case SDLK_p : cam.mouseInScreen=false; SDL_ShowCursor(SDL_ENABLE); break;
+                            case SDLK_w : cam.m_moveForward=true; break;
+                            case SDLK_s : cam.m_moveBackward=true; break;
+                            case SDLK_a : cam.m_strafeLeft=true; break;
+                            case SDLK_d : cam.m_strafeRight=true; break;
+                            case SDLK_p : cam.m_mouseInScreen=false; SDL_ShowCursor(SDL_ENABLE); break;
 
                             }
                           }break;
+       //set values back the key is released
        case SDL_KEYUP : {
                         switch(e.key.keysym.sym)
                         {
-                        case SDLK_w : cam.moveForward=false; break;
-                        case SDLK_s : cam.moveBackward=false; break;
-                        case SDLK_a : cam.strafeLeft=false; break;
-                        case SDLK_d : cam.strafeRight=false; break;
+                        case SDLK_w : cam.m_moveForward=false; break;
+                        case SDLK_s : cam.m_moveBackward=false; break;
+                        case SDLK_a : cam.m_strafeLeft=false; break;
+                        case SDLK_d : cam.m_strafeRight=false; break;
                         }
        }break;
        case SDL_MOUSEBUTTONDOWN:
            {
                if(e.button.button == SDL_BUTTON_LEFT)
                {
-                  cam.mouseInScreen = true;
+                 //checks to see if the mouse is inside to screen to disable the pointer
+                  cam.m_mouseInScreen = true;
                   SDL_ShowCursor(SDL_DISABLE);
                   break;
                }
-               if(e.button.button == SDL_BUTTON_RIGHT)
-               {
-
-               }
             }
          break;
-
-       case SDL_MOUSEBUTTONUP:
-       {
-         if (e.button.button == SDL_BUTTON_LEFT)
-         {
-
-         }
-       }
-         break;
-
        }
     }
-
+    //starts the frame timer
     frameStart();
 
-    cam.cameraUpdate(wa.matrix,mouseX,mouseY);
-    col.drawCollectable(wa.matrix,cam.playerXpos,cam.playerZpos);
-    gho.updater(wa.matrix);
+    //calls the display lists and value editors from all the classes
+    cam.cameraUpdate(wa.m_matrix,_mouseX,_mouseY);
+    col.drawCollectable(wa.m_matrix,cam.m_playerXpos,cam.m_playerZpos);
+    gho.updater(wa.m_matrix);
     wa.draw();
     a.drawArena();
     ba.drawBarn();
@@ -218,24 +197,27 @@ int main(int argc, char** argv)
     he.drawHeli();
     li.drawLightning();
     gd.drawdome();
-    gho.random();
-    std::cout<<gho.zeroone<<"\n";
-    l.distanceCal(wa.matrix);
 
+
+    //end of the frame timer
     frameEnd(GLUT_BITMAP_HELVETICA_10, 1.0 , 0.0 , 0.0 , 0.85 , 0.95);
 
+    //swap the buffer
     SDL_GL_SwapWindow(win);
 
   }
 
 
-  // Disable our timer
+  // Disable the timer
   SDL_RemoveTimer(timerID);
 
+  //destroy the window when closing
   SDL_DestroyWindow(win);
 
+  //quit sdl at end of program
   SDL_Quit();
 
+  //quit Mixer at end of program
   Mix_Quit();
   return 0;
 }

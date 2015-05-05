@@ -11,15 +11,17 @@
 #include "walls.h"
 #include "audio.h"
 
-/// \Louis Barker
-/// \Version 1.0
+//------------------------------------------------------------------------------------------------------------------
+/// Louis Barker
+/// Version 1.0
 /// 04/05/2015
+//------------------------------------------------------------------------------------------------------------------
 
 
 //------------------------------------------------------------------------------------------------------------------
 /// @brief
 /// The Arena class
-/// This class is used for the drawing of the obj for the arena ground as well as also the background ambient music
+/// This class is used for the drawing of the ground obj for the arena ground as well as also the background ambient music
 /// in the game
 ///
 /// @todo
@@ -45,51 +47,59 @@ public:
   std::vector<GLuint> m_displayList;
 
   //------------------------------------------------------------------------------------------------------------------
-  /// \This is the audio chunk defination where the audio file is assigned to allow for the sound to be played
+  /// @brief
+  /// This is the audio chunk defination where the audio file is assigned to allow for the sound to be played
   //------------------------------------------------------------------------------------------------------------------
   Mix_Chunk *a_ambMusic;
 
 
   //------------------------------------------------------------------------------------------------------------------
-  /// \brief Arena class constutor which is used to build all the functions needed for the game
-  ///
+  /// @brief
+  /// Arena class constutor which is used to build all the functions needed for the game
   //------------------------------------------------------------------------------------------------------------------
   Arena()
   {
     //------------------------------------------------------------------------------------------------------------------
-    /// \Class defination for the audio class so the audio is able to be added as needed
+    /// @brief
+    /// Class defination for the audio class so the audio is able to be added as needed
     //------------------------------------------------------------------------------------------------------------------
     Audio au;
 
     //------------------------------------------------------------------------------------------------------------------
-    /// \Here is a call the the OBJLoader class which loads the obj files data into the relivent vectors
+    /// @brief
+    /// Here is a call the the OBJLoader class which loads the obj files data into the relivent vectors
     //------------------------------------------------------------------------------------------------------------------
     ObjLoader("obj/OBJ_Ground.obj",m_Vertex,m_Normal,m_Texture,m_Index);
 
     //------------------------------------------------------------------------------------------------------------------
-    /// \Here the ground is built and added to the display list so it can be drawn
+    /// @brief
+    /// Here the ground is built and added to the display list so it can be drawn
     //------------------------------------------------------------------------------------------------------------------
     ground();
 
     //------------------------------------------------------------------------------------------------------------------
-    /// \This is a call to the loading a sound file function in Audio class to load in the background music and assigned it to a_ambMusic
+    /// @brief
+    /// This is a call to the loading a sound file function in Audio class to load in the background music and assigned it to a_ambMusic
     //------------------------------------------------------------------------------------------------------------------
     au.loadSoundChunk("sounds/ambMusic.wav", &a_ambMusic);
 
     //------------------------------------------------------------------------------------------------------------------
-    /// @a_ambMusic is now called in with the VolumeChunk function to set the volume level within the game
+    /// @brief
+    /// a_ambMusic is now called in with the VolumeChunk function to set the volume level within the game
     //------------------------------------------------------------------------------------------------------------------
     Mix_VolumeChunk(a_ambMusic, MIX_MAX_VOLUME * 0.6);
 
     //------------------------------------------------------------------------------------------------------------------
-    /// \the audio is now called in to be played on the next available channel and set to repeat on an endless loop
+    /// @brief
+    /// the audio is now called in to be played on the next available channel and set to repeat on an endless loop
     //------------------------------------------------------------------------------------------------------------------
     Mix_PlayChannel(-1, a_ambMusic, -1);
   }
   ~Arena()
   {
     //------------------------------------------------------------------------------------------------------------------
-    /// \Here are all the functions to clean and clear all the Vectors used through the .clear function
+    /// @brief
+    /// Here are all the functions to clean and clear all the Vectors used through the .clear function
     //------------------------------------------------------------------------------------------------------------------
     m_Vertex.clear();
     std::vector<Vec3>().swap (m_Vertex);
@@ -103,45 +113,31 @@ public:
     std::vector<int>().swap (m_Index);
 
     //------------------------------------------------------------------------------------------------------------------
+    ///@brief
     ///Here is the free function to clear the memory saved for the music file
     //------------------------------------------------------------------------------------------------------------------
     Mix_FreeChunk(a_ambMusic);
   }
-
   //------------------------------------------------------------------------------------------------------------------
-  /// \This is the function that is called in the main to draw the displayList with the ground in.
+  /// @brief
+  /// This is the function that is called in the main to draw the displayList with the ground in.
   //------------------------------------------------------------------------------------------------------------------
   void drawArena();
 
   //------------------------------------------------------------------------------------------------------------------
-  /// \This is the function that is used to build the obj file so that it is able to be drawn
-  /// \This function also textures the object
-  /// \Once the obj had been build and assained correctly from the obj file, it is passed into the displayList to
+  /// @brief
+  /// This is the function that is used to build the obj file so that it is able to be drawn
+  /// This function also textures the object
+  /// Once the obj had been build and assained correctly from the obj file, it is passed into the displayList to
   /// be drawn
   //------------------------------------------------------------------------------------------------------------------
   void ground();
 
-
-
-
-
-
-
 private:
   //------------------------------------------------------------------------------------------------------------------
-  /// \This is the texture id that is used for the texturing of the object
+  /// @brief
+  /// This is the texture id that is used for the texturing of the object
   //------------------------------------------------------------------------------------------------------------------
   GLuint GroundTextID;
-
-
-
-
-
 };
-
-
-
-
-
-
 #endif

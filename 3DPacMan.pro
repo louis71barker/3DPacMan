@@ -1,5 +1,5 @@
 isEqual(QT_MAJOR_VERSION, 5) {cache() }
-TARGET=PacMan3D
+TARGET=Pacnesia
 cache()
 SOURCES+=src/main.cpp \
          src/ghost.cpp \

@@ -19,7 +19,7 @@
 
 
 //------------------------------------------------------------------------------------------------------------------
-/// @brief
+/// \brief
 /// The Arena class
 /// This class is used for the drawing of the ground obj for the arena ground as well as also the background ambient music
 /// in the game

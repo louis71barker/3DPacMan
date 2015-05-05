@@ -1,0 +1,98 @@
+\hypertarget{classFence}{
+\section{Fence Class Reference}
+\label{classFence}\index{Fence@{Fence}}
+}
+
+
+INCLUDE GUARD CHANGE TO NAME OF FILE BELOW.  
+
+
+{\ttfamily \#include $<$fence.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFence_a0a7cb5b042c919c097ce9f1476447dfa}{Fence} (const std::vector$<$ std::vector$<$ int $>$ $>$ \&m\_\-matrix)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classFence}{Fence} In the constructor the fence object is loaded into the vectors. Once this is done, the object is then built into the display list and relocated to the location on the map that is is assainged. \item\end{DoxyCompactList}\item 
+\hyperlink{classFence_a542d1f0e5b80afc0b19865071cd6c616}{$\sim$Fence} ()
+\item 
+void \hyperlink{classFence_a6d6131c45143ce2d601ce92e2d621460}{buildFence} (const std::vector$<$ std::vector$<$ int $>$ $>$ \&m\_\-matrix)
+\begin{DoxyCompactList}\small\item\em buildFence -\/ This is the function that is used to build the obj file so that it is able to be drawn This function also textures the object Once the obj had been build and assained correctly from the obj file, it is passed into the displayList to be drawn \item\end{DoxyCompactList}\item 
+\hypertarget{classFence_a74e1769df18ddc2b70a84378ff276fee}{
+void \hyperlink{classFence_a74e1769df18ddc2b70a84378ff276fee}{drawFence} ()}
+\label{classFence_a74e1769df18ddc2b70a84378ff276fee}
+
+\begin{DoxyCompactList}\small\item\em drawFence -\/ This is the function that is called in the main to draw the displayList with the fence in. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::vector$<$ \hyperlink{classVec3}{Vec3} $>$ \hyperlink{classFence_a4b5ae58d96d77af0de4dfc874a8e4b67}{m\_\-Vertex}
+\item 
+\hypertarget{classFence_a19de36cf717ada801d47c1482b40a498}{
+std::vector$<$ \hyperlink{classVec3}{Vec3} $>$ {\bfseries m\_\-Normal}}
+\label{classFence_a19de36cf717ada801d47c1482b40a498}
+
+\item 
+\hypertarget{classFence_ac9c16d2a6fc795d857efd4a14405366b}{
+std::vector$<$ \hyperlink{classVec3}{Vec3} $>$ {\bfseries m\_\-Texture}}
+\label{classFence_ac9c16d2a6fc795d857efd4a14405366b}
+
+\item 
+\hypertarget{classFence_a3d5f0771ae268dbd47a55b1431447f81}{
+std::vector$<$ int $>$ {\bfseries m\_\-Index}}
+\label{classFence_a3d5f0771ae268dbd47a55b1431447f81}
+
+\item 
+\hypertarget{classFence_a3a52d46867fdba056f1bd754dc6c9a1a}{
+std::vector$<$ GLuint $>$ {\bfseries m\_\-displayList}}
+\label{classFence_a3a52d46867fdba056f1bd754dc6c9a1a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+INCLUDE GUARD CHANGE TO NAME OF FILE BELOW. Here are all the includes that are needed Louis Barker Version 1.0 04/05/2015 The \hyperlink{classFence}{Fence} class This classs is used to draw the fences around the map depending on where they are defined in the map matrix 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFence_a0a7cb5b042c919c097ce9f1476447dfa}{
+\index{Fence@{Fence}!Fence@{Fence}}
+\index{Fence@{Fence}!Fence@{Fence}}
+\subsubsection[{Fence}]{\setlength{\rightskip}{0pt plus 5cm}Fence::Fence (const std::vector$<$ std::vector$<$ int $>$ $>$ \& {\em m\_\-matrix})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classFence_a0a7cb5b042c919c097ce9f1476447dfa}
+
+
+\hyperlink{classFence}{Fence} In the constructor the fence object is loaded into the vectors. Once this is done, the object is then built into the display list and relocated to the location on the map that is is assainged. 
+\begin{DoxyParams}{Parameters}
+\item[{\em m\_\-matrix}]This is passed in as a reference to allow for the location of the fence to be found and then moved. \end{DoxyParams}
+\hypertarget{classFence_a542d1f0e5b80afc0b19865071cd6c616}{
+\index{Fence@{Fence}!$\sim$Fence@{$\sim$Fence}}
+\index{$\sim$Fence@{$\sim$Fence}!Fence@{Fence}}
+\subsubsection[{$\sim$Fence}]{\setlength{\rightskip}{0pt plus 5cm}Fence::$\sim$Fence ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classFence_a542d1f0e5b80afc0b19865071cd6c616}
+
+
+$\sim$Fence -\/ Here are all the functions to clean and clear all the Vectors used through the .clear function 
+
+\subsection{Member Function Documentation}
+\hypertarget{classFence_a6d6131c45143ce2d601ce92e2d621460}{
+\index{Fence@{Fence}!buildFence@{buildFence}}
+\index{buildFence@{buildFence}!Fence@{Fence}}
+\subsubsection[{buildFence}]{\setlength{\rightskip}{0pt plus 5cm}void Fence::buildFence (const std::vector$<$ std::vector$<$ int $>$ $>$ \& {\em m\_\-matrix})}}
+\label{classFence_a6d6131c45143ce2d601ce92e2d621460}
+
+
+buildFence -\/ This is the function that is used to build the obj file so that it is able to be drawn This function also textures the object Once the obj had been build and assained correctly from the obj file, it is passed into the displayList to be drawn 
+\begin{DoxyParams}{Parameters}
+\item[{\em m\_\-matrix}]-\/ This it the map matrix which is passed in so that the fences can be placed in the correct location \end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classFence_a4b5ae58d96d77af0de4dfc874a8e4b67}{
+\index{Fence@{Fence}!m\_\-Vertex@{m\_\-Vertex}}
+\index{m\_\-Vertex@{m\_\-Vertex}!Fence@{Fence}}
+\subsubsection[{m\_\-Vertex}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf Vec3}$>$ {\bf Fence::m\_\-Vertex}}}
+\label{classFence_a4b5ae58d96d77af0de4dfc874a8e4b67}
+are used to store the coordinate information of the objects that will be drawn in the game  are before the constuctor and destructor as they are used in both.  is used to store the vertex coordinates of the Object file.  is used to store the normal values from the object file.  is used to store the texture coordinates of the object.  is used to store the list in which to join the vertex, normals and textures coordinates together.  is the list which is used to actually draw the object onto the screen 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+header/fence.h\item 
+src/fence.cpp\end{DoxyCompactItemize}

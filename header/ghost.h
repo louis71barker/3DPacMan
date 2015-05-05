@@ -84,7 +84,7 @@ public:
     m_North = false;
     m_South = false;
     m_East = false;
-    m_West = true;
+    m_West = false;
   }
   ~Ghost()
   {
@@ -108,6 +108,12 @@ public:
 
 
 private:
+  //------------------------------------------------------------------------------------------------------------------
+  /// @brief
+  /// m_BarnTextID - This is the texture id that is used for the texturing of the object
+  //------------------------------------------------------------------------------------------------------------------
+    GLuint m_GhostTextID;
+
   //------------------------------------------------------------------------------------------------------------------
   /// @brief
   /// ghostX - this is the position of the ghost on the X axis which is used for the AI

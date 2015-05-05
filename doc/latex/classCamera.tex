@@ -1,0 +1,177 @@
+\hypertarget{classCamera}{
+\section{Camera Class Reference}
+\label{classCamera}\index{Camera@{Camera}}
+}
+
+
+The \hyperlink{classCamera}{Camera} class
+\begin{DoxyItemize}
+\item This is the class that controls everything to do with the player camera.
+\item It is where the player movement is calculated and sorted.
+\item Player collisions are also calculated here.
+\item The spawning of the player location is also located here. 
+\end{DoxyItemize} 
+
+
+{\ttfamily \#include $<$camera.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classCamera_a01f94c3543f56ede7af49dc778f19331}{
+\hyperlink{classCamera_a01f94c3543f56ede7af49dc778f19331}{Camera} ()}
+\label{classCamera_a01f94c3543f56ede7af49dc778f19331}
+
+\begin{DoxyCompactList}\small\item\em 
+\begin{DoxyItemize}
+\item Within the constructor of this \hyperlink{classCamera}{Camera} class, all the dephault values for the bool's and floats are given to all the variables used within the class 
+\end{DoxyItemize}\item\end{DoxyCompactList}\item 
+void \hyperlink{classCamera_a501b42a364d591925b732b88233fe5b5}{cameraUpdate} (std::vector$<$ std::vector$<$ int $>$ $>$ m\_\-matrix, int m\_\-x, int m\_\-y)
+\begin{DoxyCompactList}\small\item\em cameraUpdate -\/ This is the function that is called within the main which is used to apply the update to the camera each frame. It also tests to see if the player is set before it allows the player to be able to move \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classCamera_a6e86bb225fcbe085820f4331d9abe923}{m\_\-strafeLeft}
+\begin{DoxyCompactList}\small\item\em strafeLeft is a bool that is used to state that the 'a' key is pressed so the player needs to be moveing left. \item\end{DoxyCompactList}\item 
+\hypertarget{classCamera_af554927fd2b80de5b66dcd19b834aa99}{
+bool {\bfseries m\_\-strafeRight}}
+\label{classCamera_af554927fd2b80de5b66dcd19b834aa99}
+
+\item 
+\hypertarget{classCamera_a188ac8c6f0bd240947a8939445a6f747}{
+bool {\bfseries m\_\-moveForward}}
+\label{classCamera_a188ac8c6f0bd240947a8939445a6f747}
+
+\item 
+\hypertarget{classCamera_a9e8dd11b8495eeab694461a44b5f5311}{
+bool {\bfseries m\_\-moveBackward}}
+\label{classCamera_a9e8dd11b8495eeab694461a44b5f5311}
+
+\item 
+\hypertarget{classCamera_a6fdb4a2f1f0918cefe5aa053af7bbc19}{
+bool \hyperlink{classCamera_a6fdb4a2f1f0918cefe5aa053af7bbc19}{m\_\-playerSet}}
+\label{classCamera_a6fdb4a2f1f0918cefe5aa053af7bbc19}
+
+\begin{DoxyCompactList}\small\item\em playerSet -\/ This is a bool that is set when the player has been placed at the spawn location so the game is able to start properly. \item\end{DoxyCompactList}\item 
+\hypertarget{classCamera_a2caa7c5da62eac9eb2e49f4a2a27345d}{
+bool \hyperlink{classCamera_a2caa7c5da62eac9eb2e49f4a2a27345d}{m\_\-mouseInScreen}}
+\label{classCamera_a2caa7c5da62eac9eb2e49f4a2a27345d}
+
+\begin{DoxyCompactList}\small\item\em mouseInScreen -\/ This is a bool to test if the mouse is within the screen so that the mouse cursor is able to be hidden so that it doesnt interfere with the game. \item\end{DoxyCompactList}\item 
+float \hyperlink{classCamera_adb4519feec6a1363662305b67a2cc486}{m\_\-playerXpos}
+\begin{DoxyCompactList}\small\item\em playerXpos -\/ This is the coordinates for the player on the X axis. These are the values that are changed to move the player around the map. \item\end{DoxyCompactList}\item 
+\hypertarget{classCamera_a97f005c317a5d52deb6acd91820ebc0d}{
+float {\bfseries m\_\-playerZpos}}
+\label{classCamera_a97f005c317a5d52deb6acd91820ebc0d}
+
+\item 
+float \hyperlink{classCamera_a96dd9f9e56923783d8be6bb3b42456cf}{m\_\-lastPlayerPosx}
+\begin{DoxyCompactList}\small\item\em lastPlayerPosx -\/ This is the last position of the mouse pointer before the current position, this is used to calculate the amount of rotation is needed with the camera so it follows the mouse accordingly on the x axis. \item\end{DoxyCompactList}\item 
+\hypertarget{classCamera_a00cbd8cc9cf35c7dea43c60e30e1d05a}{
+float {\bfseries m\_\-lastPlayerPosy}}
+\label{classCamera_a00cbd8cc9cf35c7dea43c60e30e1d05a}
+
+\item 
+float \hyperlink{classCamera_ab2c726172275816059ddb628f9a20de4}{m\_\-xRot}
+\begin{DoxyCompactList}\small\item\em xRot -\/ This is the value that is applied to the rotation of the camera to allow the camera to rotate along with the mouse on the x axis \item\end{DoxyCompactList}\item 
+\hypertarget{classCamera_a6f617b54e011de68a49ca92ba9d7a45e}{
+float {\bfseries m\_\-yRot}}
+\label{classCamera_a6f617b54e011de68a49ca92ba9d7a45e}
+
+\item 
+float \hyperlink{classCamera_a63dbd0a2de940897c695839473b7cdd3}{m\_\-diffx}
+\begin{DoxyCompactList}\small\item\em diffx -\/ This is the value of the difference between the lastPlayerPosx and the current x value of the mouse. \item\end{DoxyCompactList}\item 
+\hypertarget{classCamera_a521e35e790fe8cbe13d9f6fa99d0d61d}{
+float {\bfseries m\_\-diffy}}
+\label{classCamera_a521e35e790fe8cbe13d9f6fa99d0d61d}
+
+\item 
+float \hyperlink{classCamera_a26a53c2caa3c9eedf69b128b9280bd8f}{m\_\-oldxPos}
+\begin{DoxyCompactList}\small\item\em oldxPos -\/ This is the last location of the player inside of the game. This is used for the collisions by setting the playerXpos back to this positions once a collision has occured. \item\end{DoxyCompactList}\item 
+\hypertarget{classCamera_a04bde640b9b8ebfddfd843c0102512ae}{
+float {\bfseries m\_\-oldzPos}}
+\label{classCamera_a04bde640b9b8ebfddfd843c0102512ae}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classCamera}{Camera} class
+\begin{DoxyItemize}
+\item This is the class that controls everything to do with the player camera.
+\item It is where the player movement is calculated and sorted.
+\item Player collisions are also calculated here.
+\item The spawning of the player location is also located here. 
+\end{DoxyItemize}Barker  1.0 04/05/2015 \begin{Desc}
+\item[\hyperlink{todo__todo000004}{Todo}]
+\begin{DoxyItemize}
+\item Move the collision workings into the player class.
+\item Get collisions to work so the player is able to slide along all surfaces rather then the grabbing method.
+\item Make it so that when the mouse pointer hits the screen bourdary, it resets to allow for the camera to rotate freely 
+\end{DoxyItemize}\end{Desc}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCamera_a501b42a364d591925b732b88233fe5b5}{
+\index{Camera@{Camera}!cameraUpdate@{cameraUpdate}}
+\index{cameraUpdate@{cameraUpdate}!Camera@{Camera}}
+\subsubsection[{cameraUpdate}]{\setlength{\rightskip}{0pt plus 5cm}void Camera::cameraUpdate (std::vector$<$ std::vector$<$ int $>$ $>$ {\em m\_\-matrix}, \/  int {\em m\_\-x}, \/  int {\em m\_\-y})}}
+\label{classCamera_a501b42a364d591925b732b88233fe5b5}
+
+
+cameraUpdate -\/ This is the function that is called within the main which is used to apply the update to the camera each frame. It also tests to see if the player is set before it allows the player to be able to move 
+\begin{DoxyParams}{Parameters}
+\item[{\em m\_\-matrix}]-\/ This is passed in so that the player is able to spawn in the correct locations that is allocated in the map matrix \item[{\em m\_\-x}]-\/ This is the value that is passed in from the main which hold the current x position of the mouse on the screen. This is what is used to calculate the rotation needed for the camera \item[{\em m\_\-y}]-\/ This is the value that is passed in from the main which holds the current y position of the mouse pointer on the screen. This is what is used to calculate the rotation needed for the camera to work. \end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classCamera_a63dbd0a2de940897c695839473b7cdd3}{
+\index{Camera@{Camera}!m\_\-diffx@{m\_\-diffx}}
+\index{m\_\-diffx@{m\_\-diffx}!Camera@{Camera}}
+\subsubsection[{m\_\-diffx}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf Camera::m\_\-diffx}}}
+\label{classCamera_a63dbd0a2de940897c695839473b7cdd3}
+
+
+diffx -\/ This is the value of the difference between the lastPlayerPosx and the current x value of the mouse. diffy -\/ This is the value of the difference between the lastPlayerPosy and the current y value of the mouse. \hypertarget{classCamera_a96dd9f9e56923783d8be6bb3b42456cf}{
+\index{Camera@{Camera}!m\_\-lastPlayerPosx@{m\_\-lastPlayerPosx}}
+\index{m\_\-lastPlayerPosx@{m\_\-lastPlayerPosx}!Camera@{Camera}}
+\subsubsection[{m\_\-lastPlayerPosx}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf Camera::m\_\-lastPlayerPosx}}}
+\label{classCamera_a96dd9f9e56923783d8be6bb3b42456cf}
+
+
+lastPlayerPosx -\/ This is the last position of the mouse pointer before the current position, this is used to calculate the amount of rotation is needed with the camera so it follows the mouse accordingly on the x axis. lastPlayerPosy -\/ This is the last position of the mouse pointer before the current position, this is used to calculate the amount of rotation is needed with the camera so it follows the mouse accordingly on the y axis. \hypertarget{classCamera_a26a53c2caa3c9eedf69b128b9280bd8f}{
+\index{Camera@{Camera}!m\_\-oldxPos@{m\_\-oldxPos}}
+\index{m\_\-oldxPos@{m\_\-oldxPos}!Camera@{Camera}}
+\subsubsection[{m\_\-oldxPos}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf Camera::m\_\-oldxPos}}}
+\label{classCamera_a26a53c2caa3c9eedf69b128b9280bd8f}
+
+
+oldxPos -\/ This is the last location of the player inside of the game. This is used for the collisions by setting the playerXpos back to this positions once a collision has occured. oldzPos -\/ This is the last location of the player inside of the game. This is used for the collisions by setting the playerZpos back to this positions once a collision has occured. \hypertarget{classCamera_adb4519feec6a1363662305b67a2cc486}{
+\index{Camera@{Camera}!m\_\-playerXpos@{m\_\-playerXpos}}
+\index{m\_\-playerXpos@{m\_\-playerXpos}!Camera@{Camera}}
+\subsubsection[{m\_\-playerXpos}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf Camera::m\_\-playerXpos}}}
+\label{classCamera_adb4519feec6a1363662305b67a2cc486}
+
+
+playerXpos -\/ This is the coordinates for the player on the X axis. These are the values that are changed to move the player around the map. playerZpos -\/ This is the coordinates for the player on the Z axis. These are the values that are changed to move the player around the map. \hypertarget{classCamera_a6e86bb225fcbe085820f4331d9abe923}{
+\index{Camera@{Camera}!m\_\-strafeLeft@{m\_\-strafeLeft}}
+\index{m\_\-strafeLeft@{m\_\-strafeLeft}!Camera@{Camera}}
+\subsubsection[{m\_\-strafeLeft}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Camera::m\_\-strafeLeft}}}
+\label{classCamera_a6e86bb225fcbe085820f4331d9abe923}
+
+
+strafeLeft is a bool that is used to state that the 'a' key is pressed so the player needs to be moveing left. strafeRight is a bool that is used to say state the 'd' key is pressed to indecate that the player needs to move right.
+
+moveForward is a bool that is used to state that the 'w' key is pressed so the player needs to move forward.
+
+moveBackward is a bool that is used to state that the 's' key is pressed so the player needs to move backwards. \hypertarget{classCamera_ab2c726172275816059ddb628f9a20de4}{
+\index{Camera@{Camera}!m\_\-xRot@{m\_\-xRot}}
+\index{m\_\-xRot@{m\_\-xRot}!Camera@{Camera}}
+\subsubsection[{m\_\-xRot}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf Camera::m\_\-xRot}}}
+\label{classCamera_ab2c726172275816059ddb628f9a20de4}
+
+
+xRot -\/ This is the value that is applied to the rotation of the camera to allow the camera to rotate along with the mouse on the x axis yRot -\/ This is the value that is applied to the rotation of the camera to allow the camera to rotate along with the mouse on the y axis 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+header/camera.h\item 
+src/camera.cpp\end{DoxyCompactItemize}

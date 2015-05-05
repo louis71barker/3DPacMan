@@ -7,7 +7,7 @@ void Ghost::buildGhost(const std::vector<std::vector<int> > &m_matrix)
 {
 
   //load the texture here and bind inside the list bellow!!!!!! :)
-
+    textLoader("textures/GhostText.jpg", m_GhostTextID);
     GLuint gid = glGenLists(1);
     glNewList(gid, GL_COMPILE);
     glPushMatrix();
@@ -18,7 +18,9 @@ void Ghost::buildGhost(const std::vector<std::vector<int> > &m_matrix)
           //test to see where the ghost spawn locations are
           if(m_matrix[i][j] == 4)
           {
+            glBindTexture(GL_TEXTURE_2D, m_GhostTextID);
             setGhost(i, j, m_matrix);
+            glBindTexture(GL_TEXTURE_2D, 0);
           }
         }
       }
@@ -30,7 +32,7 @@ void Ghost::buildGhost(const std::vector<std::vector<int> > &m_matrix)
 
 void Ghost::setGhost(const int _a, const int _b, const std::vector<std::vector<int> > &m_matrix)
 {
-  ghoAi(m_matrix);
+//  ghoAi(m_matrix);
   glPushMatrix();
     //moves and scales to needed size
     glTranslatef((_a)*4, 1, ((int)m_matrix[0].size() * 4) - (_b)*4);

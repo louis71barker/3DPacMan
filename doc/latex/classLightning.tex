@@ -1,0 +1,66 @@
+\hypertarget{classLightning}{
+\section{Lightning Class Reference}
+\label{classLightning}\index{Lightning@{Lightning}}
+}
+
+
+INCLUDE GUARD CHANGE TO NAME OF FILE BELOW.  
+
+
+{\ttfamily \#include $<$lightning.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classLightning_a08ffa8f69fd5d5ed8c144717e5714d29}{
+\hyperlink{classLightning_a08ffa8f69fd5d5ed8c144717e5714d29}{Lightning} ()}
+\label{classLightning_a08ffa8f69fd5d5ed8c144717e5714d29}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classLightning}{Lightning} -\/ In this constuctior, the lightning trigger is set to its dephault of false so that it is able turn turn once the timer is triggered. \item\end{DoxyCompactList}\item 
+\hyperlink{classLightning_aa42fc3f22b3f0234067b92dee0daa46f}{$\sim$Lightning} ()
+\item 
+\hypertarget{classLightning_a4955ae00003d7f74f1f05b840272f5af}{
+void \hyperlink{classLightning_a4955ae00003d7f74f1f05b840272f5af}{lightningAudio} ()}
+\label{classLightning_a4955ae00003d7f74f1f05b840272f5af}
+
+\begin{DoxyCompactList}\small\item\em lightningAudio -\/ This is a simple funcion to turn on the sound effect. This is called in the drawLightning function but needs to be called after SDL\_\-Mixer has been INIT so this needs to be seperate \item\end{DoxyCompactList}\item 
+\hypertarget{classLightning_aeb864ad6e8d431dc0778676dfe7eab20}{
+void \hyperlink{classLightning_aeb864ad6e8d431dc0778676dfe7eab20}{drawLightning} ()}
+\label{classLightning_aeb864ad6e8d431dc0778676dfe7eab20}
+
+\begin{DoxyCompactList}\small\item\em drawLightning -\/ This is the function that turns on and off the light to give the lightning effect. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classLightning_ae790ebe9738a86bb5bf07ff7107a0eab}{
+Mix\_\-Chunk $\ast$ \hyperlink{classLightning_ae790ebe9738a86bb5bf07ff7107a0eab}{a\_\-Thunder}}
+\label{classLightning_ae790ebe9738a86bb5bf07ff7107a0eab}
+
+\begin{DoxyCompactList}\small\item\em is the audio chunk defination where the audio file is assigned to allow for the sound to be played \item\end{DoxyCompactList}\item 
+\hypertarget{classLightning_a9c9de1029145dfe8c9028ae8e5a7fe26}{
+\hyperlink{classAudio}{Audio} \hyperlink{classLightning_a9c9de1029145dfe8c9028ae8e5a7fe26}{au}}
+\label{classLightning_a9c9de1029145dfe8c9028ae8e5a7fe26}
+
+\begin{DoxyCompactList}\small\item\em defination for the audio class so the audio is able to be added as needed \item\end{DoxyCompactList}\item 
+\hypertarget{classLightning_aad17ebd1b8b3588bd26c22d5e7ad08c6}{
+bool \hyperlink{classLightning_aad17ebd1b8b3588bd26c22d5e7ad08c6}{m\_\-lightningTrig}}
+\label{classLightning_aad17ebd1b8b3588bd26c22d5e7ad08c6}
+
+\begin{DoxyCompactList}\small\item\em lightningTrig -\/ This is the bool for the lightning to trigger the lighting on and off and to trigger the thunder sound effect. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+INCLUDE GUARD CHANGE TO NAME OF FILE BELOW. Here are all the includes that are needed  Barker  1.0 04/05/2015 The \hyperlink{classLightning}{Lightning} class -\/ This class is for the lighting effects within the scene, it is used to play the lighting sound and to also flash the light to give the effect 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classLightning_aa42fc3f22b3f0234067b92dee0daa46f}{
+\index{Lightning@{Lightning}!$\sim$Lightning@{$\sim$Lightning}}
+\index{$\sim$Lightning@{$\sim$Lightning}!Lightning@{Lightning}}
+\subsubsection[{$\sim$Lightning}]{\setlength{\rightskip}{0pt plus 5cm}Lightning::$\sim$Lightning ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classLightning_aa42fc3f22b3f0234067b92dee0daa46f}
+
+
+Here is the free function to clear the memory saved for the music file 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+header/lightning.h\item 
+src/lightning.cpp\end{DoxyCompactItemize}

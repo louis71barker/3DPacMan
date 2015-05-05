@@ -36,6 +36,7 @@ void Barn::buildBarn(const std::vector<std::vector<int> > &m_matrix)
             m_Vertex[m_Index[a-2]-1].vertexGL();
           }
         glEnd();
+        glBindTexture(GL_TEXTURE_2D, 0);
       }
     }
   }

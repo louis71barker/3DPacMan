@@ -52,7 +52,8 @@ void Collectable::placeObj(const int _x, const int _y, const std::vector<std::ve
 
 void Collectable::placeSpecials(std::vector<std::vector<int> > &m_matrix)
 {
-  //load the texture here and bind inside the list bellow!!!!!! :)
+  //load the texture
+  textLoader("textures/CherryText.jpg", m_CherryTextID);
 
   for(int i = 0; i < (int)m_matrix.size(); ++i)
   {
@@ -66,6 +67,7 @@ void Collectable::placeSpecials(std::vector<std::vector<int> > &m_matrix)
           glTranslatef((i)*4, -0.5, ((int)m_matrix[0].size() * 4) - (j)*4);
           glScalef(0.1,0.1,0.1);
           glTranslatef(0,-6,0);
+          glBindTexture(GL_TEXTURE_2D, m_CherryTextID);
           glBegin(GL_TRIANGLES);
           for (int a = 2; a < (int)m_Index.size(); a += 3)
           {
@@ -76,6 +78,7 @@ void Collectable::placeSpecials(std::vector<std::vector<int> > &m_matrix)
             //set the vertex for the obj
             m_Vertex[m_Index[a-2]-1].vertexGL();
           }
+          glBindTexture(GL_TEXTURE_2D, 0);
 
 
           glEnd();

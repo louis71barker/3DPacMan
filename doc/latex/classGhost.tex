@@ -1,0 +1,99 @@
+\hypertarget{classGhost}{
+\section{Ghost Class Reference}
+\label{classGhost}\index{Ghost@{Ghost}}
+}
+
+
+INCLUDE GUARD CHANGE TO NAME OF FILE BELOW.  
+
+
+{\ttfamily \#include $<$ghost.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classGhost_a6fd630af8f0288c7957bb47c585a7fb8}{
+void {\bfseries updater} (const std::vector$<$ std::vector$<$ int $>$ $>$ \&m\_\-matrix)}
+\label{classGhost_a6fd630af8f0288c7957bb47c585a7fb8}
+
+\item 
+\hypertarget{classGhost_a33f64ecfac8e3c77535bd5f6f8d21f09}{
+void {\bfseries drawGhosts} (const std::vector$<$ std::vector$<$ int $>$ $>$ \&m\_\-matrix)}
+\label{classGhost_a33f64ecfac8e3c77535bd5f6f8d21f09}
+
+\item 
+\hyperlink{classGhost_a3244427b4bc41dd7ffdb2d3dcd7896f3}{Ghost} (const std::vector$<$ std::vector$<$ int $>$ $>$ \&m\_\-matrix)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classGhost}{Ghost} In the constructor the \hyperlink{classGhost}{Ghost} object is loaded into the vectors. Once this is done, the object is then built into the display list and relocated to the location on the map that is is assainged. The direction values for the AI are then set to their dephault values. \item\end{DoxyCompactList}\item 
+\hyperlink{classGhost_a063ed19c1b6f5c07b9109020c6198319}{$\sim$Ghost} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::vector$<$ \hyperlink{classVec3}{Vec3} $>$ \hyperlink{classGhost_ac4f35ef7a70aba7d457c615a860c6d64}{m\_\-Vertex}
+\item 
+\hypertarget{classGhost_a72a689f34e888a2ee94205631f72e167}{
+std::vector$<$ \hyperlink{classVec3}{Vec3} $>$ {\bfseries m\_\-Normal}}
+\label{classGhost_a72a689f34e888a2ee94205631f72e167}
+
+\item 
+\hypertarget{classGhost_af8f8984197702b619bde887380fdd756}{
+std::vector$<$ \hyperlink{classVec3}{Vec3} $>$ {\bfseries m\_\-Texture}}
+\label{classGhost_af8f8984197702b619bde887380fdd756}
+
+\item 
+\hypertarget{classGhost_ab7e8e6f1b122f00913d531a3da812e1e}{
+std::vector$<$ int $>$ {\bfseries m\_\-Index}}
+\label{classGhost_ab7e8e6f1b122f00913d531a3da812e1e}
+
+\item 
+\hypertarget{classGhost_adc3df9fc9cb61590448cb3805f604018}{
+std::vector$<$ GLuint $>$ {\bfseries m\_\-displayList}}
+\label{classGhost_adc3df9fc9cb61590448cb3805f604018}
+
+\item 
+\hypertarget{classGhost_a35ef98d0aefeec3e071b8186e4f94ce0}{
+std::vector$<$ \hyperlink{classVec2}{Vec2} $>$ {\bfseries m\_\-GhostPos}}
+\label{classGhost_a35ef98d0aefeec3e071b8186e4f94ce0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+INCLUDE GUARD CHANGE TO NAME OF FILE BELOW. Here are all the includes that are needed  Barker  1.0 04/05/2015 The \hyperlink{classGhost}{Ghost} class This class is used to draw the ghost onto the screen and place the, in the correct locations. \begin{Desc}
+\item[\hyperlink{todo__todo000006}{Todo}]make the ghost AI work properly \end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classGhost_a3244427b4bc41dd7ffdb2d3dcd7896f3}{
+\index{Ghost@{Ghost}!Ghost@{Ghost}}
+\index{Ghost@{Ghost}!Ghost@{Ghost}}
+\subsubsection[{Ghost}]{\setlength{\rightskip}{0pt plus 5cm}Ghost::Ghost (const std::vector$<$ std::vector$<$ int $>$ $>$ \& {\em m\_\-matrix})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classGhost_a3244427b4bc41dd7ffdb2d3dcd7896f3}
+
+
+\hyperlink{classGhost}{Ghost} In the constructor the \hyperlink{classGhost}{Ghost} object is loaded into the vectors. Once this is done, the object is then built into the display list and relocated to the location on the map that is is assainged. The direction values for the AI are then set to their dephault values. 
+\begin{DoxyParams}{Parameters}
+\item[{\em m\_\-matrix}]This is passed in as a reference to allow for the location of the fence to be found and then moved. \end{DoxyParams}
+
+
+Here is a call the the OBJLoader class which loads the obj files data into the relivent vectors
+
+Here the ground is built and added to the display list so it can be drawn \hypertarget{classGhost_a063ed19c1b6f5c07b9109020c6198319}{
+\index{Ghost@{Ghost}!$\sim$Ghost@{$\sim$Ghost}}
+\index{$\sim$Ghost@{$\sim$Ghost}!Ghost@{Ghost}}
+\subsubsection[{$\sim$Ghost}]{\setlength{\rightskip}{0pt plus 5cm}Ghost::$\sim$Ghost ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classGhost_a063ed19c1b6f5c07b9109020c6198319}
+
+
+$\sim$Ghost -\/ Here are all the functions to clean and clear all the Vectors used through the .clear function 
+
+\subsection{Member Data Documentation}
+\hypertarget{classGhost_ac4f35ef7a70aba7d457c615a860c6d64}{
+\index{Ghost@{Ghost}!m\_\-Vertex@{m\_\-Vertex}}
+\index{m\_\-Vertex@{m\_\-Vertex}!Ghost@{Ghost}}
+\subsubsection[{m\_\-Vertex}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf Vec3}$>$ {\bf Ghost::m\_\-Vertex}}}
+\label{classGhost_ac4f35ef7a70aba7d457c615a860c6d64}
+are used to store the coordinate information of the objects that will be drawn in the game  are before the constuctor and destructor as they are used in both.  is used to store the vertex coordinates of the Object file.  is used to store the normal values from the object file.  is used to store the texture coordinates of the object.  is used to store the list in which to join the vertex, normals and textures coordinates together.  is the list which is used to actually draw the object onto the screen 
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+header/ghost.h\item 
+src/ghost.cpp\end{DoxyCompactItemize}
